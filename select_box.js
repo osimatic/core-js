@@ -123,15 +123,23 @@ class SelectBox {
 		return ts;
 	}
 
+	static reset(el) {
+		el = toEl(el);
+		if (!el) {
+			return;
+		}
+		if (!el.tomselect && el.parentElement && el.parentElement.classList.contains('ts-wrapper')) {
+			const wrapper = el.parentElement;
+			wrapper.before(el);
+			wrapper.remove();
+			el.classList.remove('ts-hidden-accessible', 'tomselected');
+		}
+		SelectBox.init(el);
+	}
+
 	static resetAll(container) {
 		container = toEl(container);
-		container.querySelectorAll('select.ts-select').forEach(el => {
-			if (!el.tomselect) {
-				el.parentElement.querySelectorAll('.ts-wrapper').forEach(w => w.remove());
-				el.classList.remove('ts-hidden-accessible', 'tomselected');
-			}
-			SelectBox.init(el);
-		});
+		container.querySelectorAll('select.ts-select').forEach(el => SelectBox.reset(el));
 	}
 
 	/**
