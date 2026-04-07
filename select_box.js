@@ -128,10 +128,9 @@ class SelectBox {
 		if (!el) {
 			return;
 		}
-		if (!el.tomselect && el.parentElement && el.parentElement.classList.contains('ts-wrapper')) {
-			const wrapper = el.parentElement;
-			wrapper.before(el);
-			wrapper.remove();
+		const tsWrapper = el.nextElementSibling;
+		if (!el.tomselect && tsWrapper && tsWrapper.classList.contains('ts-wrapper')) {
+			tsWrapper.remove();
 			el.classList.remove('ts-hidden-accessible', 'tomselected');
 		}
 		SelectBox.init(el);
@@ -223,10 +222,10 @@ class SelectBox {
 		}
 
 		if (val === null || val === undefined || val === '') {
-			ts.clear(true);
+			ts.clear();
 		}
 		else {
-			ts.setValue(val, true);
+			ts.setValue(val);
 		}
 	}
 

@@ -245,12 +245,9 @@ class FormHelper {
 	}
 
 	static setCheckedValues(inputs, defaultValues) {
-		const parent = inputs[0]?.parentElement;
-		defaultValues.forEach(value => {
-			if (parent) {
-				const t = parent.querySelector('[value="'+value+'"]');
-				if (t) t.checked = true;
-			}
+		const values = defaultValues.map(String);
+		[...inputs].forEach(input => {
+			input.checked = values.includes(input.value);
 		});
 	}
 
