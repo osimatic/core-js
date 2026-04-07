@@ -1,6 +1,7 @@
 const { toEl } = require('./util');
 const { DateTime } = require('./date_time');
 const {Locale} = require('./locale');
+const {SelectBox} = require('./select_box');
 
 // input period de type : Du <input type="date" name="start_date" /> au <input type="date" name="end_date" />
 class InputPeriod {
@@ -159,6 +160,7 @@ class FormDate {
 		for (let year=currentDate.getUTCFullYear()-nbYearsBefore; year<=(currentDate.getUTCFullYear()+nbYearsAfter); year++) {
 			select.insertAdjacentHTML('beforeend', '<option value="'+year+'">'+year+'</option>');
 		}
+		SelectBox.refresh(select);
 	}
 
 	static fillMonthSelect(select, locale=Locale.getDefault()) {
@@ -169,6 +171,7 @@ class FormDate {
 		for (let month=1; month<=12; month++) {
 			select.insertAdjacentHTML('beforeend', '<option value="'+month+'">'+DateTime.getMonthNameByMonth(month, locale).capitalize()+'</option>');
 		}
+		SelectBox.refresh(select);
 	}
 
 	static fillDayOfWeekSelect(select, locale=Locale.getDefault()) {
@@ -179,6 +182,18 @@ class FormDate {
 		for (let dayOfWeek=1; dayOfWeek<=7; dayOfWeek++) {
 			select.insertAdjacentHTML('beforeend', '<option value="'+dayOfWeek+'">'+DateTime.getDayNameByDayOfWeek(dayOfWeek, locale).capitalize()+'</option>');
 		}
+		SelectBox.refresh(select);
+	}
+
+	static fillDayOfMonthSelect(select, maxDay=31) {
+		select = toEl(select);
+		if (!select) {
+			return;
+		}
+		for (let dayOfMonth=1; dayOfMonth<=maxDay; dayOfMonth++) {
+			select.insertAdjacentHTML('beforeend', '<option value="'+dayOfMonth+'">'+dayOfMonth+'</option>');
+		}
+		SelectBox.refresh(select);
 	}
 
 	static initForm(form) {
@@ -196,8 +211,9 @@ class FormDate {
 				html += '</optgroup>';
 				select.insertAdjacentHTML('beforeend', html);
 			});
+			SelectBox.refresh(select);
 			if (select.dataset.default_value) {
-				select.value = select.dataset.default_value;
+				SelectBox.setValue(select, select.dataset.default_value);
 			}
 		}
 
