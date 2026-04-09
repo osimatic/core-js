@@ -29,25 +29,24 @@ class Country {
 		if (!select) {
 			return;
 		}
- 		if (select.querySelectorAll('option[value]:not([value=""])').length === 0) {
-			if (addNoneValue) {
-				select.insertAdjacentHTML('beforeend', '<option value="">'+noneLabel+'</option>');
-			}
-			const allCountries = Country.getCountries(locale);
-			const entries = countriesList != null
-				? countriesList.map(code => [code, allCountries[code] || code])
-				: Object.entries(allCountries);
-				entries.forEach(([countryCode, countryName]) => {
-				let attrs = '';
-				if (showFlags) {
-					/*if (typeof Country.flagsPath !== 'undefined') {
-						attrs = ' data-thumbnail="' + Country.getFlagPath(countryCode) + '"';
-					} else {*/
-					attrs = ' data-content="<span class=&quot;fi fi-' + countryCode.toLowerCase() + '&quot;></span> ' + countryName + '"';
-				}
-				select.insertAdjacentHTML('beforeend', '<option value="' + countryCode + '"' + attrs + '>' + countryName + '</option>');
-			});
+		SelectBox.reset(select, true);
+		if (addNoneValue) {
+			select.insertAdjacentHTML('beforeend', '<option value="">'+noneLabel+'</option>');
 		}
+		const allCountries = Country.getCountries(locale);
+		const entries = countriesList != null
+			? countriesList.map(code => [code, allCountries[code] || code])
+			: Object.entries(allCountries);
+			entries.forEach(([countryCode, countryName]) => {
+			let attrs = '';
+			if (showFlags) {
+				/*if (typeof Country.flagsPath !== 'undefined') {
+					attrs = ' data-thumbnail="' + Country.getFlagPath(countryCode) + '"';
+				} else {*/
+				attrs = ' data-content="<span class=&quot;fi fi-' + countryCode.toLowerCase() + '&quot;></span> ' + countryName + '"';
+			}
+			select.insertAdjacentHTML('beforeend', '<option value="' + countryCode + '"' + attrs + '>' + countryName + '</option>');
+		});
 
 		SelectBox.refresh(select);
 		if (null != defaultValue) {
@@ -101,16 +100,16 @@ class Country {
 		if (!select) {
 			return;
 		}
-		if (select.querySelectorAll('option[value]:not([value=""])').length === 0) {
-			if (addNoneValue) {
-				select.insertAdjacentHTML('beforeend', '<option value="">'+noneLabel+'</option>');
-			}
-			Object.entries(null != countriesList ? countriesList : Country.getCountries()).forEach(([countryCode, countryName]) => {
-				select.insertAdjacentHTML('beforeend', '<option value="' + countryCode + '">' + countryName + '</option>');
-			});
+		SelectBox.reset(select, true);
+		if (addNoneValue) {
+			select.insertAdjacentHTML('beforeend', '<option value="">'+noneLabel+'</option>');
 		}
+		Object.entries(null != countriesList ? countriesList : Country.getCountries()).forEach(([countryCode, countryName]) => {
+			select.insertAdjacentHTML('beforeend', '<option value="' + countryCode + '">' + countryName + '</option>');
+		});
+		SelectBox.refresh(select);
 		if (null != defaultValue) {
-			select.value = defaultValue;
+			SelectBox.setValue(select, defaultValue);
 		}
 	}
 }

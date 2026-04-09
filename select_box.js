@@ -89,6 +89,13 @@ class SelectBox {
 			ts.clear(true);
 		}
 
+		// In .form-inline, set minWidth to fit the widest option text so the wrapper
+		// doesn't resize when the selected value changes. Measured via canvas so it works
+		// even when the element is not yet visible (e.g. cloned template rows).
+		if (!isMultiple && el.closest('.form-inline') && Object.keys(ts.options).length > 0) {
+			SelectBox._applyInlineWidth(ts);
+		}
+
 		// Keep placeholder in the control, not in the dropdown search input
 		if (plugins.includes('dropdown_input')) {
 			const dropdownInput = ts.dropdown.querySelector('input');
@@ -104,6 +111,8 @@ class SelectBox {
 			placeholderEl.placeholder = placeholder;
 			placeholderEl.readOnly = true;
 			placeholderEl.tabIndex = -1;
+			placeholderEl.style.width = '0';
+			placeholderEl.style.minWidth = '0';
 			ts.control.appendChild(placeholderEl);
 			const syncPlaceholder = () => {
 				if (ts.getValue()) {
@@ -123,22 +132,28 @@ class SelectBox {
 		return ts;
 	}
 
-	static reset(el) {
+	static reset(el, emptySelect = false) {
 		el = toEl(el);
 		if (!el) {
 			return;
 		}
+		if (el.tomselect) {
+			el.tomselect.destroy();
+		}
 		const tsWrapper = el.nextElementSibling;
-		if (!el.tomselect && tsWrapper && tsWrapper.classList.contains('ts-wrapper')) {
+		if (tsWrapper && tsWrapper.classList.contains('ts-wrapper')) {
 			tsWrapper.remove();
 			el.classList.remove('ts-hidden-accessible', 'tomselected');
+		}
+		if (emptySelect) {
+			el.innerHTML = '';
 		}
 		SelectBox.init(el);
 	}
 
-	static resetAll(container) {
+	static resetAll(container, emptySelect = false) {
 		container = toEl(container);
-		container.querySelectorAll('select.ts-select').forEach(el => SelectBox.reset(el));
+		container.querySelectorAll('select.ts-select').forEach(el => SelectBox.reset(el, emptySelect));
 	}
 
 	/**
@@ -202,6 +217,9 @@ class SelectBox {
 		if (el && (el.dataset.hide_if_empty || el.dataset.hideIfEmpty)) {
 			SelectBox._checkHideIfEmpty(ts);
 		}
+		if (ts.settings.mode === 'single' && el?.closest('.form-inline') && Object.keys(ts.options).length > 0) {
+			SelectBox._applyInlineWidth(ts);
+		}
 	}
 
 	/**
@@ -247,6 +265,22 @@ class SelectBox {
 		}
 	}
 
+	static show(el) {
+		el = toEl(el);
+		if (!el) {
+			return;
+		}
+		(el.tomselect ? el.tomselect.wrapper : el).classList.remove('hide');
+	}
+
+	static hide(el) {
+		el = toEl(el);
+		if (!el) {
+			return;
+		}
+		(el.tomselect ? el.tomselect.wrapper : el).classList.add('hide');
+	}
+
 	/**
 	 * Destroy the Tom Select instance and restore the original <select>.
 	 * @param {HTMLElement|jQuery} el
@@ -262,6 +296,26 @@ class SelectBox {
 
 	static getInstance(el) {
 		return toEl(el)?.tomselect ?? null;
+	}
+
+	/**
+	 * Set a stable minWidth on a Tom Select wrapper inside .form-inline so the wrapper
+	 * doesn't resize when the selected item changes. Uses canvas measureText so it works
+	 * even when the element is hidden (e.g. a cloned template row not yet in the DOM).
+	 * @param {TomSelect} ts
+	 */
+	static _applyInlineWidth(ts) {
+		const canvas = document.createElement('canvas');
+		const ctx = canvas.getContext('2d');
+		const style = getComputedStyle(ts.control);
+		ctx.font = style.font;
+		const paddingH = parseFloat(style.paddingLeft) + parseFloat(style.paddingRight);
+		const texts = Object.values(ts.options).map(opt => opt.text || '');
+		if (ts.settings.placeholder) texts.push(ts.settings.placeholder);
+		const maxTextWidth = Math.max(...texts.map(t => ctx.measureText(t).width));
+		if (maxTextWidth > 0) {
+			ts.wrapper.style.minWidth = Math.ceil(maxTextWidth + paddingH) + 'px';
+		}
 	}
 
 	static _checkHideIfEmpty(ts) {

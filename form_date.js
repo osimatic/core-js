@@ -156,6 +156,7 @@ class FormDate {
 		if (!select) {
 			return;
 		}
+		SelectBox.reset(select, true);
 		const currentDate = new Date();
 		for (let year=currentDate.getUTCFullYear()-nbYearsBefore; year<=(currentDate.getUTCFullYear()+nbYearsAfter); year++) {
 			select.insertAdjacentHTML('beforeend', '<option value="'+year+'">'+year+'</option>');
@@ -168,6 +169,7 @@ class FormDate {
 		if (!select) {
 			return;
 		}
+		SelectBox.reset(select, true);
 		for (let month=1; month<=12; month++) {
 			select.insertAdjacentHTML('beforeend', '<option value="'+month+'">'+DateTime.getMonthNameByMonth(month, locale).capitalize()+'</option>');
 		}
@@ -179,6 +181,7 @@ class FormDate {
 		if (!select) {
 			return;
 		}
+		SelectBox.reset(select, true);
 		for (let dayOfWeek=1; dayOfWeek<=7; dayOfWeek++) {
 			select.insertAdjacentHTML('beforeend', '<option value="'+dayOfWeek+'">'+DateTime.getDayNameByDayOfWeek(dayOfWeek, locale).capitalize()+'</option>');
 		}
@@ -190,6 +193,7 @@ class FormDate {
 		if (!select) {
 			return;
 		}
+		SelectBox.reset(select, true);
 		for (let dayOfMonth=1; dayOfMonth<=maxDay; dayOfMonth++) {
 			select.insertAdjacentHTML('beforeend', '<option value="'+dayOfMonth+'">'+dayOfMonth+'</option>');
 		}
