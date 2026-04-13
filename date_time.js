@@ -95,7 +95,7 @@ class DateTime {
 	static getDateForInputDate(jsDate, timeZone=TimeZone.getDefault()) {
 		return this.getSqlDate(jsDate, timeZone);
 	}
-	static getTimeForInputTime(jsDate, timeZone=TimeZone.getDefault(), withSeconds=false) {
+	static getTimeForInputTime(jsDate, withSeconds=false, timeZone=TimeZone.getDefault()) {
 		return jsDate.toLocaleTimeString('en-GB', {hour: 'numeric', timeZone: timeZone, hour12: false}).padStart(2, '0')+':'+jsDate.toLocaleTimeString('en-GB', {minute: 'numeric', timeZone: timeZone, hour12: false}).padStart(2, '0')+(withSeconds?':'+jsDate.toLocaleTimeString('en-GB', {second: 'numeric', timeZone: timeZone, hour12: false}).padStart(2, '0'):'');
 	}
 
@@ -437,8 +437,8 @@ class TimestampUnix {
 	static getDateForInputDate(timestamp, timeZone=TimeZone.getDefault()) {
 		return DateTime.getDateForInputDate(this.parse(timestamp), timeZone);
 	}
-	static getTimeForInputTime(timestamp, timeZone=TimeZone.getDefault(), withSeconds=false) {
-		return DateTime.getTimeForInputTime(this.parse(timestamp), timeZone, withSeconds);
+	static getTimeForInputTime(timestamp, withSeconds=false, timeZone=TimeZone.getDefault()) {
+		return DateTime.getTimeForInputTime(this.parse(timestamp), withSeconds, timeZone);
 	}
 
 	static isDateEqual(timestamp1, timestamp2) {
@@ -542,18 +542,24 @@ class SqlTime {
 		return DateTime.getSqlTime(new Date());
 	}
 
-	static getTimeDisplay(sqlTime, locale=Locale.getDefault(), timeZone=TimeZone.getDefault()) {
-		return SqlDateTime.getTimeDisplay('1970-01-01 '+sqlTime, locale, timeZone);
-	}
-	static getTimeDigitalDisplay(sqlTime, locale=Locale.getDefault(), timeZone=TimeZone.getDefault()) {
-		return SqlDateTime.getTimeDigitalDisplay('1970-01-01 '+sqlTime, locale, timeZone);
-	}
-	static getTimeDisplayWithNbDays(sqlTime, previousSqlTime, locale=Locale.getDefault(), timeZone=TimeZone.getDefault()) {
-		return SqlDateTime.getTimeDisplayWithNbDays('1970-01-01 '+sqlTime, '1970-01-01 '+previousSqlTime, locale, timeZone);
+	static #getTodayDatePrefix() {
+		const today = new Date();
+		return today.getUTCFullYear()+'-'+String(today.getUTCMonth()+1).padStart(2,'0')+'-'+String(today.getUTCDate()).padStart(2,'0');
 	}
 
-	static getTimeForInputTime(sqlTime, timeZone=TimeZone.getDefault(), withSeconds=false) {
-		return SqlDateTime.getTimeForInputTime('1970-01-01 '+sqlTime, timeZone, withSeconds);
+	static getTimeDisplay(sqlTime, locale=Locale.getDefault(), timeZone=TimeZone.getDefault()) {
+		return SqlDateTime.getTimeDisplay(SqlTime.#getTodayDatePrefix()+' '+sqlTime, locale, timeZone);
+	}
+	static getTimeDigitalDisplay(sqlTime, locale=Locale.getDefault(), timeZone=TimeZone.getDefault()) {
+		return SqlDateTime.getTimeDigitalDisplay(SqlTime.#getTodayDatePrefix()+' '+sqlTime, locale, timeZone);
+	}
+	static getTimeDisplayWithNbDays(sqlTime, previousSqlTime, locale=Locale.getDefault(), timeZone=TimeZone.getDefault()) {
+		const todayPrefix = SqlTime.#getTodayDatePrefix();
+		return SqlDateTime.getTimeDisplayWithNbDays(todayPrefix+' '+sqlTime, todayPrefix+' '+previousSqlTime, locale, timeZone);
+	}
+
+	static getTimeForInputTime(sqlTime, withSeconds=false, timeZone=TimeZone.getDefault()) {
+		return SqlDateTime.getTimeForInputTime(SqlTime.#getTodayDatePrefix()+' '+sqlTime, withSeconds, timeZone);
 	}
 
 	static getTimestamp(sqlTime) {
@@ -615,8 +621,8 @@ class SqlDateTime {
 	static getDateForInputDate(sqlDateTime, timeZone=TimeZone.getDefault()) {
 		return DateTime.getDateForInputDate(this.parse(sqlDateTime), timeZone);
 	}
-	static getTimeForInputTime(sqlDateTime, timeZone=TimeZone.getDefault(), withSeconds=false) {
-		return DateTime.getTimeForInputTime(this.parse(sqlDateTime), timeZone, withSeconds);
+	static getTimeForInputTime(sqlDateTime, withSeconds=false, timeZone=TimeZone.getDefault()) {
+		return DateTime.getTimeForInputTime(this.parse(sqlDateTime), withSeconds, timeZone);
 	}
 
 	static getYear(sqlDateTime) {

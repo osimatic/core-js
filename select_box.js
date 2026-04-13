@@ -314,7 +314,7 @@ class SelectBox {
 		if (ts.settings.placeholder) texts.push(ts.settings.placeholder);
 		const maxTextWidth = Math.max(...texts.map(t => ctx.measureText(t).width));
 		if (maxTextWidth > 0) {
-			ts.wrapper.style.minWidth = Math.ceil(maxTextWidth + paddingH) + 'px';
+			ts.wrapper.style.minWidth = Math.ceil(maxTextWidth + paddingH + 10) + 'px';
 		}
 	}
 

@@ -120,24 +120,25 @@ class PostalAddress {
 		if (!input) {
 			return;
 		}
-		const autocomplete = new google.maps.places.Autocomplete(
-			input,
-			{types: ['geocode']}
-		);
 
-		// When the user selects an address from the dropdown, populate the address fields in the form.
-
-		if (typeof onPlaceChanged != 'function') {
-			return;
-		}
-
-		autocomplete.addListener('place_changed', function() {
-			let place = autocomplete.getPlace();
-			input.value = '';
-			onPlaceChanged(place);
+		const autocompleteElement = new google.maps.places.PlaceAutocompleteElement({
+			types: ['geocode'],
 		});
 
-		return autocomplete;
+		if (input.id) autocompleteElement.id = input.id;
+		if (input.className) autocompleteElement.className = input.className;
+		if (input.placeholder) autocompleteElement.setAttribute('placeholder', input.placeholder);
+		input.replaceWith(autocompleteElement);
+
+		if (typeof onPlaceChanged == 'function') {
+			autocompleteElement.addEventListener('gmp-placeselect', async (event) => {
+				const place = event.place;
+				await place.fetchFields({fields: ['formattedAddress', 'addressComponents', 'adrFormatAddress', 'location']});
+				onPlaceChanged(place);
+			});
+		}
+
+		return autocompleteElement;
 	}
 
 	static format(addressData, separator='<br/>', locale=null) {
@@ -183,63 +184,61 @@ class PostalAddress {
 	}
 
 	static getComponentsFromGoogleApi(googleApiResult) {
-		/*
-		var addressData = {
-			streetAddress: address.street,
-			additionalAddress: null,
-			postalCode: address.zipCode,
-			locality: address.city,
-			stateDistrict: null,
-			state: null,
-			countryCode: address.country,
-		};
-		*/
+		// Supports both old Places API (address_components / adr_address)
+		// and new Places API (addressComponents / adrFormatAddress)
+		const isNewApi = Array.isArray(googleApiResult.addressComponents);
+		const components = isNewApi
+			? googleApiResult.addressComponents
+			: (googleApiResult.address_components || []);
 
-		var streetNumber = null;
-		var route = null;
-		var shortRoute = null;
+		let streetNumber = null;
+		let route = null;
 
-		var addressData = {};
-		googleApiResult.address_components.forEach(function(resultAddressComponent) {
-			if (resultAddressComponent.types.indexOf('street_number') !== -1) {
-				streetNumber = resultAddressComponent.long_name;
+		const addressData = {};
+		components.forEach(function(c) {
+			const longName  = isNewApi ? c.longText  : c.long_name;
+			const shortName = isNewApi ? c.shortText : c.short_name;
+			const types = c.types || [];
+			if (types.indexOf('street_number') !== -1) {
+				streetNumber = longName;
 			}
-			if (resultAddressComponent.types.indexOf('route') !== -1) {
-				route = resultAddressComponent.long_name;
-				shortRoute = resultAddressComponent.long_name;
+			if (types.indexOf('route') !== -1) {
+				route = longName;
 			}
-			if (resultAddressComponent.types.indexOf('sublocality_level_1') !== -1) {
-				addressData.suburb = resultAddressComponent.long_name;
+			if (types.indexOf('sublocality_level_1') !== -1) {
+				addressData.suburb = longName;
 			}
-			if (resultAddressComponent.types.indexOf('locality') !== -1) {
-				addressData.locality = resultAddressComponent.long_name;
+			if (types.indexOf('locality') !== -1) {
+				addressData.locality = longName;
 			}
-			if (resultAddressComponent.types.indexOf('postal_town') !== -1) {
-				addressData.locality = resultAddressComponent.long_name;
+			if (types.indexOf('postal_town') !== -1) {
+				addressData.locality = longName;
 			}
-			if (resultAddressComponent.types.indexOf('postal_code') !== -1) {
-				addressData.postalCode = resultAddressComponent.long_name;
+			if (types.indexOf('postal_code') !== -1) {
+				addressData.postalCode = longName;
 			}
-			if (resultAddressComponent.types.indexOf('administrative_area_level_3') !== -1) {
-				addressData.locality = resultAddressComponent.long_name;
+			if (types.indexOf('administrative_area_level_3') !== -1) {
+				addressData.locality = longName;
 			}
-			if (resultAddressComponent.types.indexOf('administrative_area_level_2') !== -1) {
-				addressData.stateDistrict = resultAddressComponent.long_name;
+			if (types.indexOf('administrative_area_level_2') !== -1) {
+				addressData.stateDistrict = longName;
 			}
-			if (resultAddressComponent.types.indexOf('administrative_area_level_1') !== -1) {
-				addressData.state = resultAddressComponent.long_name;
+			if (types.indexOf('administrative_area_level_1') !== -1) {
+				addressData.state = longName;
 			}
-			if (resultAddressComponent.types.indexOf('country') !== -1) {
-				addressData.countryCode = resultAddressComponent.short_name;
+			if (types.indexOf('country') !== -1) {
+				addressData.countryCode = shortName;
 			}
 		});
+
+		const adrAddress = isNewApi ? googleApiResult.adrFormatAddress : googleApiResult.adr_address;
 		const tmp = document.createElement('div');
-		tmp.innerHTML = googleApiResult.adr_address || '';
+		tmp.innerHTML = adrAddress || '';
 		if (tmp.children.length > 0) {
 			addressData.streetAddress = tmp.children[0].textContent;
 		}
 		else {
-			addressData.streetAddress = streetNumber+' '+route;
+			addressData.streetAddress = (streetNumber ? streetNumber + ' ' : '') + (route || '');
 		}
 
 		return addressData;
