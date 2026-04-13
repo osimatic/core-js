@@ -542,6 +542,14 @@ body table.dataTable.table-hover > tbody > tr:hover > * {
 	overflow-y: auto;
 }
 
+/* ---------- Google Maps ---------- */
+
+/* PlaceAutocompleteElement — match Bootstrap 5 form-control height */
+gmp-place-autocomplete.form-control {
+	padding: 0;
+	height: calc(1.5em + 0.75rem + 2px);
+}
+
 /* ---------- Tom Select ---------- */
 
 .form-inline .ts-wrapper {
