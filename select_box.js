@@ -207,10 +207,13 @@ class SelectBox {
 		else {
 			// When there was no previous selection, honor option[selected] set before refresh()
 			// (e.g. by updateSelectEmployeeCompanyTask, which appends options with selected="selected").
-			// Use hasAttribute('selected') — not o.selected — to distinguish an explicit selection from
-			// the browser's implicit default (first option has .selected=true by default but no attribute).
+			// Use hasAttribute('selected') && o.selected: the attribute distinguishes an intentional selection
+			// from the browser's implicit default (first option has .selected=true by default but no attribute).
+			// The property check ensures we don't restore a stale attribute that was set on a previously-selected
+			// option but cleared by Tom Select's updateOriginalInput() (which sets .selected=false without
+			// removing the HTML attribute).
 			const selectedValues = el
-				? [...el.options].filter(o => o.hasAttribute('selected') && o.value !== '').map(o => o.value)
+				? [...el.options].filter(o => o.hasAttribute('selected') && o.selected && o.value !== '').map(o => o.value)
 				: [];
 			selectedValues.length > 0 ? ts.setValue(selectedValues, true) : ts.clear(true);
 		}

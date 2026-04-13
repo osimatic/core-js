@@ -1,6 +1,20 @@
-const { toEl } = require('./util');
+const { toEl, toJquery } = require('./util');
 
 class Modal {
+	/**
+	 * Initialise a modal DOM element: attaches the aria-hidden fix listener and
+	 * returns the element in the same form it was received (Element or jQuery).
+	 *
+	 * @param {Element|jQuery} modalElement - The modal DOM element (or jQuery wrapper)
+	 * @returns {Element|jQuery}
+	 */
+	static init(modalElement) {
+		const wasJQuery = modalElement && modalElement.jquery;
+		Modal.initAriaHiddenFix(modalElement);
+		const el = toEl(modalElement);
+		return wasJQuery ? toJquery(el) : el;
+	}
+	
 	/**
 	 * Hide a Bootstrap modal while preventing the "Blocked aria-hidden on focused element"
 	 * browser warning. Bootstrap sets aria-hidden after the CSS transition while its focus

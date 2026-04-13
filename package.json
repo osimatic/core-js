@@ -1,6 +1,6 @@
 {
   "name": "@osimatic/core-js",
-  "version": "1.6.35",
+  "version": "1.6.37",
   "main": "main.js",
   "scripts": {
     "test": "jest",
