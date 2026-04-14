@@ -30,7 +30,7 @@ describe('String extensions', () => {
 		test('should truncate string on word boundary', () => {
 			const text = 'Hello world this is a test';
 			// La fonction retire les espaces de fin
-			expect(text.truncateOnWord(14)).toBe('Hello world');
+			expect(text.truncateOnWord(14)).toBe('Hello world…');
 		});
 
 		test('should not truncate if within limit', () => {
@@ -40,8 +40,7 @@ describe('String extensions', () => {
 
 		test('should truncate from left when fromLeft is true', () => {
 			const text = 'Hello world this is a test';
-			const result = text.truncateOnWord(10, true);
-			expect(result.length).toBeLessThanOrEqual(10);
+			expect(text.truncateOnWord(10, true)).toBe('…is a test');
 		});
 
 		test('should handle empty string', () => {
@@ -62,10 +61,7 @@ describe('String extensions', () => {
 
 		test('should truncate from left with split=true', () => {
 			const text = 'Hello world this is a test';
-			const result = text.truncateString(10, 'left', '…', true);
-			// Should truncate on word boundary and trim start
-			expect(result).toContain('…');
-			expect(result.length).toBeLessThanOrEqual(15); // ellipsis + space + ~10 chars
+			expect(text.truncateString(10, 'left', '…', true)).toBe('… is a test');
 		});
 
 		test('should truncate from middle', () => {
@@ -77,10 +73,7 @@ describe('String extensions', () => {
 
 		test('should truncate from middle with split=true', () => {
 			const text = 'Hello world this is a test';
-			const result = text.truncateString(10, 'middle', '…', true);
-			// Should truncate on word boundaries from both sides
-			expect(result).toContain('…');
-			expect(result.split('…').length).toBe(2);
+			expect(text.truncateString(10, 'middle', '…', true)).toBe('Hello … test');
 		});
 
 		test('should not truncate if within length', () => {
