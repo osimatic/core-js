@@ -311,4 +311,4 @@ class ApiTokenSession {
 	}
 }
 
-module.exports = { JwtToken, JwtSession, ApiTokenSession };
+export { JwtToken, JwtSession, ApiTokenSession };

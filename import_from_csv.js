@@ -1,8 +1,8 @@
-require('./string');
-const { toEl } = require('./util');
-const Papa = require('papaparse');
-const { FormHelper } = require('./form_helper');
-const { CSV } = require('./file');
+import './string.js';
+import { toEl } from './util.js';
+import Papa from 'papaparse';
+import { FormHelper } from './form_helper.js';
+import { CSV } from './file.js';
 
 class ImportFromCsv {
 
@@ -355,4 +355,4 @@ class ImportFromCsv {
 
 }
 
-module.exports = { ImportFromCsv };
+export { ImportFromCsv };

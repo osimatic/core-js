@@ -1,6 +1,6 @@
-require('./string');
-const { FlashMessage } = require('./flash_message');
-const { toEl } = require('./util');
+import './string.js';
+import { FlashMessage } from './flash_message.js';
+import { toEl } from './util.js';
 
 class MultiFilesInput {
 	static init(fileInput, setFilesList, nbMaxFiles, maxFileSize) {
@@ -126,4 +126,4 @@ class MultiFilesInput {
 	}
 }
 
-module.exports = { MultiFilesInput };
+export { MultiFilesInput };

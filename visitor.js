@@ -1,4 +1,4 @@
-const { UAParser } = require('ua-parser-js');
+import { UAParser } from 'ua-parser-js';
 
 class Browser {
 	static isOpera() {
@@ -142,4 +142,4 @@ class UserAgent {
 	}
 }
 
-module.exports = { Browser, UserAgent };
+export { Browser, UserAgent };

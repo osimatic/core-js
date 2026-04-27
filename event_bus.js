@@ -36,4 +36,4 @@ class EventBus {
     }
 }
 
-module.exports = { EventBus };
+export { EventBus };

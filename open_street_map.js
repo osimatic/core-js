@@ -1,6 +1,6 @@
-const L = require('leaflet');
-require('leaflet-draw');
-const { toEl } = require('./util');
+import L from 'leaflet';
+import 'leaflet-draw';
+import { toEl } from './util.js';
 
 /**
  * https://leafletjs.com/
@@ -551,4 +551,4 @@ class OsmMap {
 	}
 }
 
-module.exports = { OpenStreetMap, OsmMap };
+export { OpenStreetMap, OsmMap };

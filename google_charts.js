@@ -1,4 +1,4 @@
-const { toEl } = require('./util');
+import { toEl } from './util.js';
 
 class GoogleCharts {
 	static init(onLoadCallback) {
@@ -363,4 +363,4 @@ class GoogleCharts {
 
 }
 
-module.exports = { GoogleCharts };
+export { GoogleCharts };

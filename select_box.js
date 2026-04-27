@@ -1,5 +1,5 @@
-const TomSelect = require('tom-select').default;
-const { toEl } = require('./util');
+import TomSelect from 'tom-select';
+import { toEl } from './util.js';
 
 // Plugin: select-all / deselect-all (for multiple selects with data-actions-box)
 TomSelect.define('actions_box', function() {
@@ -327,4 +327,4 @@ class SelectBox {
 	}
 }
 
-module.exports = { SelectBox };
+export { SelectBox };

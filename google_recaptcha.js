@@ -68,7 +68,7 @@ class GoogleRecaptcha {
 	}
 }
 
-module.exports = { GoogleRecaptcha };
+export { GoogleRecaptcha };
 
 /*
 var grecaptchaWidgets = [];

@@ -1,4 +1,4 @@
-const { toEl, toJquery } = require('./util');
+import { toEl, toJquery } from './util.js';
 
 class Modal {
 	/**
@@ -55,4 +55,4 @@ class Modal {
 	}
 }
 
-module.exports = { Modal };
+export { Modal };

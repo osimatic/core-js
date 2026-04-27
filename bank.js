@@ -1,5 +1,5 @@
-const { SqlDateTime } = require('./date_time');
-const { Locale } = require('./locale');
+import { SqlDateTime } from './date_time.js';
+import { Locale } from './locale.js';
 
 class IBAN {
 	static format(iban) {
@@ -21,4 +21,4 @@ class BankCard {
 	}
 }
 
-module.exports = { IBAN, BankCard };
+export { IBAN, BankCard };

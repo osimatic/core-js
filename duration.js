@@ -1,4 +1,4 @@
-const { Locale } = require('./locale');
+import { Locale } from './locale.js';
 
 class Duration {
 
@@ -244,4 +244,4 @@ class Duration {
 
 }
 
-module.exports = { Duration };
+export { Duration };

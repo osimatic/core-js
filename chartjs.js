@@ -1,8 +1,8 @@
-const { Chart } = require('chart.js');
-const { toEl } = require('./util');
-const deepmerge = require('deepmerge');
-const { TimeZone, DatePeriod } = require('./date_time');
-const { Locale } = require('./locale');
+import { Chart } from 'chart.js';
+import { toEl } from './util.js';
+import deepmerge from 'deepmerge';
+import { TimeZone, DatePeriod } from './date_time.js';
+import { Locale } from './locale.js';
 
 class Chartjs {
 	static init() {
@@ -328,4 +328,4 @@ class Chartjs {
 	}
 }
 
-module.exports = { Chartjs };
+export { Chartjs };

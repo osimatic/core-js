@@ -1,4 +1,4 @@
-const { Locale } = require('./locale');
+import { Locale } from './locale.js';
 
 class Currency {
 	static current = 'EUR';
@@ -139,4 +139,4 @@ class Rating {
 	}
 }
 
-module.exports = { Currency, NumberFormatter, Rating };
+export { Currency, NumberFormatter, Rating };

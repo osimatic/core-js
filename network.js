@@ -333,4 +333,4 @@ class UrlAndQueryString {
 
 }
 
-module.exports = { Cookie, UrlAndQueryString };
+export { Cookie, UrlAndQueryString };

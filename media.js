@@ -1,6 +1,7 @@
-const { toEl } = require('./util');
-const { FormHelper } = require('./form_helper');
-const { HTTPClient } = require('./http_client');
+import { toEl } from './util.js';
+import { FormHelper } from './form_helper.js';
+import { HTTPClient } from './http_client.js';
+import { UAParser } from 'ua-parser-js';
 
 class AudioMedia {
 
@@ -166,7 +167,6 @@ class UserMedia {
 
 	static requestMediaPermissions(constraints) {
 		return new Promise((resolve, reject) => {
-			const { UAParser } = require('ua-parser-js');
 			const browserName = new UAParser(window.navigator.userAgent).getBrowser().name;
 
 			navigator.mediaDevices.getUserMedia(typeof constraints !== 'undefined' ? constraints : { audio: true, video: true })
@@ -227,4 +227,4 @@ class UserMedia {
 	}
 }
 
-module.exports = { AudioMedia, VideoMedia, UserMedia };
+export { AudioMedia, VideoMedia, UserMedia };

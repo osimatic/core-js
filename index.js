@@ -1,62 +1,51 @@
-//A noter : les réécritures de prototypes définies dans certains fichiers n'ont pas besoin d'être exportés depuis le module en question (exemple Array / Object dans array.js).
-//Il faut uniquement appeler require() (sans récupérer le retour) et ajouter la/les classe(s) concernée(s) dans l'export ci-dessous (l'appel de require() applique l'extension).
-
 // rien à exporter (que des extensions d'objet natif)
-require('./string');
-require('./array');
-require('./number');
+import './string.js';
+import './array.js';
+import './number.js';
 
 // exports d'ojets non natif
-const { Locale } = require('./locale');
-const { HTTPClient } = require('./http_client');
-const { Cookie, UrlAndQueryString } = require('./network');
-const { IBAN, BankCard } = require('./bank');
-const { AudioMedia, VideoMedia, UserMedia } = require('./media');
-const { PersonName, Email, TelephoneNumber } = require('./contact_details');
-const { TimeZone, DateTime, DatePeriod, TimestampUnix, SqlDate, SqlTime, SqlDateTime } = require('./date_time');
-const { Duration } = require('./duration');
-const { File, CSV, Img } = require('./file');
-const { FormHelper, EditValue } = require('./form_helper');
-const { Country, PostalAddress, GeographicCoordinates, Polygon } = require('./location');
-const { HexColor, RgbColor } = require('./draw');
-const { SocialNetwork } = require('./social_network');
-const { sleep, refresh } = require('./util');
-const { chr, ord, trim, empty } = require('./php.min');
-const { Currency, NumberFormatter, Rating } = require('./number');
-const { Password } = require('./user');
+export { Locale } from './locale.js';
+export { HTTPClient } from './http_client.js';
+export { Cookie, UrlAndQueryString } from './network.js';
+export { IBAN, BankCard } from './bank.js';
+export { AudioMedia, VideoMedia, UserMedia } from './media.js';
+export { PersonName, Email, TelephoneNumber } from './contact_details.js';
+export { TimeZone, DateTime, DatePeriod, TimestampUnix, SqlDate, SqlTime, SqlDateTime } from './date_time.js';
+export { Duration } from './duration.js';
+export { File, CSV, Img } from './file.js';
+export { FormHelper, EditValue } from './form_helper.js';
+export { Country, PostalAddress, GeographicCoordinates, Polygon } from './location.js';
+export { HexColor, RgbColor } from './draw.js';
+export { SocialNetwork } from './social_network.js';
+export { sleep, refresh } from './util.js';
+export { chr, ord, trim, empty } from './php.min.js';
+export { Currency, NumberFormatter, Rating } from './number.js';
+export { Password } from './user.js';
 
 // exports plugins "maison"
-const { Browser, UserAgent } = require('./visitor');
-const { DataTableManager } = require('./data_table');
-const { Pagination, Navigation } = require('./paging');
-const { DetailsSubArray } = require('./details_sub_array');
-const { SelectAll } = require('./select_all');
-const { MultipleActionInTable, MultipleActionInDivList } = require('./multiple_action_in_table');
-const { MultiFilesInput } = require('./multi_files_input');
-const { FormDate, InputPeriod } = require('./form_date');
-const { ShoppingCart } = require('./shopping_cart');
-const { FlashMessage } = require('./flash_message');
-const { CountDown } = require('./count_down');
-const { ImportFromCsv } = require('./import_from_csv');
-const { JwtToken, JwtSession, ApiTokenSession } = require('./jwt');
-const { ListBox } = require('./list_box');
-const { SelectBox } = require('./select_box');
-const { Modal } = require('./modal');
-const { WebRTC } = require('./web_rtc');
-const { EventBus } = require('./event_bus');
+export { Browser, UserAgent } from './visitor.js';
+export { DataTableManager } from './data_table.js';
+export { Pagination, Navigation } from './paging.js';
+export { DetailsSubArray } from './details_sub_array.js';
+export { SelectAll } from './select_all.js';
+export { MultipleActionInTable, MultipleActionInDivList } from './multiple_action_in_table.js';
+export { MultiFilesInput } from './multi_files_input.js';
+export { FormDate, InputPeriod } from './form_date.js';
+export { ShoppingCart } from './shopping_cart.js';
+export { FlashMessage } from './flash_message.js';
+export { CountDown } from './count_down.js';
+export { ImportFromCsv } from './import_from_csv.js';
+export { JwtToken, JwtSession, ApiTokenSession } from './jwt.js';
+export { ListBox } from './list_box.js';
+export { SelectBox } from './select_box.js';
+export { Modal } from './modal.js';
+export { WebRTC } from './web_rtc.js';
+export { EventBus } from './event_bus.js';
 
 // exports surcouche lib externe
-const { Chartjs } = require('./chartjs');
-const { GoogleCharts } = require('./google_charts');
-const { GoogleRecaptcha } = require('./google_recaptcha');
-const { GoogleMap } = require('./google_maps');
-const { OpenStreetMap } = require('./open_street_map');
-const { WebSocket } = require('./web_socket');
-
-module.exports = {
-	Array, Object, Number, String,
-	Locale, HTTPClient, Cookie, UrlAndQueryString, IBAN, BankCard, AudioMedia, VideoMedia, UserMedia, PersonName, Email, TelephoneNumber, TimeZone, DateTime, DatePeriod, TimestampUnix, SqlDate, SqlTime, SqlDateTime, Duration, File, CSV, Img, FormHelper, Country, PostalAddress, GeographicCoordinates, Polygon, HexColor, RgbColor, SocialNetwork, Currency, NumberFormatter, Rating, Password,
-	Browser, DataTableManager, Pagination, Navigation, DetailsSubArray, SelectAll, MultipleActionInTable, MultipleActionInDivList, MultiFilesInput, EditValue, FormDate, InputPeriod, ShoppingCart, FlashMessage, CountDown, ImportFromCsv, JwtToken, JwtSession, ApiTokenSession, ListBox, SelectBox, Modal, WebRTC, WebSocket, EventBus,
-	sleep, refresh, chr, ord, trim, empty,
-	Chartjs, GoogleCharts, GoogleRecaptcha, GoogleMap, OpenStreetMap
-};
+export { Chartjs } from './chartjs.js';
+export { GoogleCharts } from './google_charts.js';
+export { GoogleRecaptcha } from './google_recaptcha.js';
+export { GoogleMap } from './google_maps.js';
+export { OpenStreetMap, OsmMap } from './open_street_map.js';
+export { WebSocket } from './web_socket.js';

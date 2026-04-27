@@ -37,4 +37,4 @@ class FlashMessage {
 	}
 }
 
-module.exports = { FlashMessage };
+export { FlashMessage };

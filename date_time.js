@@ -1,5 +1,5 @@
-require('./string');
-const { Locale } = require('./locale');
+import './string.js';
+import { Locale } from './locale.js';
 
 class TimeZone {
 	static default = 'Europe/Paris';
@@ -660,4 +660,4 @@ class SqlDateTime {
 DatePeriod.PART_OF_DAY_MORNING 		= 'MORNING';
 DatePeriod.PART_OF_DAY_AFTERNOON 	= 'AFTERNOON';
 
-module.exports = { TimeZone, DateTime, DatePeriod, TimestampUnix, SqlDate, SqlTime, SqlDateTime };
+export { TimeZone, DateTime, DatePeriod, TimestampUnix, SqlDate, SqlTime, SqlDateTime };

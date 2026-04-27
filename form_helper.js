@@ -1,5 +1,5 @@
-const { toEl, toJquery } = require('./util');
-const { SelectBox } = require('./select_box');
+import { toEl, toJquery } from './util.js';
+import { SelectBox } from './select_box.js';
 
 class FormHelper {
 	static init(form, onSubmitCallback, submitButton=null) {
@@ -872,4 +872,4 @@ class EditValue {
 	}
 }
 
-module.exports = { FormHelper, ArrayField, EditValue };
+export { FormHelper, ArrayField, EditValue };

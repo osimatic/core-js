@@ -1,3 +1,5 @@
+import crypto from 'node:crypto';
+
 class WebRTC {
     static setIceServers(turnUrl, stunUrl) {
         this.turnUrl = turnUrl;
@@ -100,7 +102,6 @@ class WebRTC {
         https://datatracker.ietf.org/doc/html/draft-uberti-behave-turn-rest-00
     */
     static getTurnCredentials() {
-        let crypto = require('crypto');
         let username = String(parseInt(Date.now() / 1000) + 24 * 3600); //ttl: 24h
         let hmac = crypto.createHmac('sha1', this.turnSecret);
 
@@ -112,4 +113,4 @@ class WebRTC {
     }
 }
 
-module.exports = { WebRTC };
+export { WebRTC };

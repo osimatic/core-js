@@ -1,7 +1,8 @@
 {
   "name": "@osimatic/core-js",
-  "version": "1.6.39",
-  "main": "main.js",
+  "version": "1.7.0",
+  "type": "module",
+  "main": "index.js",
   "scripts": {
     "test": "jest",
     "test:watch": "jest --watch",
@@ -20,14 +21,14 @@
     "ua-parser-js": "^2.0.9"
   },
   "peerDependencies": {
-    "datatables.net": ">=2.0",
+    "datatables.net": "^2.0",
     "tom-select": "^2.5.2",
-    "chart.js": ">=4.0",
-    "flag-icons": ">=7.0",
-    "intl-tel-input": ">=19.0",
-    "leaflet": ">=1.9",
-    "leaflet-draw": ">=1.0",
-    "papaparse": ">=5.0"
+    "chart.js": "^4.0",
+    "flag-icons": "^7.0",
+    "intl-tel-input": "^28.0",
+    "leaflet": "^1.9",
+    "leaflet-draw": "^1.0",
+    "papaparse": "^5.0"
   },
   "devDependencies": {
     "jest": "^30.2.0",

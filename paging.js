@@ -1,5 +1,5 @@
-const { UrlAndQueryString } = require('./network');
-const { toEl } = require('./util');
+import { UrlAndQueryString } from './network.js';
+import { toEl } from './util.js';
 
 class Pagination {
 	static paginateCards(div, nbItemsPerPage) {
@@ -196,7 +196,7 @@ class Navigation {
 	}
 }
 
-module.exports = { Pagination, Navigation };
+export { Pagination, Navigation };
 
 // deprecated
 /*

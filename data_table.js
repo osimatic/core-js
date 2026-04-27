@@ -1,8 +1,8 @@
 
-const DataTable = require('datatables.net');
-const { FormHelper } = require('./form_helper');
-const { UrlAndQueryString } = require('./network');
-const { InputPeriod } = require('./form_date');
+import DataTable from 'datatables.net';
+import { FormHelper } from './form_helper.js';
+import { UrlAndQueryString } from './network.js';
+import { InputPeriod } from './form_date.js';
 
 class DataTableManager {
 
@@ -421,4 +421,4 @@ class DataTableManager {
 
 }
 
-module.exports = { DataTableManager };
+export { DataTableManager };

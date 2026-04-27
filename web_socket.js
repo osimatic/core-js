@@ -1,3 +1,6 @@
+import { EventBus } from './event_bus.js';
+import { io } from 'socket.io-client';
+
 class WebSocket {
     /**
      * socketEvents : events en provenance de la socket qui seront dispatchés à travers le bus event
@@ -5,8 +8,6 @@ class WebSocket {
      * customBusEvents : events "spéciaux" en provenance de l'event bus qui seront dispatchés vers la socket : array({ 'custom_name' => 'event_name' }, ...)
     */
     static setEventListeners(socketEvents, busEvents, customBusEvents) {
-        const { EventBus } = require('./event_bus');
-
         this.eventBus = new EventBus();
 		this.socketConnectionErrors = ['connect_error', 'connect_timeout', 'reconnect_error', 'reconnect_failed'];
         this.socketEvents = socketEvents;
@@ -15,8 +16,6 @@ class WebSocket {
     }
 
 	static connect(url, options, connectInitPayload, onUnavailableCallback, onConnectionAckCallback) {
-		const { io } = require('socket.io-client');
-
 		this.logged = false;
 		this.instance = io(url, options);
 
@@ -95,4 +94,4 @@ class WebSocket {
 	}
 }
 
-module.exports = { WebSocket };
+export { WebSocket };

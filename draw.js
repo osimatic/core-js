@@ -51,4 +51,4 @@ class RgbColor {
 	}
 }
 
-module.exports = { HexColor, RgbColor };
+export { HexColor, RgbColor };

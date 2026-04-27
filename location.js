@@ -1,10 +1,12 @@
-const Address = require('ilib/lib/Address');
-const AddressFmt = require('ilib/lib/AddressFmt');
-const { toEl } = require('./util');
-const isoCountries = require('i18n-iso-countries');
-const { Locale } = require('./locale');
-const { SelectBox } = require('./select_box');
-isoCountries.registerLocale(require('i18n-iso-countries/langs/en.json'));
+import { createRequire } from 'module';
+import Address from 'ilib/lib/Address';
+import AddressFmt from 'ilib/lib/AddressFmt';
+import { toEl } from './util.js';
+import isoCountries from 'i18n-iso-countries';
+import { Locale } from './locale.js';
+import { SelectBox } from './select_box.js';
+const _require = createRequire(import.meta.url);
+isoCountries.registerLocale(_require('i18n-iso-countries/langs/en.json'));
 
 class Country {
 	static setFlagsPath(flagsPath) {
@@ -69,7 +71,7 @@ class Country {
 		let names = isoCountries.getNames(baseLang);
 		if (!names || Object.keys(names).length === 0) {
 			try {
-				isoCountries.registerLocale(require('i18n-iso-countries/langs/' + baseLang + '.json'));
+				isoCountries.registerLocale(_require('i18n-iso-countries/langs/' + baseLang + '.json'));
 				names = isoCountries.getNames(baseLang);
 			} catch (e) {
 				// locale not available
@@ -536,4 +538,4 @@ class GeographicCoordinates {
 
 }
 
-module.exports = { Country, Locale, PostalAddress, GeographicCoordinates, Polygon };
+export { Country, Locale, PostalAddress, GeographicCoordinates, Polygon };

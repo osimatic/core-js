@@ -22,4 +22,4 @@ function toJquery(el) {
 	return typeof $ !== 'undefined' ? $(el) : el;
 }
 
-module.exports = { sleep, refresh, toEl, toJquery };
+export { sleep, refresh, toEl, toJquery };

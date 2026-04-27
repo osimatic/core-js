@@ -1,5 +1,5 @@
-const { HTTPClient } = require('./http_client');
-const { toEl } = require('./util');
+import { HTTPClient } from './http_client.js';
+import { toEl } from './util.js';
 
 class DetailsSubArray {
 
@@ -142,4 +142,4 @@ class DetailsSubArray {
 
 }
 
-module.exports = { DetailsSubArray };
+export { DetailsSubArray };

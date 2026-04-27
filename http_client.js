@@ -1,6 +1,6 @@
-const { JwtSession } = require('./jwt');
-const { UrlAndQueryString } = require('./network');
-const { Locale } = require('./locale');
+import { JwtSession } from './jwt.js';
+import { UrlAndQueryString } from './network.js';
+import { Locale } from './locale.js';
 
 class HTTPClient {
 	static setAuthorizationToken(authorizationToken) {
@@ -530,4 +530,4 @@ class HTTPClient {
 
 }
 
-module.exports = { HTTPClient };
+export { HTTPClient };

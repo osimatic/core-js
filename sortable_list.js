@@ -1,4 +1,4 @@
-const { toEl } = require('./util');
+import { toEl } from './util.js';
 
 class SortableList {
 	static init(sortableList, clientYOffset=0) {
@@ -41,4 +41,4 @@ class SortableList {
 	}
 }
 
-module.exports = { SortableList };
+export { SortableList };

@@ -1,4 +1,4 @@
-const { toEl } = require('./util');
+import { toEl } from './util.js';
 
 class Password {
 	static getPasswordStrength(password) {
@@ -86,4 +86,4 @@ class Password {
 	}
 }
 
-module.exports = { Password };
+export { Password };

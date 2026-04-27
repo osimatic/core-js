@@ -29,4 +29,4 @@ class ShoppingCart {
 	}
 }
 
-module.exports = { ShoppingCart };
+export { ShoppingCart };

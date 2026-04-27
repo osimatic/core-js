@@ -1,7 +1,7 @@
-const { toEl } = require('./util');
-const { DateTime } = require('./date_time');
-const {Locale} = require('./locale');
-const {SelectBox} = require('./select_box');
+import { toEl } from './util.js';
+import { DateTime } from './date_time.js';
+import { Locale } from './locale.js';
+import { SelectBox } from './select_box.js';
 
 // input period de type : Du <input type="date" name="start_date" /> au <input type="date" name="end_date" />
 class InputPeriod {
@@ -547,4 +547,4 @@ class FormDate {
 	}
 }
 
-module.exports = { FormDate, InputPeriod };
+export { FormDate, InputPeriod };

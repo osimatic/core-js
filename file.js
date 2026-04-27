@@ -1,6 +1,6 @@
-const { toEl } = require('./util');
-const { HTTPClient } = require('./http_client');
-const { Locale } = require('./locale');
+import { toEl } from './util.js';
+import { HTTPClient } from './http_client.js';
+import { Locale } from './locale.js';
 
 class File {
 	static download(data, contentType, contentDisposition) {
@@ -170,4 +170,4 @@ class Img {
 	}
 }
 
-module.exports = { File, CSV, Img };
+export { File, CSV, Img };

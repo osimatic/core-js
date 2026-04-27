@@ -1,4 +1,4 @@
-require('./string');
+import './string.js';
 
 class SocialNetwork {
 
@@ -112,4 +112,4 @@ class SocialNetwork {
 
 }
 
-module.exports = { SocialNetwork };
+export { SocialNetwork };

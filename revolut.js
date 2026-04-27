@@ -1,4 +1,4 @@
-const RevolutCheckout = require('@revolut/checkout');
+import RevolutCheckout from '@revolut/checkout';
 
 class Revolut {
     constructor() {
@@ -10,7 +10,7 @@ class Revolut {
     }
 
     static displayPaymentPopup(orderId, onSuccess, onError, onCancel) {
-        RevolutCheckout.default(orderId, this.mode).then((instance) => {
+        RevolutCheckout(orderId, this.mode).then((instance) => {
             instance.payWithPopup({
                 onSuccess,
                 onError,
@@ -20,4 +20,4 @@ class Revolut {
     }
 }
 
-module.exports = { Revolut };
+export { Revolut };

@@ -246,4 +246,4 @@ class WebPushNotification {
 	}
 }
 
-module.exports = { WebPushNotification };
+export { WebPushNotification };

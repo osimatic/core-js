@@ -1,4 +1,4 @@
-const { toEl } = require('./util');
+import { toEl } from './util.js';
 
 class MultipleActionInTable {
 
@@ -292,4 +292,4 @@ class MultipleActionInDivList {
 	}
 }
 
-module.exports = { MultipleActionInTable, MultipleActionInDivList };
+export { MultipleActionInTable, MultipleActionInDivList };

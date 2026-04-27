@@ -1,7 +1,7 @@
 
-const libphonenumber = require('libphonenumber-js/max');
-const intlTelInputLib = require('intl-tel-input/intlTelInputWithUtils');
-const { Country } = require('./location');
+import * as libphonenumber from 'libphonenumber-js/max';
+import intlTelInputLib from 'intl-tel-input/intlTelInputWithUtils';
+import { Country } from './location.js';
 
 class PersonName {
 
@@ -192,4 +192,4 @@ class TelephoneNumber {
 	}
 }
 
-module.exports = { PersonName, Email, TelephoneNumber };
+export { PersonName, Email, TelephoneNumber };

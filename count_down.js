@@ -1,4 +1,4 @@
-const { toEl } = require('./util');
+import { toEl } from './util.js';
 
 class CountDown {
 
@@ -107,4 +107,4 @@ class CountDown {
 
 }
 
-module.exports = { CountDown };
+export { CountDown };

@@ -1,4 +1,4 @@
-const { toEl } = require('./util');
+import { toEl } from './util.js';
 
 class SelectAll {
 
@@ -153,4 +153,4 @@ class SelectAll {
 	}
 }
 
-module.exports = { SelectAll };
+export { SelectAll };
