@@ -7,12 +7,12 @@ const { CSV } = require('./file');
 class ImportFromCsv {
 
 	static _defaults = {
-		errorMessageFileNotValid: 'Le fichier sélectionné n\'est pas un fichier CSV valide.',
+		errorMessageFileNotValid: 'Le fichier sélectionné n’est pas un fichier CSV valide.',
 		errorMessageFileEmpty: 'Veuillez indiquer le fichier CSV à importer.',
 		errorMessageImportSelectColumns: 'Veuillez sélectionner les colonnes à importer.',
 		selectDefaultOptionLabel: 'Sélectionnez la colonne\u2026',
 		lineLabel: 'Ligne {0} :',
-		errorMessageImportFailed: 'L\'importation a échouée :',
+		errorMessageImportFailed: 'L’importation a échouée :',
 	};
 
 	static setDefault(options) {
@@ -76,7 +76,9 @@ class ImportFromCsv {
 			const fileInput = formUpload.querySelector('input[type="file"]');
 			if (!fileInput.files || !fileInput.files.length) {
 				const errDiv = formUpload.querySelector('div.errors');
-				if (errDiv) { errDiv.innerHTML = errorMessageFileEmpty; errDiv.classList.remove('hide'); }
+				if (errDiv) {
+					errDiv.innerHTML = errorMessageFileEmpty; errDiv.classList.remove('hide');
+				}
 				FormHelper.buttonLoader(submitUploadBtn, 'reset');
 				return;
 			}
@@ -95,7 +97,9 @@ class ImportFromCsv {
 				complete: function(results, file) {
 					if (false === CSV.checkFile(file.name, file.type)) {
 						const errDiv = document.querySelector('#form_import_upload div.errors');
-						if (errDiv) { errDiv.innerHTML = errorMessageFileNotValid; errDiv.classList.remove('hide'); }
+						if (errDiv) {
+							errDiv.innerHTML = errorMessageFileNotValid; errDiv.classList.remove('hide');
+						}
 						FormHelper.buttonLoader(submitUploadBtn, 'reset');
 						return;
 					}
@@ -111,7 +115,9 @@ class ImportFromCsv {
 				},
 				error: function(err, file) {
 					const errDiv = formUpload.querySelector('div.errors');
-					if (errDiv) { errDiv.innerHTML = errorMessageFileNotValid; errDiv.classList.remove('hide'); }
+					if (errDiv) {
+						errDiv.innerHTML = errorMessageFileNotValid; errDiv.classList.remove('hide');
+					}
 					console.error(err, file);
 					FormHelper.buttonLoader(submitUploadBtn, 'reset');
 				}
@@ -123,13 +129,17 @@ class ImportFromCsv {
 			event.preventDefault();
 			FormHelper.buttonLoader(this, 'loading');
 			const errDiv = formMatching.querySelector('div.errors');
-			if (errDiv) { errDiv.classList.add('hide'); errDiv.innerHTML = ''; }
+			if (errDiv) {
+				errDiv.classList.add('hide'); errDiv.innerHTML = '';
+			}
 			divResult.querySelectorAll('table tr').forEach(tr => tr.classList.remove('danger'));
 
 			const tabLink = ImportFromCsv.getTabLink(formMatching);
 
 			if (Object.keys(tabLink).length === 0) {
-				if (errDiv) { errDiv.innerHTML = errorMessageImportSelectColumns; errDiv.classList.remove('hide'); }
+				if (errDiv) {
+					errDiv.innerHTML = errorMessageImportSelectColumns; errDiv.classList.remove('hide');
+				}
 				FormHelper.buttonLoader(this, 'reset');
 				return;
 			}
@@ -275,7 +285,8 @@ class ImportFromCsv {
 				divResult.querySelector('table tr[data-line="' + errorData.line + '"]')?.classList.add('danger');
 			}
 			resultError += '<li>' + lineLabel.format(errorData.line) + '<ul>';
-			errorData.errors.forEach((error) => {
+			const errors = (Array.isArray(errorData.errors) ? errorData.errors : Object.values(errorData.errors));
+			errors.forEach((error) => {
 				resultError += '<li>' + error + '</li>';
 			});
 			resultError += '</ul></li>';
