@@ -1,12 +1,9 @@
-import { createRequire } from 'module';
-import Address from 'ilib/lib/Address';
-import AddressFmt from 'ilib/lib/AddressFmt';
+import Address from 'ilib/lib/Address.js';
+import AddressFmt from 'ilib/lib/AddressFmt.js';
 import { toEl } from './util.js';
-import isoCountries from 'i18n-iso-countries';
+import isoCountries from 'i18n-iso-countries/entry-node.js';
 import { Locale } from './locale.js';
 import { SelectBox } from './select_box.js';
-const _require = createRequire(import.meta.url);
-isoCountries.registerLocale(_require('i18n-iso-countries/langs/en.json'));
 
 class Country {
 	static setFlagsPath(flagsPath) {
@@ -68,16 +65,7 @@ class Country {
 	}
 	static getCountries(locale = 'en') {
 		const baseLang = Locale.getBaseLang(locale);
-		let names = isoCountries.getNames(baseLang);
-		if (!names || Object.keys(names).length === 0) {
-			try {
-				isoCountries.registerLocale(_require('i18n-iso-countries/langs/' + baseLang + '.json'));
-				names = isoCountries.getNames(baseLang);
-			} catch (e) {
-				// locale not available
-			}
-		}
-		return names || {};
+		return isoCountries.getNames(baseLang) || {};
 	}
 
 	static getContinents() {

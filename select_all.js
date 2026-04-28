@@ -6,6 +6,10 @@ class SelectAll {
 
 	static initLinkInFormGroup(link) {
 		link = toEl(link);
+		if (!link) {
+			return;
+		}
+
 		const linkClone = link.cloneNode(true);
 		link.parentElement.replaceChild(linkClone, link);
 		linkClone.addEventListener('click', function(e) {
