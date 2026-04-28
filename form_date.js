@@ -151,7 +151,7 @@ class InputPeriod {
 // input period de type : <select class="period">Aujourd'hui / Ce mois-ci / etc. / Personnalisé</select>
 class FormDate {
 
-	static fillYearSelect(select, nbYearsBefore=5, nbYearsAfter=0) {
+	static fillYearSelect(select, nbYearsBefore=5, nbYearsAfter=0, defaultValue=null) {
 		select = toEl(select);
 		if (!select) {
 			return;
@@ -162,9 +162,12 @@ class FormDate {
 			select.insertAdjacentHTML('beforeend', '<option value="'+year+'">'+year+'</option>');
 		}
 		SelectBox.refresh(select);
+		if (defaultValue !== null) {
+			SelectBox.setValue(select, defaultValue);
+		}
 	}
 
-	static fillMonthSelect(select, locale=Locale.getDefault()) {
+	static fillMonthSelect(select, defaultValue=null, locale=Locale.getDefault()) {
 		select = toEl(select);
 		if (!select) {
 			return;
@@ -174,9 +177,12 @@ class FormDate {
 			select.insertAdjacentHTML('beforeend', '<option value="'+month+'">'+DateTime.getMonthNameByMonth(month, locale).capitalize()+'</option>');
 		}
 		SelectBox.refresh(select);
+		if (defaultValue !== null) {
+			SelectBox.setValue(select, defaultValue);
+		}
 	}
 
-	static fillDayOfWeekSelect(select, locale=Locale.getDefault()) {
+	static fillDayOfWeekSelect(select, defaultValue=null, locale=Locale.getDefault()) {
 		select = toEl(select);
 		if (!select) {
 			return;
@@ -186,9 +192,12 @@ class FormDate {
 			select.insertAdjacentHTML('beforeend', '<option value="'+dayOfWeek+'">'+DateTime.getDayNameByDayOfWeek(dayOfWeek, locale).capitalize()+'</option>');
 		}
 		SelectBox.refresh(select);
+		if (defaultValue !== null) {
+			SelectBox.setValue(select, defaultValue);
+		}
 	}
 
-	static fillDayOfMonthSelect(select, maxDay=31) {
+	static fillDayOfMonthSelect(select, defaultValue=null, maxDay=31) {
 		select = toEl(select);
 		if (!select) {
 			return;
@@ -198,6 +207,9 @@ class FormDate {
 			select.insertAdjacentHTML('beforeend', '<option value="'+dayOfMonth+'">'+dayOfMonth+'</option>');
 		}
 		SelectBox.refresh(select);
+		if (defaultValue !== null) {
+			SelectBox.setValue(select, defaultValue);
+		}
 	}
 
 	static initForm(form) {
