@@ -20,9 +20,17 @@ class Password {
 		if (!input) {
 			return;
 		}
+		let touched = false;
 		function update(input) {
 			const password = input.value;
 			const div = input.closest('.form-group').querySelector('.password_strength_content');
+
+			if (password.length < 3 && !touched) {
+				div.classList.add('hide');
+				return;
+			}
+			div.classList.remove('hide');
+
 			const score = Password.getPasswordStrength(password);
 
 			const strengthBar = div.querySelector('.password_strength_bar');
@@ -82,6 +90,10 @@ class Password {
 		);
 		input.onchange = () => update(input);
 		input.oninput = () => update(input);
+		input.onblur = () => {
+			touched = true;
+			update(input);
+		};
 		update(input);
 	}
 }
