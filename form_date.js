@@ -79,42 +79,44 @@ class InputPeriod {
 	}
 
 
+	static todayUtc() {
+		const now = new Date();
+		return new Date(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()));
+	}
+
 	static selectToday(link) {
-		let date = new Date();
-		this.selectPeriod(link, date, date);
+		this.selectFollowingDay(link, 0);
 	}
 
 	static selectPreviousDay(lien, nbDays) {
 		this.selectFollowingDay(lien, -nbDays);
 	}
 	static selectFollowingDay(lien, nbDays) {
-		let date = new Date();
+		let date = this.todayUtc();
 		date.setUTCDate(date.getUTCDate() + nbDays);
 		this.selectPeriod(lien, date, date);
 	}
 
 	static selectCurrentWeek(lien) {
-		let date = new Date();
-		this.selectPeriod(lien, DateTime.getFirstDayOfWeek(date), DateTime.getLastDayOfWeek(date));
+		this.selectFollowingWeek(lien, 0);
 	}
 	static selectPreviousWeek(lien, nbWeeks) {
 		this.selectFollowingWeek(lien, -nbWeeks);
 	}
 	static selectFollowingWeek(lien, nbWeeks) {
-		let date = new Date();
+		let date = this.todayUtc();
 		date.setUTCDate(date.getUTCDate() + (7*nbWeeks));
 		this.selectPeriod(lien, DateTime.getFirstDayOfWeek(date), DateTime.getLastDayOfWeek(date));
 	}
 
 	static selectCurrentMonth(lien) {
-		let date = new Date();
-		this.selectPeriod(lien, DateTime.getFirstDayOfMonth(date), DateTime.getLastDayOfMonth(date));
+		this.selectFollowingMonth(lien, 0);
 	}
 	static selectPreviousMonth(lien, nbMonths) {
 		this.selectFollowingMonth(lien, -nbMonths);
 	}
 	static selectFollowingMonth(lien, nbMonths) {
-		let date = new Date();
+		let date = this.todayUtc();
 		date.setUTCDate(1);
 		date.setUTCMonth(date.getUTCMonth() + nbMonths);
 		this.selectPeriod(lien, DateTime.getFirstDayOfMonth(date), DateTime.getLastDayOfMonth(date));
@@ -127,7 +129,7 @@ class InputPeriod {
 		this.selectFollowingYear(lien, -nbAnneesMoins);
 	}
 	static selectFollowingYear(lien, nbAnneesMoins) {
-		let date = new Date();
+		let date = this.todayUtc();
 		date.setUTCFullYear(date.getUTCFullYear() + nbAnneesMoins);
 		this.selectPeriod(lien, DateTime.getFirstDayOfYear(date), DateTime.getLastDayOfYear(date));
 	}
@@ -142,8 +144,8 @@ class InputPeriod {
 			return;
 		}
 
-		inputPeriodStart.value = DateTime.getDateForInputDate(startDate);
-		inputPeriodEnd.value = DateTime.getDateForInputDate(endDate);
+		inputPeriodStart.value = DateTime.getDateForInputDate(startDate, 'UTC');
+		inputPeriodEnd.value = DateTime.getDateForInputDate(endDate, 'UTC');
 	}
 
 }
