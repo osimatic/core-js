@@ -131,6 +131,27 @@ class PostalAddress {
 		return autocompleteElement;
 	}
 
+	static getInputValue(input) {
+		input = toEl(input);
+		if (!input) {
+			return null;
+		}
+		const value = 'inputValue' in input ? input.inputValue : input.value;
+		return value ?? null;
+	}
+
+	static setInputValue(input, value) {
+		input = toEl(input);
+		if (!input) {
+			return;
+		}
+		if ('inputValue' in input) {
+			input.inputValue = value;
+		} else {
+			input.value = value;
+		}
+	}
+
 	static format(addressData, separator='<br/>', locale=null) {
 		function empty(value) {
 			return typeof value == 'undefined' || value == null || value === '';
