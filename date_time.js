@@ -563,7 +563,7 @@ class SqlTime {
 	}
 
 	static getTimestamp(sqlTime) {
-		return SqlDateTime.getTimestamp('1970-01-01 '+sqlTime);
+		return SqlDateTime.getTimestamp(SqlTime.#getTodayDatePrefix()+' '+sqlTime);
 	}
 }
 

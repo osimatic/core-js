@@ -47,7 +47,7 @@ class SelectBox {
 
 		const isMultiple = el.multiple;
 		const searchDisabled = el.dataset.search === 'false';
-		
+
 		const plugins = [];
 		if (isMultiple && (el.dataset.actionsBox || el.dataset.actions_box)) {
 			plugins.push('actions_box');
@@ -217,6 +217,14 @@ class SelectBox {
 				: [];
 			selectedValues.length > 0 ? ts.setValue(selectedValues, true) : ts.clear(true);
 		}
+		// Tom Select's updateOriginalInput() — triggered internally by ts.sync() and ts.setValue() —
+		// physically moves selected <option> elements out of their <optgroup> to the end of <select>.
+		// A subsequent ts.sync() would then read the corrupted DOM and lose the optgroup assignment
+		// for those options (they'd end up in an unnamed group rendered last in the dropdown).
+		// Rebuild the native DOM from the internal store so the next refresh() reads a clean structure.
+		if (el && ts.optgroups && Object.keys(ts.optgroups).length > 0) {
+			SelectBox._rebuildNativeSelect(el, ts);
+		}
 		if (el && (el.dataset.hide_if_empty || el.dataset.hideIfEmpty)) {
 			SelectBox._checkHideIfEmpty(ts);
 		}
@@ -319,6 +327,53 @@ class SelectBox {
 		if (maxTextWidth > 0) {
 			ts.wrapper.style.minWidth = Math.ceil(maxTextWidth + paddingH + 10) + 'px';
 		}
+	}
+
+	/**
+	 * Rebuild the native <select> DOM from Tom Select's internal option/optgroup store.
+	 * Tom Select's updateOriginalInput() physically moves selected <option> elements out of
+	 * their <optgroup> to the end of <select> on every setValue() call. This corrupts the DOM
+	 * structure so that a subsequent ts.sync() re-reads those options as group-less and assigns
+	 * them to an unnamed group rendered last in the dropdown. Calling this method after any
+	 * operation that triggers updateOriginalInput() restores the correct DOM structure so future
+	 * sync() calls read clean, group-aware data.
+	 * @param {HTMLSelectElement} el  — the native <select> element (not a jQuery object)
+	 * @param {TomSelect} ts
+	 */
+	static _rebuildNativeSelect(el, ts) {
+		const fragment = document.createDocumentFragment();
+		const groupEls = {};
+
+		// Create <optgroup> elements in store order
+		Object.values(ts.optgroups)
+			.sort((a, b) => (a.$order || 0) - (b.$order || 0))
+			.forEach(group => {
+				const optgroupEl = document.createElement('optgroup');
+				optgroupEl.label = group.label || '';
+				if (group.disabled) optgroupEl.disabled = true;
+				groupEls[group.value] = optgroupEl;
+				fragment.appendChild(optgroupEl);
+			});
+
+		// Place <option> elements into their optgroups in store order
+		const selected = ts.getValue();
+		const selectedSet = new Set(Array.isArray(selected) ? selected : (selected ? [selected] : []));
+
+		Object.values(ts.options)
+			.filter(opt => opt.value !== '')
+			.sort((a, b) => (a.$order || 0) - (b.$order || 0))
+			.forEach(opt => {
+				const optionEl = document.createElement('option');
+				optionEl.value = opt.value;
+				optionEl.textContent = opt.text || '';
+				if (opt.disabled) optionEl.disabled = true;
+				if (selectedSet.has(opt.value)) optionEl.selected = true;
+				const optgroup = Array.isArray(opt.optgroup) ? opt.optgroup[0] : opt.optgroup;
+				(optgroup && groupEls[optgroup] ? groupEls[optgroup] : fragment).appendChild(optionEl);
+			});
+
+		el.innerHTML = '';
+		el.appendChild(fragment);
 	}
 
 	static _checkHideIfEmpty(ts) {
