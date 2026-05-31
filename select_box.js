@@ -344,13 +344,24 @@ class SelectBox {
 		const fragment = document.createDocumentFragment();
 		const groupEls = {};
 
+		// Restore custom data-* attributes stored by Tom Select from the original HTML element
+		const restoreDataAttrs = (domEl, storeEntry, knownProps) => {
+			Object.entries(storeEntry).forEach(([key, val]) => {
+				if (!knownProps.has(key) && typeof val === 'string') {
+					domEl.dataset[key] = val;
+				}
+			});
+		};
+
 		// Create <optgroup> elements in store order
+		const knownGroupProps = new Set(['value', 'label', '$order', 'disabled']);
 		Object.values(ts.optgroups)
 			.sort((a, b) => (a.$order || 0) - (b.$order || 0))
 			.forEach(group => {
 				const optgroupEl = document.createElement('optgroup');
 				optgroupEl.label = group.label || '';
 				if (group.disabled) optgroupEl.disabled = true;
+				restoreDataAttrs(optgroupEl, group, knownGroupProps);
 				groupEls[group.value] = optgroupEl;
 				fragment.appendChild(optgroupEl);
 			});
@@ -358,6 +369,7 @@ class SelectBox {
 		// Place <option> elements into their optgroups in store order
 		const selected = ts.getValue();
 		const selectedSet = new Set(Array.isArray(selected) ? selected : (selected ? [selected] : []));
+		const knownOptProps = new Set(['value', 'text', '$order', 'disabled', 'optgroup', 'selected', 'label', 'content']);
 
 		Object.values(ts.options)
 			.filter(opt => opt.value !== '')
@@ -368,6 +380,7 @@ class SelectBox {
 				optionEl.textContent = opt.text || '';
 				if (opt.disabled) optionEl.disabled = true;
 				if (selectedSet.has(opt.value)) optionEl.selected = true;
+				restoreDataAttrs(optionEl, opt, knownOptProps);
 				const optgroup = Array.isArray(opt.optgroup) ? opt.optgroup[0] : opt.optgroup;
 				(optgroup && groupEls[optgroup] ? groupEls[optgroup] : fragment).appendChild(optionEl);
 			});
