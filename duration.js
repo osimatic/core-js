@@ -67,10 +67,12 @@ class Duration {
 
 	static formatSecondsAsString(seconds, withSeconds = true, withMinutes = true, withMinuteLabel = true, fullLabel = false, hideHourIfZero = false) {
 		seconds = Math.round(seconds);
+		const isNegative = seconds < 0;
+		const absSeconds = Math.abs(seconds);
 
 		// Hours
 		let strHours = '';
-		let nbHours = this.totalHours(seconds);
+		let nbHours = this.totalHours(absSeconds);
 		if (!hideHourIfZero || nbHours > 0) {
 			strHours += nbHours;
 			if (fullLabel) {
@@ -83,7 +85,7 @@ class Duration {
 		// Minutes
 		let strMinutes = '';
 		if (withMinutes) {
-			let nbMinutes = this.remainingMinutes(seconds);
+			let nbMinutes = this.remainingMinutes(absSeconds);
 			strMinutes += ' ';
 			if (fullLabel) {
 				strMinutes += nbMinutes.toString() + (withMinuteLabel ? ' minute' + (nbMinutes > 1 ? 's' : '') : '');
@@ -95,7 +97,7 @@ class Duration {
 		// Seconds
 		let strSeconds = '';
 		if (withSeconds) {
-			let nbSeconds = this.remainingSeconds(seconds);
+			let nbSeconds = this.remainingSeconds(absSeconds);
 			strSeconds += ' ';
 			if (fullLabel) {
 				strSeconds += nbSeconds.toString() + ' seconde' + (nbSeconds > 1 ? 's' : '');
@@ -104,7 +106,7 @@ class Duration {
 			}
 		}
 
-		return (strHours + strMinutes + strSeconds).trim();
+		return (isNegative ? '- ' : '') + (strHours + strMinutes + strSeconds).trim();
 	}
 
 	// -------------------------------------------------------------------------
@@ -152,15 +154,15 @@ class Duration {
 	// -------------------------------------------------------------------------
 
 	static totalDays(seconds) {
-		return Math.floor(seconds / 86400);
+		return Math.trunc(seconds / 86400) || 0;
 	}
 
 	static totalHours(seconds) {
-		return Math.floor(seconds / 3600);
+		return Math.trunc(seconds / 3600) || 0;
 	}
 
 	static totalMinutes(seconds) {
-		return Math.floor(seconds / 60);
+		return Math.trunc(seconds / 60) || 0;
 	}
 
 	// -------------------------------------------------------------------------
@@ -168,15 +170,15 @@ class Duration {
 	// -------------------------------------------------------------------------
 
 	static remainingHours(seconds) {
-		return this.totalHours(seconds % 86400);
+		return Math.abs(this.totalHours(seconds % 86400));
 	}
 
 	static remainingMinutes(seconds) {
-		return this.totalMinutes(seconds % 3600);
+		return Math.abs(this.totalMinutes(seconds % 3600));
 	}
 
 	static remainingSeconds(seconds) {
-		return seconds % 60;
+		return Math.abs(seconds % 60);
 	}
 
 	// -------------------------------------------------------------------------
