@@ -1,4 +1,5 @@
-const { HTTPClient } = require('../http_client');
+import { HTTPClient } from '../http_client.js';
+import { JwtSession } from '../jwt.js';
 
 // Mock JwtSession
 jest.mock('../jwt', () => ({
@@ -179,7 +180,6 @@ describe('HTTPClient', () => {
 
 		test('should handle null authorization token', () => {
 			HTTPClient.authorizationToken = null;
-			const { JwtSession } = require('../jwt');
 			JwtSession.getToken.mockReturnValue(null);
 
 			const headers = HTTPClient.getHeaders(true);
@@ -189,7 +189,6 @@ describe('HTTPClient', () => {
 
 		test('should handle empty authorization token', () => {
 			HTTPClient.authorizationToken = '';
-			const { JwtSession } = require('../jwt');
 			JwtSession.getToken.mockReturnValue('');
 
 			const headers = HTTPClient.getHeaders(true);

@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-const { ListBox } = require('../list_box');
+import { ListBox } from '../list_box.js';
 
 describe('ListBox', () => {
 	describe('selectall', () => {

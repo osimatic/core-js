@@ -1,8 +1,8 @@
 /**
  * @jest-environment jsdom
  */
-const { DetailsSubArray } = require('../details_sub_array');
-const { HTTPClient } = require('../http_client');
+import { DetailsSubArray } from '../details_sub_array.js';
+import { HTTPClient } from '../http_client.js';
 
 function setupTable(nbLinks = 1) {
 	document.body.innerHTML = `

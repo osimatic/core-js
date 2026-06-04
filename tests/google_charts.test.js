@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-const { GoogleCharts } = require('../google_charts');
+import { GoogleCharts } from '../google_charts.js';
 
 describe('GoogleCharts', () => {
 	let mockChart;

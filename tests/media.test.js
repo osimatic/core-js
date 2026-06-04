@@ -1,4 +1,4 @@
-const { AudioMedia, VideoMedia, UserMedia } = require('../media');
+import { AudioMedia, VideoMedia, UserMedia } from '../media.js';
 
 describe('media.js', () => {
 	describe('AudioMedia', () => {

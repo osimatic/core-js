@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-const { GoogleMap } = require('../google_maps');
+import { GoogleMap } from '../google_maps.js';
 
 describe('GoogleMap', () => {
 	let mockMap;

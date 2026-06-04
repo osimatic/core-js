@@ -1,4 +1,4 @@
-const { WebRTC } = require('../web_rtc');
+import { WebRTC } from '../web_rtc.js';
 
 describe('WebRTC', () => {
 	let mockPeerConnection;

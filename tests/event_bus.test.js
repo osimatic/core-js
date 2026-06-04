@@ -1,4 +1,4 @@
-const { EventBus } = require('../event_bus');
+import { EventBus } from '../event_bus.js';
 
 describe('EventBus', () => {
 	let eventBus;

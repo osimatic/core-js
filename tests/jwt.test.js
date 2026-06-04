@@ -1,4 +1,4 @@
-const { JwtToken, JwtSession, ApiTokenSession } = require('../jwt');
+import { JwtToken, JwtSession, ApiTokenSession } from '../jwt.js';
 
 // Helper function to create a valid JWT token for testing
 function createJwtToken(payload) {

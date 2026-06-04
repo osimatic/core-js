@@ -1,5 +1,5 @@
-require('../number');
-const { Rating } = require('../number');
+import '../number.js';
+import { Rating, NumberFormatter } from '../number.js';
 
 describe('Rating', () => {
 	describe('display', () => {
@@ -46,7 +46,6 @@ describe('Rating', () => {
 });
 
 describe('NumberFormatter', () => {
-	const { NumberFormatter } = require('../number');
 
 	describe('getDecimalFormatter', () => {
 		test('should create and cache decimal formatter', () => {

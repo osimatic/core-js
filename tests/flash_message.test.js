@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-const { FlashMessage } = require('../flash_message');
+import { FlashMessage } from '../flash_message.js';
 
 describe('FlashMessage', () => {
 	beforeEach(() => {

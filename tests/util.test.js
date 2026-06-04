@@ -1,4 +1,4 @@
-const { sleep, refresh } = require('../util');
+import { sleep, refresh } from '../util.js';
 
 describe('Util', () => {
 	describe('sleep', () => {

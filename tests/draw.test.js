@@ -1,4 +1,4 @@
-const { HexColor, RgbColor } = require('../draw');
+import { HexColor, RgbColor } from '../draw.js';
 
 describe('HexColor', () => {
 	describe('check', () => {

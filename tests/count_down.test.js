@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-const { CountDown } = require('../count_down');
+import { CountDown } from '../count_down.js';
 
 describe('CountDown', () => {
 	let div;

@@ -1,5 +1,5 @@
-require('../array'); // For unsetVal method
-const { ShoppingCart } = require('../shopping_cart');
+import '../array.js'; // For unsetVal method
+import { ShoppingCart } from '../shopping_cart.js';
 
 describe('ShoppingCart', () => {
 	let localStorageMock;

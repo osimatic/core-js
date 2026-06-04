@@ -1,8 +1,8 @@
 /**
  * @jest-environment jsdom
  */
-const { MultiFilesInput } = require('../multi_files_input');
-const { FlashMessage } = require('../flash_message');
+import { MultiFilesInput } from '../multi_files_input.js';
+import { FlashMessage } from '../flash_message.js';
 
 // Mock FileReader
 class MockFileReader {

@@ -1,4 +1,4 @@
-const { IBAN, BankCard } = require('../bank');
+import { IBAN, BankCard } from '../bank.js';
 
 describe('IBAN', () => {
 	describe('format', () => {

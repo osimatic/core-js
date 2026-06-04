@@ -1,4 +1,4 @@
-const { Country, Locale, PostalAddress, GeographicCoordinates, Polygon } = require('../location');
+import { Country, Locale, PostalAddress, GeographicCoordinates, Polygon } from '../location.js';
 
 describe('Country', () => {
 	describe('getCountries', () => {

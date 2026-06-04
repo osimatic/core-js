@@ -1,4 +1,4 @@
-const { TimestampUnix } = require('../../date_time');
+import { TimestampUnix } from '../../date_time.js';
 
 describe('TimestampUnix', () => {
 	describe('parse', () => {

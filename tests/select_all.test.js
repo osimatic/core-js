@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-const { SelectAll } = require('../select_all');
+import { SelectAll } from '../select_all.js';
 
 // ─── helpers ────────────────────────────────────────────────────────────────
 

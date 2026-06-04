@@ -1,4 +1,4 @@
-const { SqlDate } = require('../../date_time');
+import { SqlDate } from '../../date_time.js';
 
 describe('SqlDate', () => {
 	describe('parse', () => {

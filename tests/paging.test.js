@@ -2,8 +2,8 @@
  * @jest-environment jsdom
  */
 
-const { Pagination, Navigation } = require('../paging');
-const { UrlAndQueryString } = require('../network');
+import { Pagination, Navigation } from '../paging.js';
+import { UrlAndQueryString } from '../network.js';
 
 function makeItems(n) {
 	return Array.from({ length: n }, (_, i) => {

@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-const { SortableList } = require('../sortable_list');
+import { SortableList } from '../sortable_list.js';
 
 function setupList(nbItems = 3) {
 	document.body.innerHTML = `

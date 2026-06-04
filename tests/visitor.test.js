@@ -1,4 +1,4 @@
-const { Browser, UserAgent } = require('../visitor');
+import { Browser, UserAgent } from '../visitor.js';
 
 describe('Browser', () => {
 	describe('isOpera', () => {

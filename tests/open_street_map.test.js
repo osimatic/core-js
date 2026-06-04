@@ -1,8 +1,8 @@
 /**
  * @jest-environment jsdom
  */
-const { OpenStreetMap, OsmMap } = require('../open_street_map');
-const L = require('leaflet');
+import { OpenStreetMap, OsmMap } from '../open_street_map.js';
+import L from 'leaflet';
 
 function createMockMap(zoom = 6) {
 	return {

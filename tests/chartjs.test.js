@@ -1,7 +1,8 @@
 /**
  * @jest-environment jsdom
  */
-const { Chartjs } = require('../chartjs');
+import { Chartjs } from '../chartjs.js';
+import { DatePeriod } from '../date_time.js';
 
 let mockChartInstance;
 
@@ -258,7 +259,6 @@ describe('Chartjs', () => {
 	});
 
 	describe('getPeriodLabels', () => {
-		const { DatePeriod } = require('../date_time');
 
 		test('delegates to DatePeriod.getPeriodLabels with default locale/timezone', () => {
 			const spy = jest.spyOn(DatePeriod, 'getPeriodLabels');

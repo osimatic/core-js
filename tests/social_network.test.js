@@ -1,4 +1,4 @@
-const { SocialNetwork } = require('../social_network');
+import { SocialNetwork } from '../social_network.js';
 
 describe('SocialNetwork', () => {
 	describe('Facebook', () => {

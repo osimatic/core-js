@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-const { Password } = require('../user');
+import { Password } from '../user.js';
 
 function setupFormGroup(initialValue = '') {
 	const formGroup = document.createElement('div');

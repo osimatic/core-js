@@ -1,4 +1,4 @@
-const { File, CSV, Img } = require('../file');
+import { File, CSV, Img } from '../file.js';
 
 describe('File', () => {
 	describe('formatFileSize', () => {

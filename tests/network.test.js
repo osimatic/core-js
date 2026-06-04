@@ -1,4 +1,4 @@
-const { Cookie, UrlAndQueryString } = require('../network');
+import { Cookie, UrlAndQueryString } from '../network.js';
 
 describe('Cookie', () => {
 	// Mock document.cookie

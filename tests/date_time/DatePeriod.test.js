@@ -1,4 +1,4 @@
-const { DatePeriod, DateTime, SqlDate } = require('../../date_time');
+import { DatePeriod, DateTime, SqlDate } from '../../date_time.js';
 
 describe('DatePeriod', () => {
 	describe('isSameDay', () => {

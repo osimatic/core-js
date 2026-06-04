@@ -1,4 +1,4 @@
-const { GoogleRecaptcha } = require('../google_recaptcha');
+import { GoogleRecaptcha } from '../google_recaptcha.js';
 
 describe('GoogleRecaptcha', () => {
 	let mockGrecaptcha;

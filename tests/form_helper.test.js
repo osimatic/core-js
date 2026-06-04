@@ -1,9 +1,9 @@
 /**
  * @jest-environment jsdom
  */
-require('../array'); // For removeEmptyValues method
-require('../string'); // For normalizeBreaks method
-const { FormHelper, ArrayField, EditValue } = require('../form_helper');
+import '../array.js'; // For removeEmptyValues method
+import '../string.js'; // For normalizeBreaks method
+import { FormHelper, ArrayField, EditValue } from '../form_helper.js';
 
 // Helper functions
 function setupForm() {

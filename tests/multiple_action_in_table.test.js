@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-const { MultipleActionInTable, MultipleActionInDivList } = require('../multiple_action_in_table');
+import { MultipleActionInTable, MultipleActionInDivList } from '../multiple_action_in_table.js';
 
 // ─── helpers ────────────────────────────────────────────────────────────────
 

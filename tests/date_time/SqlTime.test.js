@@ -1,4 +1,4 @@
-const { SqlTime, TimestampUnix } = require('../../date_time');
+import { SqlTime, TimestampUnix } from '../../date_time.js';
 
 describe('SqlTime', () => {
 	describe('parse', () => {

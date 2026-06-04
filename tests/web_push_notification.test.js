@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-const { WebPushNotification } = require('../web_push_notification');
+import { WebPushNotification } from '../web_push_notification.js';
 
 describe('WebPushNotification', () => {
 	let mockSub;

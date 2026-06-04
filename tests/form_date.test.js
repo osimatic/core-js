@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-const { FormDate, InputPeriod } = require('../form_date');
+import { FormDate, InputPeriod } from '../form_date.js';
 
 describe('FormDate', () => {
 	describe('getPeriodList', () => {

@@ -1,4 +1,4 @@
-const { PersonName, Email, TelephoneNumber } = require('../contact_details');
+import { PersonName, Email, TelephoneNumber } from '../contact_details.js';
 
 describe('PersonName', () => {
 	describe('format', () => {

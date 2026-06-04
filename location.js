@@ -11,15 +11,21 @@ class Country {
 	}
 
 	static getFlagPath(countryCode) {
-		return typeof Country.flagsPath !== 'undefined' ? Country.flagsPath + countryCode.toLowerCase() + '.png' : null;
+		return typeof Country.flagsPath !== 'undefined' && countryCode ? Country.flagsPath + countryCode.toLowerCase() + '.png' : null;
 	}
 	static getFlagImg(countryCode, locale=Locale.getDefault()) {
+		if (!countryCode) {
+			return '';
+		}
 		if (typeof Country.flagsPath !== 'undefined') {
 			return '<span><img src="'+Country.getFlagPath(countryCode)+'" alt="" title="'+Country.getCountryName(countryCode, locale)+'" class="flag" /></span>';
 		}
 		return '<span class="fi fi-' + countryCode.toLowerCase() + '"></span>';
 	}
 	static getFlagEmoji(countryCode) {
+		if (!countryCode) {
+			return '';
+		}
 		return [...countryCode.toUpperCase()].map(c => String.fromCodePoint(0x1F1E6 - 65 + c.charCodeAt(0))).join('');
 	}
 
@@ -38,7 +44,7 @@ class Country {
 			: Object.entries(allCountries);
 			entries.forEach(([countryCode, countryName]) => {
 			let attrs = '';
-			if (showFlags) {
+			if (showFlags && countryCode) {
 				/*if (typeof Country.flagsPath !== 'undefined') {
 					attrs = ' data-thumbnail="' + Country.getFlagPath(countryCode) + '"';
 				} else {*/

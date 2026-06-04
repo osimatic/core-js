@@ -1,8 +1,8 @@
 // Mock socket.io-client before requiring WebSocket
 jest.mock('socket.io-client');
 
-const { WebSocket } = require('../web_socket');
-const socketIoClient = require('socket.io-client');
+import { WebSocket } from '../web_socket.js';
+import socketIoClient from 'socket.io-client';
 
 describe('WebSocket', () => {
 	let mockEventBus;
