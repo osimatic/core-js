@@ -347,7 +347,7 @@ class SelectBox {
 		// Restore custom data-* attributes stored by Tom Select from the original HTML element
 		const restoreDataAttrs = (domEl, storeEntry, knownProps) => {
 			Object.entries(storeEntry).forEach(([key, val]) => {
-				if (!knownProps.has(key) && typeof val === 'string') {
+				if (!knownProps.has(key) && typeof val === 'string' && !key.startsWith('$')) {
 					domEl.dataset[key] = val;
 				}
 			});
