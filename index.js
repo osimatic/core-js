@@ -30,6 +30,7 @@ export { DetailsSubArray } from './details_sub_array.js';
 export { SelectAll } from './select_all.js';
 export { MultipleActionInTable, MultipleActionInDivList } from './multiple_action_in_table.js';
 export { MultiFilesInput } from './multi_files_input.js';
+export { MultiPhotoInput } from './multi_photo_input.js';
 export { FormDate, InputPeriod } from './form_date.js';
 export { ShoppingCart } from './shopping_cart.js';
 export { FlashMessage } from './flash_message.js';
