@@ -155,6 +155,20 @@ describe('Email', () => {
 		});
 	});
 
+	describe('normalize', () => {
+		test('should lowercase email', () => {
+			expect(Email.normalize('Test@Example.COM')).toBe('test@example.com');
+		});
+
+		test('should trim leading and trailing whitespace', () => {
+			expect(Email.normalize('  test@example.com  ')).toBe('test@example.com');
+		});
+
+		test('should lowercase and trim at the same time', () => {
+			expect(Email.normalize(' Test@Example.COM ')).toBe('test@example.com');
+		});
+	});
+
 	describe('getMailToLink', () => {
 		test('should generate mailto link', () => {
 			const email = 'test@example.com';
