@@ -53,11 +53,16 @@ class MultipleActionInTable {
 			firstTh.innerHTML = '<input type="checkbox" class="action_multiple_check_all" />';
 		}
 
-		table.querySelectorAll('input.action_multiple_checkbox').forEach(cb => {
-			cb.addEventListener('change', () => {
-				MultipleActionInTable.updateCheckbox(table);
+		// Délégation sur la table (et non sur chaque checkbox) : avec la pagination DataTables, les lignes hors page courante
+		// sont détachées puis réinsérées dans le DOM, donc une checkbox réapparue n'aurait jamais reçu son écouteur direct.
+		if (!table.dataset.action_multiple_bound) {
+			table.addEventListener('change', (e) => {
+				if (e.target.matches('input.action_multiple_checkbox')) {
+					MultipleActionInTable.updateCheckbox(table);
+				}
 			});
-		});
+			table.dataset.action_multiple_bound = '1';
+		}
 
 		const checkAll = table.querySelector('input.action_multiple_check_all');
 		if (checkAll) {

@@ -242,11 +242,31 @@ describe('MultipleActionInTable', () => {
 			const checkboxes = table.querySelectorAll('input.action_multiple_checkbox');
 			checkboxes.forEach(cb => {
 				cb.checked = true;
-				cb.dispatchEvent(new Event('change'));
+				cb.dispatchEvent(new Event('change', { bubbles: true }));
 			});
 
 			const checkAll = table.querySelector('input.action_multiple_check_all');
 			expect(checkAll.checked).toBe(true);
+		});
+
+		test('checking a row checkbox added after init (ex : réinsérée par la pagination DataTables) met bien à jour les boutons', () => {
+			const table = setupTable({ nbRows: 1 });
+			MultipleActionInTable.init(table);
+
+			// Simule une ligne réinsérée dans le DOM par DataTables après un changement de page/longueur de page,
+			// donc absente du DOM au moment de l'appel à init().
+			table.querySelector('tbody').insertAdjacentHTML('beforeend', `
+				<tr data-action_multiple_input_name="ids[]" data-action_multiple_item_id="2">
+					<td class="select"><input type="checkbox" class="action_multiple_checkbox" name="ids[]" value="2"></td>
+					<td>Item 2</td>
+				</tr>`);
+
+			const newCheckbox = table.querySelector('input.action_multiple_checkbox[value="2"]');
+			newCheckbox.checked = true;
+			newCheckbox.dispatchEvent(new Event('change', { bubbles: true }));
+
+			const divBtn = MultipleActionInTable.getDivBtn(table);
+			expect(divBtn.classList.contains('hide')).toBe(false);
 		});
 	});
 
