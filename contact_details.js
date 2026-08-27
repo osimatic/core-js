@@ -54,6 +54,15 @@ class Email {
 	static getMailToLink(email) {
 		return '<a href="mailto:'+email+'">'+email+'</a>';
 	}
+
+	// Formats a list of recipients (each either [address, name] or a plain address) as "Name <address>, address2, ...".
+	// Set escapeHtml to true when the result is inserted as raw HTML rather than through .text().
+	static formatRecipientList(recipients, separator = ', ', escapeHtml = false) {
+		return (recipients ?? []).map(recipient => {
+			const text = Array.isArray(recipient) ? (recipient[1] ? recipient[1]+' <'+recipient[0]+'>' : recipient[0]) : recipient;
+			return escapeHtml ? text.escapeHtml() : text;
+		}).join(separator);
+	}
 }
 
 class TelephoneNumber {
