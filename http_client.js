@@ -307,7 +307,7 @@ class HTTPClient {
 		});
 	}
 
-	static download(method, url, data={}, errorCallback=null, completeCallback=null, additionalHeaders={}) {
+	static download(method, url, data={}, errorCallback=null, completeCallback=null, additionalHeaders={}, sendAuthorizationHeader=true) {
 		HTTPClient.requestBlob(method, url, data,
 			(blobData, response) => {
 				const contentType = response.headers.get('content-type');
@@ -319,11 +319,12 @@ class HTTPClient {
 			},
 			errorCallback,
 			completeCallback,
-			additionalHeaders
+			additionalHeaders,
+			sendAuthorizationHeader
 		);
 	}
 
-	static async requestBlob(method, url, data={}, successCallback=null, errorCallback=null, completeCallback=null, additionalHeaders={}) {
+	static async requestBlob(method, url, data={}, successCallback=null, errorCallback=null, completeCallback=null, additionalHeaders={}, sendAuthorizationHeader=true) {
 		if (!window.fetch) {
 			return;
 		}
@@ -331,7 +332,7 @@ class HTTPClient {
 		let body = null;
 		method = method.toUpperCase();
 
-		let headers = HTTPClient.getHeaders(false, additionalHeaders);
+		let headers = HTTPClient.getHeaders(false, additionalHeaders, sendAuthorizationHeader);
 		if ('PATCH' === method || 'DELETE' === method) {
 			headers.append('Content-Type', 'application/x-www-form-urlencoded');
 			body = encodeURIComponent(new URLSearchParams(HTTPClient.formatFormData(data)).toString());

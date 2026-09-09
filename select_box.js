@@ -195,6 +195,19 @@ class SelectBox {
 			}
 		}
 
+		// Tom Select's sync() only adds/updates options found in the current DOM, it never removes
+		// ones that disappeared (e.g. tasks no longer valid after narrowing the list down to a
+		// selected company): without this, the dropdown keeps showing stale entries indefinitely
+		// even though the underlying <select> was correctly rebuilt by the caller.
+		if (el) {
+			const currentValues = new Set([...el.querySelectorAll('option')].map(o => o.value));
+			Object.keys(ts.options).forEach(value => {
+				if (!currentValues.has(value)) {
+					ts.removeOption(value, true);
+				}
+			});
+		}
+
 		ts.sync();
 		// sync() with allowEmptyOption: true may re-add the auto-generated empty option to the store.
 		// Remove it if it has no text (auto-generated); intentional empty options (e.g. "- Aucun -") are kept.

@@ -1,6 +1,6 @@
 {
   "name": "@osimatic/core-js",
-  "version": "1.7.19",
+  "version": "1.7.21",
   "type": "module",
   "main": "index.js",
   "scripts": {
@@ -21,7 +21,7 @@
     "ua-parser-js": "^2.0.9"
   },
   "peerDependencies": {
-    "datatables.net": "^2.0",
+    "datatables.net": "^2.0 || ^3.0",
     "tom-select": "^2.5.2",
     "chart.js": "^4.0",
     "flag-icons": "^7.0",
