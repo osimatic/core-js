@@ -231,11 +231,14 @@ class SelectBox {
 			selectedValues.length > 0 ? ts.setValue(selectedValues, true) : ts.clear(true);
 		}
 		// Tom Select's updateOriginalInput() — triggered internally by ts.sync() and ts.setValue() —
-		// physically moves selected <option> elements out of their <optgroup> to the end of <select>.
-		// A subsequent ts.sync() would then read the corrupted DOM and lose the optgroup assignment
-		// for those options (they'd end up in an unnamed group rendered last in the dropdown).
-		// Rebuild the native DOM from the internal store so the next refresh() reads a clean structure.
-		if (el && ts.optgroups && Object.keys(ts.optgroups).length > 0) {
+		// physically moves selected <option> elements to the end of <select> (out of their <optgroup>
+		// when there is one). A subsequent ts.sync() would then read that shuffled DOM: with optgroups,
+		// it loses the group assignment for those options; without optgroups, getSettings() still
+		// recomputes each option's $order from this wrong DOM position, corrupting the displayed
+		// dropdown order (sortField defaults to '$order'). Rebuild the native DOM from the internal
+		// store — already sorted by the (still correct) $order — so the next refresh() reads a clean
+		// structure instead of compounding the drift.
+		if (el) {
 			SelectBox._rebuildNativeSelect(el, ts);
 		}
 		if (el && (el.dataset.hide_if_empty || el.dataset.hideIfEmpty)) {
@@ -269,6 +272,10 @@ class SelectBox {
 		else {
 			ts.setValue(val);
 		}
+		
+		// See _rebuildNativeSelect() doc: undoes the DOM shuffle from updateOriginalInput() so a
+		// later sync()/refresh() doesn't recompute $order (and thus the displayed order) from it.
+		SelectBox._rebuildNativeSelect(el, ts);
 	}
 
 	/**
@@ -283,6 +290,9 @@ class SelectBox {
 
 		if (el.tomselect) {
 			el.tomselect.clear(true);
+			// See _rebuildNativeSelect() doc: undoes the DOM shuffle from updateOriginalInput() so a
+			// later sync()/refresh() doesn't recompute $order (and thus the displayed order) from it.
+			SelectBox._rebuildNativeSelect(el, el.tomselect);
 		}
 		else {
 			el.value = '';
@@ -356,6 +366,21 @@ class SelectBox {
 	static _rebuildNativeSelect(el, ts) {
 		const fragment = document.createDocumentFragment();
 		const groupEls = {};
+
+		// A native <select> with no <option selected> defaults to selecting the first one. ts.options
+		// never keeps a real entry for the auto-generated empty placeholder (removed by refresh()'s
+		// cleanup, and setValue()/clear() never add one at all), so without this, rebuilding from
+		// ts.options alone when nothing is selected would silently make the first real option "stick".
+		if (ts.settings.mode === 'single' && ts.settings.allowEmptyOption && !ts.getValue()) {
+			// Reuse the intentional empty option's label (e.g. "- Aucun -") if the store still has
+			// one; otherwise fall back to a plain blank placeholder.
+			const emptyData = ts.options[''];
+			const emptyOption = document.createElement('option');
+			emptyOption.value = '';
+			emptyOption.textContent = emptyData?.text || '';
+			emptyOption.selected = true;
+			fragment.appendChild(emptyOption);
+		}
 
 		// Restore custom data-* attributes stored by Tom Select from the original HTML element
 		const restoreDataAttrs = (domEl, storeEntry, knownProps) => {

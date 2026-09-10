@@ -401,7 +401,7 @@ class DataTableManager {
 
 		// Enregistre un filtre scopé à cette table uniquement
 		const filterFn = function(settings, searchData, index) {
-			if (settings.nTable !== table[0]) return true;
+			if (settings.table !== table[0]) return true;
 			return callback($(dt.row(index).node()));
 		};
 		filterFn._table = table[0];
