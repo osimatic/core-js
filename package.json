@@ -1,6 +1,6 @@
 {
   "name": "@osimatic/core-js",
-  "version": "1.7.23",
+  "version": "1.7.24",
   "type": "module",
   "main": "index.js",
   "scripts": {
@@ -16,7 +16,7 @@
   "dependencies": {
     "deepmerge": "^4.3.1",
     "i18n-iso-countries": "^7.14.0",
-    "ilib": "^14.21",
+    "ilib": "^15.0",
     "libphonenumber-js": "^1.12.39",
     "ua-parser-js": "^2.0.9"
   },
@@ -25,7 +25,7 @@
     "tom-select": "^2.5.2",
     "chart.js": "^4.0",
     "flag-icons": "^7.0",
-    "intl-tel-input": "^28.0",
+    "intl-tel-input": "^29.0",
     "leaflet": "^1.9",
     "leaflet-draw": "^1.0",
     "papaparse": "^5.0"
