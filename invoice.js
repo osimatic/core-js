@@ -1,10 +1,10 @@
 class ChorusPro {
-	// La structure de facturation Chorus Pro du destinataire, qui détermine quelles références sont obligatoires sur les factures déposées (cf. Osimatic\Invoice\ChorusProInvoiceCategory côté PHP)
-	static getInvoiceCategoryList() {
+	// La/les référence(s) obligatoire(s) sur les factures déposées pour la structure destinataire (cf. Osimatic\Invoice\ChorusProInvoiceReferenceRequirement côté PHP)
+	static getInvoiceReferenceRequirementList() {
 		return {
-			TYPE_1: 'Type 1 (n° d’engagement obligatoire)',
-			TYPE_2: 'Type 2 (code service obligatoire)',
-			TYPE_3: 'Type 3 (aucune référence requise)',
+			ENGAGEMENT_REQUIRED: 'Numéro d’engagement obligatoire',
+			SERVICE_CODE_REQUIRED: 'Code service obligatoire',
+			NONE: 'Aucune référence requise',
 		};
 	}
 
