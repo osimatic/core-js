@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-import { ImportFromCsv } from '../import_from_csv.js';
+import { ImportFromCsv } from '../../file/ImportFromCsv.js';
 
 const originalDefaults = { ...ImportFromCsv._defaults };
 

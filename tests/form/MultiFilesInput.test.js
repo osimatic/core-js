@@ -1,8 +1,9 @@
 /**
  * @jest-environment jsdom
  */
-import { MultiFilesInput } from '../multi_files_input.js';
-import { FlashMessage } from '../flash_message.js';
+import { jest } from '@jest/globals';
+import { MultiFilesInput } from '../../form/MultiFilesInput.js';
+import { FlashMessage } from '../../widgets/FlashMessage.js';
 
 // Mock FileReader
 class MockFileReader {

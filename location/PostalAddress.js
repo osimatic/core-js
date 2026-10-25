@@ -1,5 +1,6 @@
 import Address from 'ilib/lib/Address.js';
 import AddressFmt from 'ilib/lib/AddressFmt.js';
+import { Country } from './Country.js';
 import { toEl } from '../utils/util.js';
 
 class PostalAddress {

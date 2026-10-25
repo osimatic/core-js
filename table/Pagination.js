@@ -1,3 +1,4 @@
+import { UrlAndQueryString } from '../network/UrlAndQueryString.js';
 import { toEl } from '../utils/util.js';
 
 class Pagination {

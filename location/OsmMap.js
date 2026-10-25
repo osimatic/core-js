@@ -1,3 +1,4 @@
+import { OpenStreetMap } from './OpenStreetMap.js';
 import { toEl } from '../utils/util.js';
 
 class OsmMap {

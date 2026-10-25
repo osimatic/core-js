@@ -1,5 +1,6 @@
 import L from 'leaflet';
 import 'leaflet-draw';
+import { Polygon } from './Polygon.js';
 import { toEl } from '../utils/util.js';
 
 /**
