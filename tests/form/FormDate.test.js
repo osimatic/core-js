@@ -180,7 +180,8 @@ describe('FormDate', () => {
 		let mockSelect;
 
 		beforeEach(() => {
-			mockSelect = { insertAdjacentHTML: jest.fn() };
+			mockSelect = document.createElement('select');
+			jest.spyOn(mockSelect, 'insertAdjacentHTML');
 		});
 
 		test('should do nothing if element does not exist', () => {
@@ -255,7 +256,8 @@ describe('FormDate', () => {
 		let mockSelect;
 
 		beforeEach(() => {
-			mockSelect = { insertAdjacentHTML: jest.fn() };
+			mockSelect = document.createElement('select');
+			jest.spyOn(mockSelect, 'insertAdjacentHTML');
 
 			// Mock String.prototype.capitalize for this test
 			if (!String.prototype.capitalize) {
@@ -283,7 +285,8 @@ describe('FormDate', () => {
 		let mockSelect;
 
 		beforeEach(() => {
-			mockSelect = { insertAdjacentHTML: jest.fn() };
+			mockSelect = document.createElement('select');
+			jest.spyOn(mockSelect, 'insertAdjacentHTML');
 
 			if (!String.prototype.capitalize) {
 				String.prototype.capitalize = function() {

@@ -1,7 +1,8 @@
 /**
  * @jest-environment jsdom
  */
-import { GoogleMap } from '../google_maps.js';
+import { jest } from '@jest/globals';
+import { GoogleMap } from '../../location/GoogleMap.js';
 
 describe('GoogleMap', () => {
 	let mockMap;
