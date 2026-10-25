@@ -1,4 +1,4 @@
-import '../string.js';
+import '../utils/string.js';
 
 describe('String extensions', () => {
 	describe('reverseString', () => {

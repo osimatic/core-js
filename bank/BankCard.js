@@ -1,5 +1,5 @@
-import { SqlDateTime } from '../date_time.js';
-import { Locale } from '../locale.js';
+import { SqlDateTime } from '../calendar/SqlDateTime.js';
+import { Locale } from '../location/Locale.js';
 
 class BankCard {
 	static formatCardNumber(cardNumber, hiddenChar='*') {

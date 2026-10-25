@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-import { CountDown } from '../count_down.js';
+import { CountDown } from '../widgets/CountDown.js';
 
 describe('CountDown', () => {
 	let div;

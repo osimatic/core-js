@@ -1,4 +1,4 @@
-import { sleep, refresh } from '../util.js';
+import { sleep, refresh } from '../utils/util.js';
 
 describe('Util', () => {
 	describe('sleep', () => {

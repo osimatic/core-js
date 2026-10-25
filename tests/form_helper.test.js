@@ -1,8 +1,8 @@
 /**
  * @jest-environment jsdom
  */
-import '../array.js'; // For removeEmptyValues method
-import '../string.js'; // For normalizeBreaks method
+import '../utils/array.js'; // For removeEmptyValues method
+import '../utils/string.js'; // For normalizeBreaks method
 import { FormHelper, ArrayField, EditValue } from '../form_helper.js';
 
 // Helper functions

@@ -1,4 +1,4 @@
-import '../array.js';
+import '../utils/array.js';
 
 describe('Array.prototype extensions', () => {
 	describe('unset', () => {
