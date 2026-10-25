@@ -51,41 +51,13 @@ class SocialNetwork {
 		;
 	}
 
-	// ---------- Google Plus ----------
+	// ---------- Instagram ----------
 
-	static getButtonGooglePlusShare(lang='fr') {
-		/*
-		<a target="_blank" title="Google +" href="https://plus.google.com/share?url=<?php the_permalink(); ?>&hl=fr" rel="nofollow" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=450,width=650');return false;"><img src="http://korben.info/wp-content/themes/korben2013/hab/gplus_icon.png" alt="Google Plus" /></a>
-		*/
+	// Identifiant Instagram (@…) déduit de l'URL du profil
+	static getInstagramHandle(url) {
+		var path = new URL(url).pathname.replace(/\/+$/, '');
+		return '@' + path.split('/').pop();
 	}
-
-	static getButtonGooglePlusPlusOne(lang='fr') {
-		/*
-		$str = '
-			<!-- Place this tag where you want the +1 button to render -->
-			<div class="g-plusone"></div>
-
-			<!-- Place this render call where appropriate -->
-			<script type="text/javascript">
-				window.___gcfg = {lang: \'fr\'};
-
-				(function() {
-					var po = document.createElement(\'script\'); po.type = \'text/javascript\'; po.async = true;
-					po.src = \'https://apis.google.com/js/plusone.js\';
-					var s = document.getElementsByTagName(\'script\')[0]; s.parentNode.insertBefore(po, s);
-				})();
-			</script>
-		';
-		*/
-
-		return ''
-			+'<!-- Placez cette balise dans l\'en-tête ou juste avant la balise de fermeture du corps de texte. -->'
-			+'<script src="https://apis.google.com/js/platform.js" async defer>{lang: \''+lang+'\'}</script>'
-			+'<!-- Placez cette balise où vous souhaitez faire apparaître le gadget Bouton +1. -->'
-			+'<div class="g-plusone"></div>'
-		;
-	}
-
 
 	// ---------- Linkedin ----------
 

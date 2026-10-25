@@ -296,6 +296,23 @@ describe('SocialNetwork', () => {
 		});
 	});
 
+	describe('Instagram', () => {
+		describe('getInstagramHandle', () => {
+			test('should extract handle from profile URL', () => {
+				expect(SocialNetwork.getInstagramHandle('https://www.instagram.com/mytime')).toBe('@mytime');
+			});
+
+			test('should ignore trailing slashes', () => {
+				expect(SocialNetwork.getInstagramHandle('https://www.instagram.com/mytime/')).toBe('@mytime');
+				expect(SocialNetwork.getInstagramHandle('https://www.instagram.com/mytime///')).toBe('@mytime');
+			});
+
+			test('should ignore query string and hash', () => {
+				expect(SocialNetwork.getInstagramHandle('https://www.instagram.com/mytime/?hl=fr#top')).toBe('@mytime');
+			});
+		});
+	});
+
 	describe('Flattr', () => {
 		describe('getButtonFlattrShare', () => {
 			test('should return undefined (not implemented)', () => {
