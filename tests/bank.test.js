@@ -1,4 +1,5 @@
-import { IBAN, BankCard } from '../bank.js';
+import { IBAN } from '../bank/IBAN.js';
+import { BankCard } from '../bank/BankCard.js';
 
 describe('IBAN', () => {
 	describe('format', () => {

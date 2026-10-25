@@ -1,11 +1,5 @@
-import { SqlDateTime } from './date_time.js';
-import { Locale } from './locale.js';
-
-class IBAN {
-	static format(iban) {
-		return iban.toUpperCase().replace(/[^\dA-Z]/g, '').replace(/(.{4})/g, '$1 ').trim();
-	}
-}
+import { SqlDateTime } from '../date_time.js';
+import { Locale } from '../locale.js';
 
 class BankCard {
 	static formatCardNumber(cardNumber, hiddenChar='*') {
@@ -21,4 +15,4 @@ class BankCard {
 	}
 }
 
-export { IBAN, BankCard };
+export { BankCard };
