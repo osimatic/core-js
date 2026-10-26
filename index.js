@@ -30,6 +30,7 @@ export { ShoppingCart } from './commerce/ShoppingCart.js';
 export { PersonName } from './contact/PersonName.js';
 export { Email } from './contact/Email.js';
 export { TelephoneNumber } from './contact/TelephoneNumber.js';
+export { IntlTelInput } from './contact/IntlTelInput.js';
 
 export { HexColor } from './draw/HexColor.js';
 export { RgbColor } from './draw/RgbColor.js';

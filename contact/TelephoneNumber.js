@@ -1,5 +1,4 @@
 import * as libphonenumber from 'libphonenumber-js/max';
-import intlTelInputLib from 'intl-tel-input/intlTelInputWithUtils';
 import { Country } from '../location/Country.js';
 
 class TelephoneNumber {
@@ -7,22 +6,6 @@ class TelephoneNumber {
 		TelephoneNumber.localCountryCode = countryCode;
 	}
 
-	static getCountryIsoCode(phoneNumber, localCountryIsoCode=TelephoneNumber.localCountryCode) {
-		try {
-			const number = libphonenumber.parsePhoneNumber(phoneNumber, localCountryIsoCode.toUpperCase());
-			return number != null ? number.country : null;
-		} catch (error) {
-			console.error(error);
-		}
-		return null;
-		//return libphonenumber.parsePhoneNumber(phoneNumber, localCountryIsoCode.toUpperCase()).country || '';
-	}
-	static getCountryName(phoneNumber, localCountryIsoCode=TelephoneNumber.localCountryCode) {
-		return Country.getCountryName(this.getCountryIsoCode(phoneNumber, localCountryIsoCode));
-	}
-	static getFlagImg(phoneNumber, localCountryIsoCode=TelephoneNumber.localCountryCode) {
-		return Country.getFlagImg(this.getCountryIsoCode(phoneNumber, localCountryIsoCode));
-	}
 	static formatNational(phoneNumber, localCountryIsoCode=TelephoneNumber.localCountryCode) {
 		try {
 			const number = libphonenumber.parsePhoneNumber(phoneNumber, localCountryIsoCode.toUpperCase());
@@ -117,29 +100,21 @@ class TelephoneNumber {
 		return TelephoneNumber.getTypeLabelList()[phoneNumberType] || 'Inconnu';
 	}
 
-	static setIntlTelInput(input, placeholderNumberType) {
-		TelephoneNumber.localCountryCode = typeof TelephoneNumber.localCountryCode != 'undefined' ? TelephoneNumber.localCountryCode : null;
-
-		return intlTelInputLib(input[0], {
-			initialCountry: null != TelephoneNumber.localCountryCode ? TelephoneNumber.localCountryCode.toLowerCase() : null, // depuis version 19.x, le code pays doit être en minuscule
-			placeholderNumberType: placeholderNumberType || 'FIXED_LINE_OR_MOBILE',
-		});
-	}
-
-	static getIntlTelInputInstance(input) {
-		return intlTelInputLib.getInstance(input[0]);
-	}
-
-	static getEnteredNumberInInternationalFormat(intlTelInput) {
-		return intlTelInput.getNumber(intlTelInputLib.NUMBER_FORMAT.E164);
-	}
-
-	static formatNumberFromIntlTelInput(intlTelInput) {
-		let number = intlTelInput.getNumber();
-		if (number != '' && number.substr(0, 1) !== '+') {
-			number = '+' + intlTelInput.getSelectedCountryData().dialCode + number;
+	static getCountryIsoCode(phoneNumber, localCountryIsoCode=TelephoneNumber.localCountryCode) {
+		try {
+			const number = libphonenumber.parsePhoneNumber(phoneNumber, localCountryIsoCode.toUpperCase());
+			return number != null ? number.country : null;
+		} catch (error) {
+			console.error(error);
 		}
-		return number;
+		return null;
+		//return libphonenumber.parsePhoneNumber(phoneNumber, localCountryIsoCode.toUpperCase()).country || '';
+	}
+	static getCountryName(phoneNumber, localCountryIsoCode=TelephoneNumber.localCountryCode) {
+		return Country.getCountryName(this.getCountryIsoCode(phoneNumber, localCountryIsoCode));
+	}
+	static getFlagImg(phoneNumber, localCountryIsoCode=TelephoneNumber.localCountryCode) {
+		return Country.getFlagImg(this.getCountryIsoCode(phoneNumber, localCountryIsoCode));
 	}
 }
 

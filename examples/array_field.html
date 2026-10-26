@@ -123,13 +123,13 @@
 		entering_field_in_table: false,
 		item_name: 'Numéro de téléphone',
 		init_callback: (div) => {
-			let itiPhoneNumberField = TelephoneNumber.setIntlTelInput(div.find('.item_add_one input[type="text"]'));
+			let itiPhoneNumberField = IntlTelInput.setIntlTelInput(div.find('.item_add_one input[type="text"]'));
 			Location.fillCountrySelect(div.find('select[name="country"]'), 'FR');
 		},
 		format_entered_value_callback: (value, addDiv) => {
 			if (addDiv.hasClass('item_add_one')) {
-				const itiPhoneNumberField = TelephoneNumber.getIntlTelInputInstance(addDiv.find('input[type="text"]'));
-				return TelephoneNumber.getEnteredNumberInInternationalFormat(itiPhoneNumberField);
+				const itiPhoneNumberField = IntlTelInput.getIntlTelInputInstance(addDiv.find('input[type="text"]'));
+				return IntlTelInput.getEnteredNumberInInternationalFormat(itiPhoneNumberField);
 			}
 
 			let country = addDiv.find('select[name="country"]').val();
@@ -171,7 +171,7 @@
 
 			phoneNumber = Array.isArray(phoneNumber) ? phoneNumber[0] : phoneNumber;
 
-			const itiPhoneNumberField = TelephoneNumber.getIntlTelInputInstance(addDiv.find('input[type="text"]'));
+			const itiPhoneNumberField = IntlTelInput.getIntlTelInputInstance(addDiv.find('input[type="text"]'));
 			if (null == phoneNumber || '' === phoneNumber) {
 				return 'Veuillez saisir un numéro de téléphone.';
 			}

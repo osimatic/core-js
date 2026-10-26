@@ -4,6 +4,29 @@ import { Locale } from './Locale.js';
 import { SelectBox } from '../form/SelectBox.js';
 
 class Country {
+	static getCountryName(countryCode, locale=Locale.getDefault()) {
+		const baseLang = Locale.getBaseLang(locale);
+		Country.getCountries(locale); // ensure locale is registered
+		const name = isoCountries.getName(countryCode, baseLang);
+		return name || countryCode;
+	}
+	static getCountries(locale = 'en') {
+		const baseLang = Locale.getBaseLang(locale);
+		return isoCountries.getNames(baseLang) || {};
+	}
+
+	static getContinents() {
+		return {
+			1: "Europe",
+			2: "Moyen-Orient",
+			3: "Afrique",
+			4: "Amérique du Nord",
+			5: "Amérique du Sud",
+			6: "Asie",
+			7: "Océanie",
+		};
+	}
+
 	static setFlagsPath(flagsPath) {
 		Country.flagsPath = flagsPath;
 	}
@@ -40,7 +63,7 @@ class Country {
 		const entries = countriesList != null
 			? countriesList.map(code => [code, allCountries[code] || code])
 			: Object.entries(allCountries);
-			entries.forEach(([countryCode, countryName]) => {
+		entries.forEach(([countryCode, countryName]) => {
 			let attrs = '';
 			if (showFlags && countryCode) {
 				/*if (typeof Country.flagsPath !== 'undefined') {
@@ -61,33 +84,6 @@ class Country {
 		return Country.fillSelect(select, defaultValue, locale, true, countriesList, addNoneValue, noneLabel);
 	}
 
-	static getCountryName(countryCode, locale=Locale.getDefault()) {
-		const baseLang = Locale.getBaseLang(locale);
-		Country.getCountries(locale); // ensure locale is registered
-		const name = isoCountries.getName(countryCode, baseLang);
-		return name || countryCode;
-	}
-	static getCountries(locale = 'en') {
-		const baseLang = Locale.getBaseLang(locale);
-		return isoCountries.getNames(baseLang) || {};
-	}
-
-	static getContinents() {
-		return {
-			1: "Europe",
-			2: "Moyen-Orient",
-			3: "Afrique",
-			4: "Amérique du Nord",
-			5: "Amérique du Sud",
-			6: "Asie",
-			7: "Océanie",
-		};
-	}
-
-	/** @deprecated Use getCountries instead **/
-	static getCountryList() {
-		return Country.getCountries();
-	}
 	/** @deprecated Use fillSelect instead **/
 	static fillCountrySelect(select, defaultValue=null, countriesList=null, addNoneValue=false, noneLabel='- Aucun -') {
 		select = toEl(select);
@@ -106,6 +102,12 @@ class Country {
 			SelectBox.setValue(select, defaultValue);
 		}
 	}
+
+	/** @deprecated Use getCountries instead **/
+	static getCountryList() {
+		return Country.getCountries();
+	}
+
 }
 
 export { Country };

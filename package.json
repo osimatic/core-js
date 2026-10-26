@@ -1,8 +1,13 @@
 {
   "name": "@osimatic/core-js",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "type": "module",
   "main": "index.js",
+  "sideEffects": [
+    "./utils/array.js",
+    "./utils/string.js",
+    "./utils/number.js"
+  ],
   "scripts": {
     "test": "jest",
     "test:watch": "jest --watch",

@@ -1,29 +1,38 @@
 import TomSelect from 'tom-select';
 import { toEl } from '../utils/util.js';
 
+let actionsBoxPluginDefined = false;
+
 // Plugin: select-all / deselect-all (for multiple selects with data-actions-box)
-TomSelect.define('actions_box', function() {
-	const self = this;
-	let injected = false;
-	this.on('dropdown_open', function(dropdown) {
-		if (injected) {
-			return;
-		}
-		injected = true;
-		const div = document.createElement('div');
-		div.className = 'ts-actions-box d-flex gap-1 p-1 border-bottom';
-		div.innerHTML = ''
-			+ '<button type="button" class="btn btn-sm btn-outline-secondary flex-fill">Tout s\u00e9lectionner</button>'
-			+ '<button type="button" class="btn btn-sm btn-outline-secondary flex-fill">Tout d\u00e9s\u00e9lectionner</button>';
-		div.children[0].addEventListener('mousedown', e => {
-			e.preventDefault();
-			Object.keys(self.options).forEach(v => { if (!self.options[v].disabled) self.addItem(v, true); });
-			self.refreshItems();
+// Enregistr\u00e9 \u00e0 la premi\u00e8re utilisation et non au chargement du module, pour que le bundle n'embarque pas tom-select inutilement
+function defineActionsBoxPlugin() {
+	if (actionsBoxPluginDefined) {
+		return;
+	}
+	actionsBoxPluginDefined = true;
+	TomSelect.define('actions_box', function() {
+		const self = this;
+		let injected = false;
+		this.on('dropdown_open', function(dropdown) {
+			if (injected) {
+				return;
+			}
+			injected = true;
+			const div = document.createElement('div');
+			div.className = 'ts-actions-box d-flex gap-1 p-1 border-bottom';
+			div.innerHTML = ''
+				+ '<button type="button" class="btn btn-sm btn-outline-secondary flex-fill">Tout s\u00e9lectionner</button>'
+				+ '<button type="button" class="btn btn-sm btn-outline-secondary flex-fill">Tout d\u00e9s\u00e9lectionner</button>';
+			div.children[0].addEventListener('mousedown', e => {
+				e.preventDefault();
+				Object.keys(self.options).forEach(v => { if (!self.options[v].disabled) self.addItem(v, true); });
+				self.refreshItems();
+			});
+			div.children[1].addEventListener('mousedown', e => { e.preventDefault(); self.clear(true); });
+			dropdown.insertBefore(div, dropdown.firstChild);
 		});
-		div.children[1].addEventListener('mousedown', e => { e.preventDefault(); self.clear(true); });
-		dropdown.insertBefore(div, dropdown.firstChild);
 	});
-});
+}
 
 class SelectBox {
 
@@ -50,6 +59,7 @@ class SelectBox {
 
 		const plugins = [];
 		if (isMultiple && (el.dataset.actionsBox || el.dataset.actions_box)) {
+			defineActionsBoxPlugin();
 			plugins.push('actions_box');
 		}
 		if (!isMultiple && el.dataset.allowClear !== 'false' && el.dataset.allow_clear !== 'false') {
