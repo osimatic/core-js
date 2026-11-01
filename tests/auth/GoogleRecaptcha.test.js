@@ -76,12 +76,14 @@ describe('GoogleRecaptcha', () => {
 			expect(consoleLogSpy).toHaveBeenCalledWith('var grecaptcha undefined');
 		});
 
-		test('should return early when grecaptcha.render is not a function', () => {
-			global.grecaptcha = { render: null };
+		test('should wait for ready when grecaptcha.render is not a function', () => {
+			const ready = jest.fn();
+			global.grecaptcha = { render: null, ready };
 
 			GoogleRecaptcha.onLoad();
 
-			expect(consoleLogSpy).toHaveBeenCalledWith('var grecaptcha undefined');
+			expect(consoleLogSpy).toHaveBeenCalledWith('grecaptcha pas encore prêt, attente de ready');
+			expect(ready).toHaveBeenCalledWith(expect.any(Function));
 		});
 
 		test('should initialize googleCaptchaRendersCallback if undefined', () => {
@@ -180,15 +182,23 @@ describe('GoogleRecaptcha', () => {
 
 			GoogleRecaptcha.reset('recaptcha-1');
 
-			expect(consoleLogSpy).toHaveBeenCalledWith('var grecaptcha.render undefined');
+			expect(consoleLogSpy).toHaveBeenCalledWith('var grecaptcha undefined');
+			expect(mockGrecaptcha.render).not.toHaveBeenCalled();
 		});
 
-		test('should return early when grecaptcha.render is not a function', () => {
-			global.grecaptcha = { render: null };
+		test('should wait for ready and render when grecaptcha.render is not a function', () => {
+			let readyCallback;
+			global.grecaptcha = { render: null, ready: jest.fn(cb => { readyCallback = cb; }) };
 
 			GoogleRecaptcha.reset('recaptcha-1');
 
-			expect(consoleLogSpy).toHaveBeenCalledWith('var grecaptcha.render undefined');
+			expect(consoleLogSpy).toHaveBeenCalledWith('grecaptcha pas encore prêt, attente de ready');
+			expect(global.grecaptcha.ready).toHaveBeenCalledWith(expect.any(Function));
+
+			// API prête : le rendu est relancé
+			global.grecaptcha = mockGrecaptcha;
+			readyCallback();
+			expect(mockGrecaptcha.render).toHaveBeenCalledWith('recaptcha-1', { sitekey: 'test-key' });
 		});
 
 		test('should initialize grecaptchaWidgets if undefined', () => {

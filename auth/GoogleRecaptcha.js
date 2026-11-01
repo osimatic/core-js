@@ -3,10 +3,25 @@ class GoogleRecaptcha {
 		this.config = config;
 	}
 
+	// Retourne true si l'API est prête ; sinon, exécute callback dès qu'elle l'est (api.js peut être chargé sans être prête)
+	static whenReady(callback) {
+		if (typeof grecaptcha == 'undefined') {
+			console.log('var grecaptcha undefined');
+			return false;
+		}
+		if (typeof grecaptcha.render != 'function') {
+			console.log('grecaptcha pas encore prêt, attente de ready');
+			if (typeof grecaptcha.ready == 'function') {
+				grecaptcha.ready(callback);
+			}
+			return false;
+		}
+		return true;
+	}
+
 	static onLoad() {
 		console.log('GoogleRecaptcha.onLoad');
-		if (typeof grecaptcha == 'undefined' || typeof grecaptcha.render != 'function') {
-			console.log('var grecaptcha undefined');
+		if (!GoogleRecaptcha.whenReady(() => GoogleRecaptcha.onLoad())) {
 			return;
 		}
 
@@ -35,8 +50,7 @@ class GoogleRecaptcha {
 	}
 
 	static reset(id) {
-		if (typeof grecaptcha == 'undefined' || typeof grecaptcha.render != 'function') {
-			console.log('var grecaptcha.render undefined');
+		if (!GoogleRecaptcha.whenReady(() => GoogleRecaptcha.reset(id))) {
 			return;
 		}
 
