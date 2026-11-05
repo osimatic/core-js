@@ -2,10 +2,15 @@ import { toEl } from '../utils/util.js';
 import { FormHelper } from '../form/FormHelper.js';
 import { HTTPClient } from '../network/HTTPClient.js';
 
-class AudioMedia {
+export class AudioMedia {
 
 	static getPlayer(playUrl) {
 		return '<audio controls preload="none"><source src="' + playUrl + '" type="audio/x-wav"></audio>';
+	}
+
+	// The URL is empty in the DOM when it was set with jQuery .data(), which only updates its internal cache
+	static getPlayUrl(el) {
+		return el.dataset.play_url || (typeof $ !== 'undefined' ? $(el).data('play_url') : '');
 	}
 
 	static initPlayLinks(div) {
@@ -19,7 +24,7 @@ class AudioMedia {
 			link.addEventListener('click', function(e) {
 				e.preventDefault();
 				const template = document.createElement('template');
-				template.innerHTML = AudioMedia.getPlayer(this.dataset.play_url);
+				template.innerHTML = AudioMedia.getPlayer(AudioMedia.getPlayUrl(this));
 				const audio = template.content.firstChild;
 				audio.play();
 				this.insertAdjacentElement('afterend', audio);
@@ -47,7 +52,7 @@ class AudioMedia {
 					modalEl.removeEventListener('show.bs.modal', handler);
 					const player = modalEl.querySelector('audio');
 					if (player) {
-						player.src = (event.relatedTarget || currentLink).dataset.play_url;
+						player.src = AudioMedia.getPlayUrl(event.relatedTarget || currentLink);
 						player.play();
 					}
 				});
@@ -130,5 +135,3 @@ class AudioMedia {
 		draw();
 	}
 }
-
-export { AudioMedia };

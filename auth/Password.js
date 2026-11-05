@@ -1,6 +1,6 @@
 import { toEl } from '../utils/util.js';
 
-class Password {
+export class Password {
 	static getPasswordStrength(password) {
 		let score = 0;
 
@@ -97,5 +97,3 @@ class Password {
 		update(input);
 	}
 }
-
-export { Password };

@@ -1,4 +1,4 @@
-class Organization {
+export class Organization {
 	// Formats a French SIREN number for display, grouped by blocks of 3 digits, e.g. "217 402 379" (cf. Osimatic\Organization\Company::formatFranceSiren() côté PHP)
 	static formatFranceSiren(siren) {
 		const digits = (siren ?? '').replace(/\s/g, '');
@@ -23,5 +23,3 @@ class Organization {
 		return 'B '+Organization.formatFranceSiren(siren);
 	}
 }
-
-export { Organization };

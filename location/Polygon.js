@@ -1,6 +1,6 @@
 import { GeographicCoordinates } from './GeographicCoordinates.js';
 
-class Polygon {
+export class Polygon {
 	static format(geoJsonPolygon) {
 		geoJsonPolygon = typeof geoJsonPolygon == 'string' ? JSON.parse(geoJsonPolygon) : geoJsonPolygon;
 
@@ -163,5 +163,3 @@ class Polygon {
 	}
 
 }
-
-export { Polygon };

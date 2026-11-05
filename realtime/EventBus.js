@@ -1,4 +1,4 @@
-class EventBus {
+export class EventBus {
     constructor() {
 		this.events = {}; 
 	}
@@ -35,5 +35,3 @@ class EventBus {
 		handlers.splice(handlers.indexOf(handler), 1);
     }
 }
-
-export { EventBus };

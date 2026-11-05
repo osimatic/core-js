@@ -1,7 +1,7 @@
 import { UAParser } from 'ua-parser-js';
 
 //Source : https://www.npmjs.com/package/mic-check
-class UserMedia {
+export class UserMedia {
 	static hasGetUserMedia() {
 		return !!(typeof navigator !== 'undefined' && (navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia));
 	}
@@ -72,5 +72,3 @@ class UserMedia {
 		return this.requestMediaPermissions({ audio: false, video: (typeof videoConstraints !== 'undefined' ? videoConstraints : true )});
 	}
 }
-
-export { UserMedia };

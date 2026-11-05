@@ -1,6 +1,6 @@
 import { toEl } from '../utils/util.js';
 
-class VideoMedia {
+export class VideoMedia {
 	static initPlayPauseClick(videoElement) {
 		videoElement = toEl(videoElement);
 		if (!videoElement) {
@@ -25,5 +25,3 @@ class VideoMedia {
 		});
 	}
 }
-
-export { VideoMedia };

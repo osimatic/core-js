@@ -1,4 +1,4 @@
-class NumberFormatter {
+export class NumberFormatter {
 	static getDecimalFormatter(locale, digits = 2) {
 		this.decimalFormatter = this.decimalFormatter || {};
 		if (typeof this.decimalFormatter[locale+digits] == 'undefined') {
@@ -26,5 +26,3 @@ class NumberFormatter {
 		return this.percentFormatter[locale+digits];
 	}
 }
-
-export { NumberFormatter };

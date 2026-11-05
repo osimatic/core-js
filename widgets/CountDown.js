@@ -1,6 +1,6 @@
 import { toEl } from '../utils/util.js';
 
-class CountDown {
+export class CountDown {
 
 	static init(div, options = {}) {
 		div = toEl(div);
@@ -106,5 +106,3 @@ class CountDown {
 	}
 
 }
-
-export { CountDown };

@@ -8,7 +8,7 @@ import { toEl } from '../utils/util.js';
  * https://switch2osm.org/the-basics/
  * https://www.openstreetmap.org/help
  */
-class OpenStreetMap {
+export class OpenStreetMap {
 	static createMap(mapContainer, options={}) {
 		mapContainer = toEl(mapContainer);
 		if (!mapContainer) {
@@ -453,5 +453,3 @@ class OpenStreetMap {
 	}
 
 }
-
-export { OpenStreetMap };

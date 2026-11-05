@@ -1,4 +1,4 @@
-class FlashMessage {
+export class FlashMessage {
 	static displaySuccess(message, reload=false, modal=null, onMessageHidden=null, domId=null) {
 		this.display('success', message, reload, modal, onMessageHidden, domId);
 	}
@@ -36,5 +36,3 @@ class FlashMessage {
 		}
 	}
 }
-
-export { FlashMessage };

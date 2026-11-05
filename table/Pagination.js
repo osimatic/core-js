@@ -1,7 +1,7 @@
 import { UrlAndQueryString } from '../network/UrlAndQueryString.js';
 import { toEl } from '../utils/util.js';
 
-class Pagination {
+export class Pagination {
 	static paginateCards(div, nbItemsPerPage) {
 		Pagination.paginate(div, div.querySelectorAll('.pagination_item'), nbItemsPerPage, null);
 	}
@@ -254,4 +254,3 @@ function paginationAsList(nbResultatsTotal, nbResultatsParPage, urlPage, nomPara
 	return strPagination;
 }
 */
-export { Pagination };

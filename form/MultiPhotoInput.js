@@ -2,7 +2,7 @@ import { UserMedia } from '../media/UserMedia.js';
 import { FlashMessage } from '../widgets/FlashMessage.js';
 import { toEl } from '../utils/util.js';
 
-class MultiPhotoInput {
+export class MultiPhotoInput {
 	/**
 	 * Initialize a multi-photo input component inside the given container.
 	 * Supports camera capture via getUserMedia and file picker.
@@ -164,5 +164,3 @@ class MultiPhotoInput {
 		}
 	}
 }
-
-export { MultiPhotoInput };

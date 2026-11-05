@@ -1,4 +1,4 @@
-class ChorusPro {
+export class ChorusPro {
 	// La/les référence(s) obligatoire(s) sur les factures déposées pour la structure destinataire (cf. Osimatic\Invoice\ChorusProInvoiceReferenceRequirement côté PHP)
 	static getInvoiceReferenceRequirementList() {
 		return {
@@ -20,5 +20,3 @@ class ChorusPro {
 		};
 	}
 }
-
-export { ChorusPro };

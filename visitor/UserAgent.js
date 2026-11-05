@@ -1,6 +1,6 @@
 import { UAParser } from 'ua-parser-js';
 
-class UserAgent {
+export class UserAgent {
 	static getInfosDisplay(userAgentData, separator=' — ') {
 		let components = [];
 		if (null !== userAgentData['os']) {
@@ -119,5 +119,3 @@ class UserAgent {
 		return str.trim();
 	}
 }
-
-export { UserAgent };

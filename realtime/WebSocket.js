@@ -1,7 +1,7 @@
 import { EventBus } from './EventBus.js';
 import { io } from 'socket.io-client';
 
-class WebSocket {
+export class WebSocket {
     /**
      * socketEvents : events en provenance de la socket qui seront dispatchés à travers le bus event
      * busEvents : events en provenance de l'event bus qui seront dispatchés vers la socket
@@ -93,5 +93,3 @@ class WebSocket {
         }
 	}
 }
-
-export { WebSocket };

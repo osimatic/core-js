@@ -1,6 +1,6 @@
 import '../utils/string.js';
 
-class DateTimeFormatter {
+export class DateTimeFormatter {
 	static getDateDigitalFormatter(locale, timeZone) {
 		this.dateDigitalFormatter = this.dateDigitalFormatter || {};
 		if (typeof this.dateDigitalFormatter[timeZone+locale] == 'undefined') {
@@ -65,5 +65,3 @@ class DateTimeFormatter {
 		return this.timeDigitalFormatter[timeZone+locale];
 	}
 }
-
-export { DateTimeFormatter };

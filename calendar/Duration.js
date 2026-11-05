@@ -1,6 +1,6 @@
 import { Locale } from '../location/Locale.js';
 
-class Duration {
+export class Duration {
 
 	// -------------------------------------------------------------------------
 	// Days formatting
@@ -245,5 +245,3 @@ class Duration {
 	static getNbMinutesOfHundredthOfAnHour(durationAsHundredthOfAnHour) { return this.getMinutesFromDecimal(durationAsHundredthOfAnHour); }
 
 }
-
-export { Duration };

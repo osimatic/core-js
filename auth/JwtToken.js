@@ -1,4 +1,4 @@
-class JwtToken {
+export class JwtToken {
 	static parseJwt (token) {
 		let base64Url = token.split('.')[1];
 		let base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
@@ -36,5 +36,3 @@ class JwtToken {
 		return typeof payload['roles'] != 'undefined' && payload['roles'].indexOf(role) !== -1;
 	}
 }
-
-export { JwtToken };

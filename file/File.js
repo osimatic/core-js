@@ -1,6 +1,6 @@
 import { Locale } from '../location/Locale.js';
 
-class File {
+export class File {
 	static download(data, contentType, contentDisposition) {
 		let filename = "";
 		let disposition = contentDisposition;
@@ -71,5 +71,3 @@ class File {
 		reader.readAsDataURL(blob);
 	};
 }
-
-export { File };

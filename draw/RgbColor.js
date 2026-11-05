@@ -1,4 +1,4 @@
-class RgbColor {
+export class RgbColor {
 	static isLight(red, green, blue) {
 		const PERCENT_RED 		= 0.2125;
 		const PERCENT_GREEN 	= 0.7154;
@@ -11,5 +11,3 @@ class RgbColor {
 		return coeff > 128;
 	}
 }
-
-export { RgbColor };

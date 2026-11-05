@@ -1,6 +1,6 @@
 import { toEl } from '../utils/util.js';
 
-class GoogleCharts {
+export class GoogleCharts {
 	static init(onLoadCallback) {
 		// google.load("visualization", "1", {packages:["corechart"]});
 		google.charts.load('current', {'packages':['bar','line','corechart']});
@@ -358,5 +358,3 @@ class GoogleCharts {
 	}
 
 }
-
-export { GoogleCharts };

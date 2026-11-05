@@ -1,7 +1,7 @@
 import * as libphonenumber from 'libphonenumber-js/max';
 import { Country } from '../location/Country.js';
 
-class TelephoneNumber {
+export class TelephoneNumber {
 	static setLocalCountryCode(countryCode) {
 		TelephoneNumber.localCountryCode = countryCode;
 	}
@@ -117,5 +117,3 @@ class TelephoneNumber {
 		return Country.getFlagImg(this.getCountryIsoCode(phoneNumber, localCountryIsoCode));
 	}
 }
-
-export { TelephoneNumber };

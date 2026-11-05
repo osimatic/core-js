@@ -3,7 +3,7 @@ import { TelephoneNumber } from './TelephoneNumber.js';
 
 // Méthodes qui dépendent de intl-tel-input : séparées de TelephoneNumber pour ne pas embarquer la lib
 // quand seul le formatage des numéros est utilisé
-class IntlTelInput {
+export class IntlTelInput {
 	static setIntlTelInput(input, placeholderNumberType) {
 		TelephoneNumber.localCountryCode = typeof TelephoneNumber.localCountryCode != 'undefined' ? TelephoneNumber.localCountryCode : null;
 
@@ -29,5 +29,3 @@ class IntlTelInput {
 		return number;
 	}
 }
-
-export { IntlTelInput };

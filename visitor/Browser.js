@@ -1,4 +1,4 @@
-class Browser {
+export class Browser {
 	static isOpera() {
 		return (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
 	}
@@ -19,5 +19,3 @@ class Browser {
 		return !Browser.isIE() && !!window.StyleMedia;
 	}
 }
-
-export { Browser };

@@ -1,4 +1,4 @@
-class GoogleRecaptcha {
+export class GoogleRecaptcha {
 	static setConfig(config) {
 		this.config = config;
 	}
@@ -84,4 +84,3 @@ function grecaptchaOnload () {
 	//});
 }
 */
-export { GoogleRecaptcha };

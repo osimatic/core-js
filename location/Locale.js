@@ -1,4 +1,4 @@
-class Locale {
+export class Locale {
 	static current = 'fr-FR';
 
 	static getDefault() {
@@ -38,5 +38,3 @@ class Locale {
 		return Locale.normalize(locale).replace('-', '_');
 	}
 }
-
-export { Locale };

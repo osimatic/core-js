@@ -1,7 +1,7 @@
 import '../utils/string.js';
 import { Locale } from '../location/Locale.js';
 
-class SocialNetwork {
+export class SocialNetwork {
 
 	// ---------- Facebook ----------
 
@@ -82,5 +82,3 @@ class SocialNetwork {
 	}
 
 }
-
-export { SocialNetwork };

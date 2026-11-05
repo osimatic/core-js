@@ -1,6 +1,6 @@
 import { toEl, toJquery } from '../utils/util.js';
 
-class Modal {
+export class Modal {
 	/**
 	 * Initialise a modal DOM element: attaches the aria-hidden fix listener and
 	 * returns the element in the same form it was received (Element or jQuery).
@@ -54,5 +54,3 @@ class Modal {
 		});
 	}
 }
-
-export { Modal };

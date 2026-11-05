@@ -1,7 +1,7 @@
 import { SqlDateTime } from '../calendar/SqlDateTime.js';
 import { Locale } from '../location/Locale.js';
 
-class BankCard {
+export class BankCard {
 	static formatCardNumber(cardNumber, hiddenChar='*') {
 		if (cardNumber.length === 16) {
 			cardNumber = cardNumber.substring(0, 4)+'-'+cardNumber.substring(4, 8)+'-'+cardNumber.substring(8, 12)+'-'+cardNumber.substring(12, 16);
@@ -14,5 +14,3 @@ class BankCard {
 		return SqlDateTime.getMonthName(expirationDate, locale)+' '+SqlDateTime.getYear(expirationDate);
 	}
 }
-
-export { BankCard };

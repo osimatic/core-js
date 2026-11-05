@@ -16,7 +16,7 @@
  * @see https://developer.mozilla.org/en-US/docs/Web/API/Push_API
  * @see https://web.dev/articles/push-notifications-overview
  */
-class WebPushNotification {
+export class WebPushNotification {
 
 	// =========================================================================
 	// Configuration
@@ -245,5 +245,3 @@ class WebPushNotification {
 		return aOutput;
 	}
 }
-
-export { WebPushNotification };

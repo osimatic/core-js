@@ -1,6 +1,6 @@
 import '../utils/string.js';
 
-class TimeZone {
+export class TimeZone {
 	static default = 'Europe/Paris';
 
 	static getDefault() {
@@ -11,5 +11,3 @@ class TimeZone {
 		TimeZone.default = tz || 'Europe/Paris';
 	}
 }
-
-export { TimeZone };

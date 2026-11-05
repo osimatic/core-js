@@ -1,4 +1,4 @@
-class ApiTokenSession {
+export class ApiTokenSession {
 	static getToken() {
 		return localStorage.getItem('api_token');
 	}
@@ -67,5 +67,3 @@ class ApiTokenSession {
 		return hasRole;
 	}
 }
-
-export { ApiTokenSession };

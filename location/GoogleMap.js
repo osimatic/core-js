@@ -1,4 +1,4 @@
-class GoogleMap {
+export class GoogleMap {
 	constructor(mapId) {
 		this.markers = [];
 		this.locations = [];
@@ -164,5 +164,3 @@ google.maps.Marker.prototype.setMap = function(map) {
 	this._setMap(map);
 }
 */
-
-export { GoogleMap };

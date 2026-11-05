@@ -1,6 +1,6 @@
 import { toEl, toJquery } from '../utils/util.js';
 
-class ArrayField {
+export class ArrayField {
 	static init(formGroupDiv, defaultValues=[], options = {
 		entering_field_in_table: true,
 		item_name: null,
@@ -330,5 +330,3 @@ class ArrayField {
 		}
 	}
 }
-
-export { ArrayField };

@@ -4,7 +4,7 @@ import { SelectBox } from './SelectBox.js';
 import { toEl } from '../utils/util.js';
 
 // input period de type : <select class="period">Aujourd'hui / Ce mois-ci / etc. / Personnalisé</select>
-class FormDate {
+export class FormDate {
 
 	static fillYearSelect(select, nbYearsBefore=5, nbYearsAfter=0, defaultValue=null) {
 		select = toEl(select);
@@ -413,5 +413,3 @@ class FormDate {
 		if (yearSelect) yearSelect.value = year;
 	}
 }
-
-export { FormDate };

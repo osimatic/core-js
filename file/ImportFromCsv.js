@@ -4,7 +4,7 @@ import Papa from 'papaparse';
 import { FormHelper } from '../form/FormHelper.js';
 import { CSV } from './CSV.js';
 
-class ImportFromCsv {
+export class ImportFromCsv {
 
 	static _defaults = {
 		errorMessageFileNotValid: 'Le fichier sélectionné n’est pas un fichier CSV valide.',
@@ -354,5 +354,3 @@ class ImportFromCsv {
 	}
 
 }
-
-export { ImportFromCsv };

@@ -8,7 +8,7 @@ import { SqlDateTime } from './SqlDateTime.js';
 /**
  * Les dates SQL fournies en paramètre doivent être en UTC.
  */
-class SqlDate {
+export class SqlDate {
 	static parse(sqlDate) {
 		if (sqlDate == null) {
 			return null;
@@ -55,5 +55,3 @@ class SqlDate {
 		return DatePeriod.getNbDayBetweenTwo(SqlDateTime.parse(sqlDate1 + " 00:00:00"), SqlDateTime.parse(sqlDate2 + " 00:00:00"), asPeriod);
 	}
 }
-
-export { SqlDate };

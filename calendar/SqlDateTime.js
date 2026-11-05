@@ -7,7 +7,7 @@ import { DatePeriod } from './DatePeriod.js';
 /**
  * Les dates/heures SQL fournies en paramètre doivent être en UTC.
  */
-class SqlDateTime {
+export class SqlDateTime {
 	static getCurrentSqlDateTime() {
 		return DateTime.getSqlDateTime(new Date());
 	}
@@ -92,5 +92,3 @@ class SqlDateTime {
 	}
 
 }
-
-export { SqlDateTime };

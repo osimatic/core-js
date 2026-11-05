@@ -3,7 +3,7 @@ import { toEl } from '../utils/util.js';
 import { Locale } from './Locale.js';
 import { SelectBox } from '../form/SelectBox.js';
 
-class Country {
+export class Country {
 	static getCountryName(countryCode, locale=Locale.getDefault()) {
 		const baseLang = Locale.getBaseLang(locale);
 		Country.getCountries(locale); // ensure locale is registered
@@ -109,5 +109,3 @@ class Country {
 	}
 
 }
-
-export { Country };
