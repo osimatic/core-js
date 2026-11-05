@@ -39,7 +39,9 @@ class AudioMedia {
 			link.addEventListener('click', function(e) {
 				e.preventDefault();
 				const modalEl = document.getElementById('modal_voice_message_play');
-				if (!modalEl) return;
+				if (!modalEl) {
+					return;
+				}
 				const currentLink = this;
 				modalEl.addEventListener('show.bs.modal', function handler(event) {
 					modalEl.removeEventListener('show.bs.modal', handler);

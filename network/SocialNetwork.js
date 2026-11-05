@@ -1,37 +1,36 @@
 import '../utils/string.js';
+import { Locale } from '../location/Locale.js';
 
 class SocialNetwork {
 
 	// ---------- Facebook ----------
 
-	static getButtonFacebookShare(appId, urlPage) {
-		/*
-		<a target="_blank" title="Facebook" href="https://www.facebook.com/sharer.php?u=<?php the_permalink(); ?>&t=<?php the_title(); ?>" rel="nofollow" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=700');return false;"><img src="http://korben.info/wp-content/themes/korben2013/hab/facebook_icon.png" alt="Facebook" /></a>
-		*/
-
+	// Chargement du SDK Facebook (commun aux boutons share et like)
+	static getFacebookSdkScript(appId, locale) {
 		return ''
 			+'<div id="fb-root"></div>'
 			+'<script>(function(d, s, id) {'
 				+'var js, fjs = d.getElementsByTagName(s)[0];'
 				+'if (d.getElementById(id)) return;'
 				+'js = d.createElement(s); js.id = id;'
-				+'js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&appId='+appId+'version=v2.0";'
+				+'js.src = "//connect.facebook.net/'+locale.replace('-', '_')+'/sdk.js#xfbml=1&appId='+appId+'&version=v2.0";'
 				+'fjs.parentNode.insertBefore(js, fjs);'
 			+'}(document, \'script\', \'facebook-jssdk\'));</script>'
+		;
+	}
+
+	static getButtonFacebookShare(appId, urlPage, locale=Locale.getDefault()) {
+		/*
+		<a target="_blank" title="Facebook" href="https://www.facebook.com/sharer.php?u=<?php the_permalink(); ?>&t=<?php the_title(); ?>" rel="nofollow" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=500,width=700');return false;"><img src="http://korben.info/wp-content/themes/korben2013/hab/facebook_icon.png" alt="Facebook" /></a>
+		*/
+
+		return SocialNetwork.getFacebookSdkScript(appId, locale)
 			+'<div class="fb-share-button" data-href="'+urlPage+'"></div>'
 		;
 	}
 
-	static getButtonFacebookLike(appId, urlPage) {
-		return ''
-			+'<div id="fb-root"></div>'
-			+'<script type="text/javascript">(function(d, s, id) {'
-				+'var js, fjs = d.getElementsByTagName(s)[0];'
-				+'if (d.getElementById(id)) return;'
-				+'js = d.createElement(s); js.id = id;'
-				+'js.src = "//connect.facebook.net/fr_FR/all.js#xfbml=1&amp;appId='+appId+'";'
-				+'fjs.parentNode.insertBefore(js, fjs);'
-			+'}(document, \'script\', \'facebook-jssdk\'));</script>'
+	static getButtonFacebookLike(appId, urlPage, locale=Locale.getDefault()) {
+		return SocialNetwork.getFacebookSdkScript(appId, locale)
 			+'<div class="fb-like" data-href="'+urlPage+'" data-layout="button_count" data-show-faces="true"></div>'
 		;
 	}

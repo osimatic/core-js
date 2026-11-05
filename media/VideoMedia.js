@@ -15,7 +15,9 @@ class VideoMedia {
 				let height = this.offsetHeight;
 
 				// avoids interference with controls
-				if (clickY > 0.82*height) return;
+				if (clickY > 0.82*height) {
+					return;
+				}
 
 				// toggles play / pause
 				this.paused ? this.play() : this.pause();
