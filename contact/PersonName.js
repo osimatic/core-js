@@ -1,4 +1,4 @@
-class PersonName {
+export class PersonName {
 
 	static format(firstName, lastName) {
 		let str = '';
@@ -29,5 +29,3 @@ class PersonName {
 		return regEx.exec(lastName) != null;
 	}
 }
-
-export { PersonName };

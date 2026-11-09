@@ -1,6 +1,6 @@
 import { RgbColor } from './RgbColor.js';
 
-class HexColor {
+export class HexColor {
 	static check(hexColor) {
 		const match = hexColor.match(/^[0-9a-fA-F]{6}$/);
 		return match ? match.length > 0 : false;
@@ -38,5 +38,3 @@ class HexColor {
 		return RgbColor.isLight(rgb[0], rgb[1], rgb[2]);
 	}
 }
-
-export { HexColor };

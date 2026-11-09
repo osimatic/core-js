@@ -1,4 +1,4 @@
-class Rating {
+export class Rating {
 	static display(rating, maxRating = 5, imgOn = '&#9733;', imgOff = '&#9734;', imgHalf = null) {
 		if (rating == null) {
 			return '';
@@ -22,5 +22,3 @@ class Rating {
 			+ imgOff.repeat(maxRating - totalFull - (showHalf ? 1 : 0));
 	}
 }
-
-export { Rating };

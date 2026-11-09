@@ -1,4 +1,4 @@
-class ListBox {
+export class ListBox {
 	/*
 	<div class="form-group">
 		<div class="listebox_left">
@@ -109,5 +109,3 @@ class ListBox {
 	}
 
 }
-
-export { ListBox };

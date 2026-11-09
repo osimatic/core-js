@@ -2,7 +2,7 @@ import '../utils/string.js';
 import { FlashMessage } from '../widgets/FlashMessage.js';
 import { toEl } from '../utils/util.js';
 
-class MultiFilesInput {
+export class MultiFilesInput {
 	static init(fileInput, setFilesList, nbMaxFiles, maxFileSize) {
 		fileInput = toEl(fileInput);
 		if (!fileInput) {
@@ -125,5 +125,3 @@ class MultiFilesInput {
 		}
 	}
 }
-
-export { MultiFilesInput };

@@ -4,7 +4,7 @@ import { TimeZone } from './TimeZone.js';
 import { DateTime } from './DateTime.js';
 import { DatePeriod } from './DatePeriod.js';
 
-class TimestampUnix {
+export class TimestampUnix {
 	static parse(timestamp) {
 		if (timestamp == null) {
 			return null;
@@ -103,5 +103,3 @@ class TimestampUnix {
 	}
 
 }
-
-export { TimestampUnix };

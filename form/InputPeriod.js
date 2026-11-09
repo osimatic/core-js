@@ -2,7 +2,7 @@ import { DateTime } from '../calendar/DateTime.js';
 import { toEl } from '../utils/util.js';
 
 // input period de type : Du <input type="date" name="start_date" /> au <input type="date" name="end_date" />
-class InputPeriod {
+export class InputPeriod {
 
 	static addLinks(form) {
 		form = toEl(form);
@@ -147,5 +147,3 @@ class InputPeriod {
 	}
 
 }
-
-export { InputPeriod };

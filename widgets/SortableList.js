@@ -1,6 +1,6 @@
 import { toEl } from '../utils/util.js';
 
-class SortableList {
+export class SortableList {
 	static init(sortableList, clientYOffset=0) {
 		sortableList = toEl(sortableList);
 		if (!sortableList) {
@@ -40,5 +40,3 @@ class SortableList {
 		sortableList.addEventListener('dragenter', e => e.preventDefault());
 	}
 }
-
-export { SortableList };

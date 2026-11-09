@@ -4,7 +4,7 @@ import { TimeZone } from './TimeZone.js';
 import { DateTimeFormatter } from './DateTimeFormatter.js';
 import { DatePeriod } from './DatePeriod.js';
 
-class DateTime {
+export class DateTime {
 	static getSqlDate(jsDate, timeZone=TimeZone.getDefault()) {
 		return DateTimeFormatter.getDateSqlFormatter(timeZone).format(jsDate).replace(/\//g,'-').replace(',','');
 	}
@@ -223,5 +223,3 @@ class DateTime {
 		return DatePeriod.getNbDayBetweenTwo(jsDate1, jsDate2, asPeriod, timeZone);
 	}
 }
-
-export { DateTime };

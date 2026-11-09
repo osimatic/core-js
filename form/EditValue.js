@@ -1,7 +1,7 @@
 import { FormHelper } from './FormHelper.js';
 import { toEl } from '../utils/util.js';
 
-class EditValue {
+export class EditValue {
 	static init(valueDiv, onSubmitCallback, getInputCallback) {
 		valueDiv = toEl(valueDiv);
 		if (!valueDiv) {
@@ -75,5 +75,3 @@ class EditValue {
 		});
 	}
 }
-
-export { EditValue };

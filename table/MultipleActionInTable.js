@@ -1,6 +1,6 @@
 import { toEl } from '../utils/util.js';
 
-class MultipleActionInTable {
+export class MultipleActionInTable {
 
 	// Ajoute les colonnes select (thead th + tbody td) dans le DOM.
 	// Idempotent : sans effet si les colonnes existent déjà.
@@ -160,5 +160,3 @@ class MultipleActionInTable {
 	}
 
 }
-
-export { MultipleActionInTable };

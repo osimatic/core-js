@@ -1,4 +1,4 @@
-class ShoppingCart {
+export class ShoppingCart {
 	static addProduct(productId, quantity, data) {
 		let cart = this.getCart();
 		let item = cart.find(element => element.product_id == productId);
@@ -28,5 +28,3 @@ class ShoppingCart {
 		return cart;
 	}
 }
-
-export { ShoppingCart };

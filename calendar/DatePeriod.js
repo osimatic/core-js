@@ -4,7 +4,7 @@ import { TimeZone } from './TimeZone.js';
 import { DateTime } from './DateTime.js';
 import { SqlDate } from './SqlDate.js';
 
-class DatePeriod {
+export class DatePeriod {
 	static isSameDay(jsDate1, jsDate2) {
 		return jsDate1.getFullYear() === jsDate2.getFullYear() &&
 			jsDate1.getMonth() === jsDate2.getMonth() &&
@@ -73,5 +73,3 @@ class DatePeriod {
 // Part of day
 DatePeriod.PART_OF_DAY_MORNING 		= 'MORNING';
 DatePeriod.PART_OF_DAY_AFTERNOON 	= 'AFTERNOON';
-
-export { DatePeriod };

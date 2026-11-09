@@ -7,7 +7,7 @@ import { SqlDateTime } from './SqlDateTime.js';
 /**
  * Les heures SQL fournies en paramètre doivent être en UTC.
  */
-class SqlTime {
+export class SqlTime {
 	static parse(sqlTime) {
 		if (sqlTime == null) {
 			return null;
@@ -54,5 +54,3 @@ class SqlTime {
 		return SqlDateTime.getTimestamp(SqlTime.#getTodayDatePrefix()+' '+sqlTime);
 	}
 }
-
-export { SqlTime };

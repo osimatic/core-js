@@ -5,7 +5,7 @@ import { TimeZone } from '../calendar/TimeZone.js';
 import { DatePeriod } from '../calendar/DatePeriod.js';
 import { Locale } from '../location/Locale.js';
 
-class Chartjs {
+export class Chartjs {
 	static init() {
 		if (Chartjs.initialized) {
 			return;
@@ -328,5 +328,3 @@ class Chartjs {
 		return 'day_of_month';
 	}
 }
-
-export { Chartjs };

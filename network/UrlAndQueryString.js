@@ -1,4 +1,4 @@
-class UrlAndQueryString {
+export class UrlAndQueryString {
 	static displayUrl(url, withLink=true) {
 		return (withLink ? '<a href="' + url + '">' : '') + UrlAndQueryString.getHost(url, false) + (withLink ? '</a>' : '');
 	}
@@ -303,5 +303,3 @@ class UrlAndQueryString {
 	}
 
 }
-
-export { UrlAndQueryString };

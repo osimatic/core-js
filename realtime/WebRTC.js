@@ -1,6 +1,6 @@
 import crypto from 'node:crypto';
 
-class WebRTC {
+export class WebRTC {
     static setIceServers(turnUrl, stunUrl) {
         this.turnUrl = turnUrl;
         this.stunUrl = stunUrl;
@@ -112,5 +112,3 @@ class WebRTC {
         return { username: username, password: hmac.read() };
     }
 }
-
-export { WebRTC };

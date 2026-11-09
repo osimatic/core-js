@@ -1,6 +1,6 @@
 import { JwtToken } from './JwtToken.js';
 
-class JwtSession {
+export class JwtSession {
 	/*static setStorage(storage) {
 		JwtSession.storage = storage;
 	}*/
@@ -203,5 +203,3 @@ class JwtSession {
 	}
 
 }
-
-export { JwtSession };

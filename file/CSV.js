@@ -9,11 +9,9 @@ const CSV_MIME_TYPES = [
 	'text/plain',
 ];
 
-class CSV {
+export class CSV {
 	static checkFile(filename, fileType) {
 		return CSV_MIME_TYPES.indexOf(fileType) !== -1 && filename.split('.').pop().toLowerCase() === CSV_FILE_EXTENSION;
 	}
 
 }
-
-export { CSV };

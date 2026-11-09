@@ -1,7 +1,7 @@
 import { HTTPClient } from '../network/HTTPClient.js';
 import { toEl } from '../utils/util.js';
 
-class Img {
+export class Img {
 	static compress(oData) {
 		let a = [];
 		let len = oData.length;
@@ -78,5 +78,3 @@ class Img {
 		});
 	}
 }
-
-export { Img };

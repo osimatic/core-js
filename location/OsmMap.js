@@ -1,7 +1,7 @@
 import { OpenStreetMap } from './OpenStreetMap.js';
 import { toEl } from '../utils/util.js';
 
-class OsmMap {
+export class OsmMap {
 
 	constructor(mapContainer, options={}) {
 		mapContainer = toEl(mapContainer);
@@ -98,5 +98,3 @@ class OsmMap {
 		OpenStreetMap.connectMarkers(this.map, this.locations);
 	}
 }
-
-export { OsmMap };

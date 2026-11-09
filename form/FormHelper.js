@@ -1,7 +1,7 @@
 import { SelectBox } from './SelectBox.js';
 import { toEl, toJquery } from '../utils/util.js';
 
-class FormHelper {
+export class FormHelper {
 	static init(form, onSubmitCallback, submitButton=null) {
 		const wasJQuery = form && form.jquery;
 		form = toEl(form);
@@ -465,5 +465,3 @@ class FormHelper {
 
 
 }
-
-export { FormHelper };

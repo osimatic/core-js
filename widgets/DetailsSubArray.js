@@ -1,7 +1,7 @@
 import { HTTPClient } from '../network/HTTPClient.js';
 import { toEl } from '../utils/util.js';
 
-class DetailsSubArray {
+export class DetailsSubArray {
 
 	static initDetailsLink(table, options = {}) {
 		table = toEl(table);
@@ -141,5 +141,3 @@ class DetailsSubArray {
 	}
 
 }
-
-export { DetailsSubArray };

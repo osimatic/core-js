@@ -4,7 +4,7 @@ import { InputPeriod } from '../form/InputPeriod.js';
 import { UrlAndQueryString } from '../network/UrlAndQueryString.js';
 import { MultipleActionInTable } from './MultipleActionInTable.js';
 
-class DataTableManager {
+export class DataTableManager {
 
 	static setOptions(options) {
 		DataTableManager.dateTableOptions = Object.assign({}, DataTableManager.getOptions(), options);
@@ -420,5 +420,3 @@ class DataTableManager {
 	}
 
 }
-
-export { DataTableManager };

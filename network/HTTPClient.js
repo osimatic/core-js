@@ -2,7 +2,7 @@ import { JwtSession } from '../auth/JwtSession.js';
 import { UrlAndQueryString } from './UrlAndQueryString.js';
 import { Locale } from '../location/Locale.js';
 
-class HTTPClient {
+export class HTTPClient {
 	static setAuthorizationToken(authorizationToken) {
 		HTTPClient.authorizationToken = authorizationToken;
 	}
@@ -530,5 +530,3 @@ class HTTPClient {
 	}
 
 }
-
-export { HTTPClient };

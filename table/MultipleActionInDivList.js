@@ -1,6 +1,6 @@
 import { toEl } from '../utils/util.js';
 
-class MultipleActionInDivList {
+export class MultipleActionInDivList {
 // init checkbox
 	static init(contentDiv, options = {}) {
 		contentDiv = toEl(contentDiv);
@@ -135,5 +135,3 @@ class MultipleActionInDivList {
 		}
 	}
 }
-
-export { MultipleActionInDivList };

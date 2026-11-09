@@ -1,7 +1,7 @@
 import { Locale } from '../location/Locale.js';
 import { NumberFormatter } from './NumberFormatter.js';
 
-class Currency {
+export class Currency {
 	static current = 'EUR';
 
 	static getDefault() {
@@ -16,5 +16,3 @@ class Currency {
 		return NumberFormatter.getCurrencyFormatter(locale, currency, nbDecimal).format(number);
 	}
 }
-
-export { Currency };

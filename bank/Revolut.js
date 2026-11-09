@@ -1,6 +1,6 @@
 import RevolutCheckout from '@revolut/checkout';
 
-class Revolut {
+export class Revolut {
     constructor() {
         this.mode = 'prod';
     }
@@ -19,5 +19,3 @@ class Revolut {
         });
     }
 }
-
-export { Revolut };

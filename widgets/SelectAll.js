@@ -1,6 +1,6 @@
 import { toEl } from '../utils/util.js';
 
-class SelectAll {
+export class SelectAll {
 
 	// Dans un form-group
 
@@ -156,5 +156,3 @@ class SelectAll {
 		checkboxSelectAll.checked = allCheckboxChecked.length > 0 && allCheckbox.length === allCheckboxChecked.length;
 	}
 }
-
-export { SelectAll };

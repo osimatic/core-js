@@ -1,4 +1,4 @@
-class Cookie {
+export class Cookie {
 	static set(name, value, nbValidityDays=30) {
 		let d = new Date();
 		d.setTime(d.getTime() + (nbValidityDays * 24 * 60 * 60 * 1000));
@@ -26,5 +26,3 @@ class Cookie {
 		Cookie.set(name, "", -1);
 	}
 }
-
-export { Cookie };

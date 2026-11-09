@@ -34,7 +34,7 @@ function defineActionsBoxPlugin() {
 	});
 }
 
-class SelectBox {
+export class SelectBox {
 
 	/**
 	 * Initialize Tom Select on a select element.
@@ -442,5 +442,3 @@ class SelectBox {
 		ts.wrapper.closest('.form-group')?.classList.toggle('hide', !hasOptions);
 	}
 }
-
-export { SelectBox };
