@@ -5,10 +5,10 @@ import { TelephoneNumber } from './TelephoneNumber.js';
 // quand seul le formatage des numéros est utilisé
 class IntlTelInput {
 	static setIntlTelInput(input, placeholderNumberType) {
-		TelephoneNumber.localCountryCode = typeof TelephoneNumber.localCountryCode != 'undefined' ? TelephoneNumber.localCountryCode : null;
+		const localCountryCode = typeof TelephoneNumber.localCountryCode != 'undefined' ? TelephoneNumber.localCountryCode : null;
 
 		return intlTelInputLib(input[0], {
-			initialCountry: null != TelephoneNumber.localCountryCode ? TelephoneNumber.localCountryCode.toLowerCase() : null, // depuis version 19.x, le code pays doit être en minuscule
+			initialCountry: localCountryCode ? localCountryCode.toLowerCase() : null, // depuis version 19.x, le code pays doit être en minuscule
 			placeholderNumberType: placeholderNumberType || 'FIXED_LINE_OR_MOBILE',
 		});
 	}
