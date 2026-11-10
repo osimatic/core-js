@@ -7,7 +7,8 @@
       "Bash(npm login)",
       "Bash(npm publish:*)",
       "Bash(npm logout:*)",
-      "Bash(node -e:*)"
+      "Bash(node -e:*)",
+      "Bash(npm view *)"
     ]
   }
 }
