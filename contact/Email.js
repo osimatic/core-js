@@ -9,7 +9,7 @@ export class Email {
 		return regExEmail.exec(email) != null;
 	}
 
-	// Normalisation recommandée par Google avant hachage pour les enhanced conversions : https://support.google.com/google-ads/answer/13258081
+	// Normalization recommended by Google before hashing for enhanced conversions: https://support.google.com/google-ads/answer/13258081
 	static normalize(email) {
 		return email.trim().toLowerCase();
 	}

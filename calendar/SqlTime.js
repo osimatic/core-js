@@ -5,7 +5,7 @@ import { DateTime } from './DateTime.js';
 import { SqlDateTime } from './SqlDateTime.js';
 
 /**
- * Les heures SQL fournies en paramètre doivent être en UTC.
+ * SQL times provided as parameters must be in UTC.
  */
 export class SqlTime {
 	static parse(sqlTime) {

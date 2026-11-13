@@ -147,15 +147,15 @@ function paginationAsList(nbResultatsTotal, nbResultatsParPage, urlPage, nomPara
 	var strEntreLiensPageDebutFinEtAvantApresPageCourante = '…';
 	nomParamPage = nomParamPage || 'page';
 
-	// Si le nombre de résultat total est inférieur au nombre d'affichage par page, il n'y a qu'une seule page.
+	// If the total number of results is less than the number displayed per page, there is only one page.
 	if (nbResultatsTotal < nbResultatsParPage && emptyStringIfOnlyOnePage) {
 		return '';
 	}
 
-	// Initialisation du nombre de pages
+	// Initialization of the number of pages
 	var nbPages = Math.ceil(nbResultatsTotal/nbResultatsParPage);
 
-	// Initialisation du numéro de la page courante
+	// Initialization of the current page number
 	//var query = window.location.search.substring(1).query.split("&");
 
 	var url = new URL(currentUrl);
@@ -174,7 +174,7 @@ function paginationAsList(nbResultatsTotal, nbResultatsParPage, urlPage, nomPara
 
 	var strPagination = '<ul class="pagination">';
 
-	// Lien pour la première page
+	// Link to the first page
 	if (afficherLienFirstLastPage) {
 		var strLienFirstPage = '&lt;&lt;';
 		if (numPageCourante > 1) {
@@ -185,7 +185,7 @@ function paginationAsList(nbResultatsTotal, nbResultatsParPage, urlPage, nomPara
 		}
 	}
 
-	// Lien pour la page précédente
+	// Link to the previous page
 	if (afficherLienPagePrecedenteSuivante) {
 		var strLienPagePrecedente = '&lt;';
 		if (numPageCourante > 1) {
@@ -227,7 +227,7 @@ function paginationAsList(nbResultatsTotal, nbResultatsParPage, urlPage, nomPara
 		}
 	}
 
-	// Lien pour la page suivante
+	// Link to the next page
 	if (afficherLienPagePrecedenteSuivante) {
 		var strLienPageSuivante = '&gt;';
 		if (numPageCourante < nbPages) {
@@ -238,7 +238,7 @@ function paginationAsList(nbResultatsTotal, nbResultatsParPage, urlPage, nomPara
 		}
 	}
 
-	// Lien pour la dernière page
+	// Link to the last page
 	if (afficherLienFirstLastPage) {
 		var strLienLastPage = '&gt;&gt;';
 		if (numPageCourante < nbPages) {

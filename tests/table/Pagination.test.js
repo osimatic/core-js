@@ -131,7 +131,7 @@ describe('Pagination', () => {
 
 			Pagination.paginate(div, [], 10, select);
 
-			expect(select.options.length).toBe(5); // 'Afficher tout' + 4 options
+			expect(select.options.length).toBe(5); // 'Afficher tout' (show all) + 4 options
 			expect(select.options[0].textContent).toBe('Afficher tout');
 			expect(select.options[0].value).toBe('0');
 		});

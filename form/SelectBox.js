@@ -4,7 +4,7 @@ import { toEl } from '../utils/util.js';
 let actionsBoxPluginDefined = false;
 
 // Plugin: select-all / deselect-all (for multiple selects with data-actions-box)
-// Enregistr\u00e9 \u00e0 la premi\u00e8re utilisation et non au chargement du module, pour que le bundle n'embarque pas tom-select inutilement
+// Registered on first use rather than at module load, so that the bundle does not embed tom-select unnecessarily
 function defineActionsBoxPlugin() {
 	if (actionsBoxPluginDefined) {
 		return;

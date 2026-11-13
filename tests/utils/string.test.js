@@ -29,7 +29,7 @@ describe('String extensions', () => {
 	describe('truncateOnWord', () => {
 		test('should truncate string on word boundary', () => {
 			const text = 'Hello world this is a test';
-			// La fonction retire les espaces de fin
+			// The function removes trailing spaces
 			expect(text.truncateOnWord(14)).toBe('Hello world…');
 		});
 
@@ -67,7 +67,7 @@ describe('String extensions', () => {
 		test('should truncate from middle', () => {
 			const text = 'Hello world this is a test';
 			const result = text.truncateString(10, 'middle');
-			// Il y a un espace avant et après "…"
+			// There is a space before and after "…"
 			expect(result).toBe('Hello … test');
 		});
 
@@ -345,7 +345,7 @@ describe('String extensions', () => {
 		});
 
 		test('should handle multiple dots', () => {
-			expect('1.2.3'.isNumeric()).toBe(true); // Permis par la fonction actuelle
+			expect('1.2.3'.isNumeric()).toBe(true); // Allowed by the current function
 		});
 	});
 
@@ -357,8 +357,8 @@ describe('String extensions', () => {
 
 		test('should return false for invalid base64 strings', () => {
 			expect('Hello!'.isBase64()).toBe(false);
-			expect('SGVsbG8'.isBase64()).toBe(false); // Pas de padding
-			expect('SGVs bG8='.isBase64()).toBe(false); // Espace invalide
+			expect('SGVsbG8'.isBase64()).toBe(false); // No padding
+			expect('SGVs bG8='.isBase64()).toBe(false); // Invalid space
 		});
 
 		test('should handle valid base64 without special chars', () => {

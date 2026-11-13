@@ -146,7 +146,7 @@ export class SelectAll {
 			return;
 		}
 
-		// 22/11/2021 : rajout :not(.check_all) sinon si toutes les cases sont coché, la case select all n'est pas coché à l'initialisation
+		// 22/11/2021: added :not(.check_all), otherwise if all checkboxes are checked, the select all checkbox is not checked at initialization
 		const allCheckbox = div.querySelectorAll('div.checkbox input[type="checkbox"]:not(.check_all), div.form-check input[type="checkbox"]:not(.check_all)');
 		const allCheckboxChecked = div.querySelectorAll('div.checkbox input[type="checkbox"]:not(.check_all):checked, div.form-check input[type="checkbox"]:not(.check_all):checked');
 		const checkboxSelectAll = div.querySelector('input.check_all');

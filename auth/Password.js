@@ -10,7 +10,7 @@ export class Password {
 		if (/[0-9]/.test(password)) score++;
 		if (/[^A-Za-z0-9]/.test(password)) score++;
 
-		if (password.length > 12 && score >= 4) score++; // Bonus pour long mot de passe
+		if (password.length > 12 && score >= 4) score++; // Bonus for long password
 
 		return score;
 	}
@@ -44,7 +44,7 @@ export class Password {
 				special: /[^A-Za-z0-9]/.test(password),
 			};
 
-			// Mise à jour des conditions
+			// Update conditions
 			div.querySelectorAll('.password_strength_conditions li').forEach(li => {
 				const cond = li.dataset.condition;
 				li.classList.remove('text-success', 'text-danger');

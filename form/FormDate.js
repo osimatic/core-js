@@ -3,7 +3,7 @@ import { Locale } from '../location/Locale.js';
 import { SelectBox } from './SelectBox.js';
 import { toEl } from '../utils/util.js';
 
-// input period de type : <select class="period">Aujourd'hui / Ce mois-ci / etc. / Personnalisé</select>
+// period input of type: <select class="period">Aujourd'hui / Ce mois-ci / etc. / Personnalisé</select>
 export class FormDate {
 
 	static fillYearSelect(select, nbYearsBefore=5, nbYearsAfter=0, defaultValue=null) {
@@ -140,7 +140,7 @@ export class FormDate {
 			updatePeriodSelect(comparedPeriodSelect);
 		}
 
-		// ---------- Choix période (new) ----------
+		// ---------- Period choice (new) ----------
 
 		const periodeSelect = form.querySelector('select.periode');
 		if (periodeSelect) {
@@ -156,7 +156,7 @@ export class FormDate {
 
 		updateForm(form);
 
-		// ---------- Choix période (old) ----------
+		// ---------- Period choice (old) ----------
 
 		if (form.querySelector('select.day') && form.querySelector('select.month') && form.querySelector('select.year')) {
 			form.querySelector('select.year').insertAdjacentHTML('afterend',
@@ -199,7 +199,7 @@ export class FormDate {
 			);
 		}
 
-		// Lien de sélection de date
+		// Date selection link
 
 		const lienToday = form.querySelector('a.lien_form_today');
 		if (lienToday) {
@@ -267,7 +267,7 @@ export class FormDate {
 			other: {label: 'Autre', list: {
 				perso: 						'Personnalisé',
 			}},
-			'1d': {label: 'Un jour', list: { // 1 jour
+			'1d': {label: 'Un jour', list: { // 1 day
 				'ajd': 									'Aujourd\u2019hui',
 				'hier': 								'Hier',
 				'jourMoins2': 							'Avant-hier',
@@ -279,39 +279,39 @@ export class FormDate {
 				'same_day_as_yesterday_last_year': 		'Même jour qu\u2019hier l\u2019année dernière',
 				'same_day_as_yesterday_least_2_years': 	'Même jour qu\u2019hier l\u2019année A-2'
 			}},
-			'1w': {label: 'Une semaine', list: { // 1 semaine
+			'1w': {label: 'Une semaine', list: { // 1 week
 				'curr_week': 					'Cette semaine',
 				'last_week': 					'La semaine dernière',
 				'weekMoins2': 					'Semaine S-2',
 				'weekMoins3': 					'Semaine S-3',
 				'weekMoins4': 					'Semaine S-4',
 			}},
-			'7d': {label: '7 jours', list: { // 7 jours
+			'7d': {label: '7 jours', list: { // 7 days
 				'last_7_days': 					'Les 7 derniers jours',
 				'last_7_days_before': 			'Les 7 jours avant',
 				'last_7_days_least_1_year': 	'Les mêmes 7 jours l\u2019année dernière',
 				'last_7_days_least_2_years': 	'Les mêmes 7 jours l\u2019année A-2',
 			}},
-			'14d': {label: '14 jours', list: { // 14 jours
+			'14d': {label: '14 jours', list: { // 14 days
 				'last_14_days': 				'Les 14 derniers jours',
 				'last_14_days_before': 			'Les 14 jours avant',
 				'last_14_days_least_1_year': 	'Les mêmes 14 jours l\u2019année dernière',
 				'last_14_days_least_2_years': 	'Les mêmes 14 jours l\u2019année A-2',
 			}},
-			// 30 jours
+			// 30 days
 			'30d': {label: '30 jours', list: {
 				'last_30_days': 				'Les 30 derniers jours',
 				'last_30_days_before': 			'Les 30 jours avant',
 				'last_30_days_least_1_year': 	'Les mêmes 30 jours l\u2019année dernière',
 				'last_30_days_least_2_years': 	'Les mêmes 30 jours l\u2019année A-2',
 			}},
-			'60d': {label: '60 jours', list: { // 60 jours
+			'60d': {label: '60 jours', list: { // 60 days
 				'last_60_days': 				'Les 60 derniers jours',
 				'last_60_days_before': 			'Les 60 jours avant',
 				'last_60_days_least_1_year': 	'Les mêmes 60 jours l\u2019année dernière',
 				'last_60_days_least_2_years': 	'Les mêmes 60 jours l\u2019année A-2',
 			}},
-			'1m': {label: 'Un mois', list: { // 1 mois
+			'1m': {label: 'Un mois', list: { // 1 month
 				'curr_month': 					'Ce mois-ci',
 				'last_month': 					'Le mois dernier',
 				'monthMoins2': 					'Mois M-2',
@@ -322,31 +322,31 @@ export class FormDate {
 				'same_month_last_year': 		'Même mois l\u2019année dernière',
 				'same_month_least_2_years': 	'Même mois l\u2019année A-2',
 			}},
-			'3m': {label: '3 mois', list: { // 3 mois
+			'3m': {label: '3 mois', list: { // 3 months
 				'last_3_month': 				'Les 3 derniers mois',
 				'last_3_month_before': 			'Les 3 mois avant',
 				'last_3_month_least_1_year': 	'Les mêmes 3 mois l\u2019année dernière',
 				'last_3_month_least_2_years': 	'Les mêmes 3 mois l\u2019année A-2',
 			}},
-			'6m': {label: '6 mois', list: { // 6 mois
+			'6m': {label: '6 mois', list: { // 6 months
 				'last_6_month': 				'Les 6 derniers mois',
 				'last_6_month_before': 			'Les 6 mois avant',
 				'last_6_month_least_1_year': 	'Les mêmes 6 mois l\u2019année dernière',
 				'last_6_month_least_2_years': 	'Les mêmes 6 mois l\u2019année A-2',
 			}},
-			'12m': {label: '12 mois', list: { // 12 mois
+			'12m': {label: '12 mois', list: { // 12 months
 				'last_12_month': 				'Les 12 derniers mois',
 				'last_12_month_before': 		'Les 12 mois avant',
 				'last_12_month_least_1_year': 	'Les mêmes 12 mois l\u2019année dernière',
 				'last_12_month_least_2_years': 	'Les mêmes 12 mois l\u2019année A-2',
 			}},
-			'24m': {label: '24 mois', list: { // 24 mois
+			'24m': {label: '24 mois', list: { // 24 months
 				'last_24_month': 				'Les 24 derniers mois',
 				'last_24_month_before': 		'Les 24 mois avant',
 				'last_24_month_least_1_year': 	'Les mêmes 24 mois l\u2019année dernière',
 				'last_24_month_least_2_years': 	'Les mêmes 24 mois l\u2019année A-2',
 			}},
-			'1y': {label: 'Une année', list: { // 1 année
+			'1y': {label: 'Une année', list: { // 1 year
 				'curr_year': 					'Cette année',
 				'last_year': 					'L\u2019année dernière',
 				'yearMoins2': 					'Année A-2',

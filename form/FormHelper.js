@@ -52,7 +52,7 @@ export class FormHelper {
 		}
 
 		const employeesDisplayType = form.querySelector('[name="employees_display_type"][value="NONE"]');
-		if (employeesDisplayType) employeesDisplayType.checked = true; //todo à retirer
+		if (employeesDisplayType) employeesDisplayType.checked = true; //todo to remove
 
 		Object.entries(data).forEach(([key, value]) => {
 			if (value == null) {
@@ -296,7 +296,7 @@ export class FormHelper {
 	}
 
 	// ------------------------------------------------------------
-	// Messages erreur
+	// Error messages
 	// ------------------------------------------------------------
 
 	static extractErrorKeyOfJson(json, onlyIfUniqueError=false) {
@@ -426,7 +426,7 @@ export class FormHelper {
 
 
 	// ------------------------------------------------------------
-	// Bouton valider
+	// Submit button
 	// ------------------------------------------------------------
 
 	static buttonLoader(button, action) {

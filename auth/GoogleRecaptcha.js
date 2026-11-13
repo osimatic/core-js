@@ -3,7 +3,7 @@ export class GoogleRecaptcha {
 		this.config = config;
 	}
 
-	// Retourne true si l'API est prête ; sinon, exécute callback dès qu'elle l'est (api.js peut être chargé sans être prête)
+	// Returns true if the API is ready; otherwise, runs callback as soon as it is (api.js may be loaded without being ready)
 	static whenReady(callback) {
 		if (typeof grecaptcha == 'undefined') {
 			console.log('var grecaptcha undefined');

@@ -3,9 +3,9 @@ import { io } from 'socket.io-client';
 
 export class WebSocket {
     /**
-     * socketEvents : events en provenance de la socket qui seront dispatchés à travers le bus event
-     * busEvents : events en provenance de l'event bus qui seront dispatchés vers la socket
-     * customBusEvents : events "spéciaux" en provenance de l'event bus qui seront dispatchés vers la socket : array({ 'custom_name' => 'event_name' }, ...)
+     * socketEvents: events coming from the socket that will be dispatched through the event bus
+     * busEvents: events coming from the event bus that will be dispatched to the socket
+     * customBusEvents: "special" events coming from the event bus that will be dispatched to the socket: array({ 'custom_name' => 'event_name' }, ...)
     */
     static setEventListeners(socketEvents, busEvents, customBusEvents) {
         this.eventBus = new EventBus();
@@ -41,7 +41,7 @@ export class WebSocket {
 		var self = this;
 
 		self.instance.on('connect', function() {
-			if (self.logged) { //reconnexion avant timeout : on supprime les listeners de l'event bus
+			if (self.logged) { //reconnection before timeout: we remove the event bus listeners
 				self.clear();
 			}
 

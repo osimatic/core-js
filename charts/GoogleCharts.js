@@ -12,7 +12,7 @@ export class GoogleCharts {
 	}
 
 	static drawCharts(chartsList, onComplete) {
-		// on supprime du tableau la liste des graphiques dont l'id div n'a pas été trouvé (le graphique ne pourra pas être généré)
+		// remove from the array the charts whose div id was not found (the chart cannot be generated)
 		chartsList = chartsList.filter(chartData => typeof chartData.div_id != 'undefined' && document.getElementById(chartData.div_id) !== null);
 
 		let nbChartsCompleted = 0;
@@ -33,7 +33,7 @@ export class GoogleCharts {
 					width: chartData.width,
 					onComplete: chart => {
 						nbChartsCompleted++;
-						// si tous les graphiques ont été chargés, on appelle le callback onComplete transmis en paramètre
+						// if all charts have been loaded, call the onComplete callback passed as parameter
 						if (chartsList.length === nbChartsCompleted && typeof onComplete == 'function') {
 							onComplete();
 						}
@@ -107,14 +107,14 @@ export class GoogleCharts {
 			});
 		}
 		else {
-			// Déclaration du tableau de données
+			// Declaration of the data table
 			data = new google.visualization.DataTable();
 			data.addColumn('string', abscissaLabel);
 			ordinateLabel.forEach((libelleOrd) => {
 				data.addColumn('number', libelleOrd);
 			});
 
-			// Remplissage des données
+			// Filling in the data
 			nbCells = 0;
 			let numRow = 0;
 			abscissaData.forEach((dataAbs, idx) => {
@@ -140,7 +140,7 @@ export class GoogleCharts {
 		// console.log(data);
 		// console.log('drawGraph : '+div+' ; type : '+graphType);
 
-		// Options générales
+		// General options
 		let chartOptions = {
 			colors: colors,
 			fontName: 'Trebuchet MS',
@@ -154,7 +154,7 @@ export class GoogleCharts {
 			chartOptions.vAxis.format = formatData;
 		}
 
-		// Options sur le titre du graphique
+		// Options for the chart title
 		chartOptions.title = title;
 		if (graphType === 'pie_chart') {
 			// chartOptions.titlePosition = 'none';
@@ -163,7 +163,7 @@ export class GoogleCharts {
 			chartOptions.titlePosition = 'none';
 		}
 
-		// Options sur la taille du graphique
+		// Options for the chart size
 		if (graphType === 'bar_chart') {
 			chartOptions.chartArea = {left:120, top:30};
 			//chartOptions.chartArea = {left:"auto", top:"auto"};
@@ -198,7 +198,7 @@ export class GoogleCharts {
 		//console.log(div.width());
 		//chartOptions.width = div.width();
 
-		// Options sur la légende
+		// Options for the legend
 		chartOptions.legend = {};
 		if (graphType === 'pie_chart') {
 			chartOptions.legend.position = 'right';
@@ -210,7 +210,7 @@ export class GoogleCharts {
 			chartOptions.legend.position = 'top';
 		}
 
-		// Options sur l'affichage des labels en absisse / ordonnée
+		// Options for displaying the labels on the abscissa / ordinate axes
 		if (graphType === 'bar_chart') {
 			// chartOptions.hAxis.title = libelleOrd;
 			chartOptions.vAxis.title = abscissaLabel;
@@ -220,7 +220,7 @@ export class GoogleCharts {
 			// chartOptions.vAxis.title = libelleOrd;
 		}
 
-		// Options sur les graphiques "dual bar chart / dual column chart"
+		// Options for "dual bar chart / dual column chart" charts
 		if (isDualChart) {
 			chartOptions.series = {};
 			chartOptions.axes = {};
@@ -263,20 +263,20 @@ export class GoogleCharts {
 			// console.log(chartOptions.vAxes);
 		}
 
-		// Options sur les graphiques "combo chart"
+		// Options for "combo chart" charts
 		if (graphType === 'combo_chart') {
 			chartOptions.seriesType = "bars";
 			chartOptions.series = {};
 			chartOptions.series[nbCells] = {type: "line"};
 		}
 
-		// Options sur le style des lignes pour les "line chart"
+		// Line style options for "line chart" charts
 		if (graphType === 'line_chart') {
 			chartOptions.series = [{lineWidth: 3}, {lineWidth: 1.5}];
 			chartOptions.curveType = 'function';
 		}
 
-		// Options sur le style pour les "pie chart"
+		// Style options for "pie chart" charts
 		if (graphType === 'pie_chart') {
 			chartOptions.is3D = false;
 			chartOptions.pieResidueSliceLabel = 'Autre';
@@ -292,7 +292,7 @@ export class GoogleCharts {
 
 		// console.log(chartOptions);
 
-		// Création du graphique
+		// Creation of the chart
 		let chart = null;
 		if (graphType === 'column_chart') {
 			// chart = new google.visualization.ColumnChart(div);

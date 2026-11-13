@@ -1,5 +1,5 @@
 import { Duration } from '../../calendar/Duration.js';
-import '../../utils/number.js'; // Pour Math.getDecimals et Number.roundDecimal
+import '../../utils/number.js'; // For Math.getDecimals and Number.roundDecimal
 
 describe('Duration', () => {
 	describe('formatDays', () => {
@@ -139,7 +139,7 @@ describe('Duration', () => {
 		});
 
 		test('should handle plural labels correctly', () => {
-			expect(Duration.formatSecondsAsString(7201, true, true, true, true)).toBe('2 heures 0 minute 1 seconde'); // 0 est singulier en français
+			expect(Duration.formatSecondsAsString(7201, true, true, true, true)).toBe('2 heures 0 minute 1 seconde'); // 0 is singular in French
 		});
 
 		test('should hide hour if zero when requested', () => {
@@ -163,7 +163,7 @@ describe('Duration', () => {
 		});
 
 		test('should prefix sign for pure-minutes negative duration', () => {
-			// totalHours(-300) = 0, le signe était perdu avant le fix
+			// totalHours(-300) = 0, the sign was lost before the fix
 			expect(Duration.formatSecondsAsString(-300)).toBe('- 0h 05min 00s');
 		});
 

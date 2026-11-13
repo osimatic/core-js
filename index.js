@@ -1,9 +1,9 @@
-// rien à exporter (que des extensions d'objet natif)
+// nothing to export (only native object extensions)
 import './utils/string.js';
 import './utils/array.js';
 import './utils/number.js';
 
-// exports d'objets non natifs
+// exports of non-native objects
 export { JwtToken } from './auth/JwtToken.js';
 export { JwtSession } from './auth/JwtSession.js';
 export { ApiTokenSession } from './auth/ApiTokenSession.js';

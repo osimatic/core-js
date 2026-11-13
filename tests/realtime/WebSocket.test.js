@@ -1,8 +1,8 @@
 import { jest } from '@jest/globals';
 
-// En ESM, les mocks de modules doivent être déclarés avant les import() dynamiques
+// In ESM, module mocks must be declared before dynamic import() calls
 let mockEventBus;
-// socket.io-client n'est pas installé dans le projet : mock virtuel
+// socket.io-client is not installed in the project: virtual mock
 jest.unstable_mockModule('socket.io-client', () => ({
 	io: jest.fn()
 }), { virtual: true });

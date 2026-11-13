@@ -195,7 +195,7 @@ describe('GoogleRecaptcha', () => {
 			expect(consoleLogSpy).toHaveBeenCalledWith('grecaptcha pas encore prêt, attente de ready');
 			expect(global.grecaptcha.ready).toHaveBeenCalledWith(expect.any(Function));
 
-			// API prête : le rendu est relancé
+			// API ready: rendering is triggered again
 			global.grecaptcha = mockGrecaptcha;
 			readyCallback();
 			expect(mockGrecaptcha.render).toHaveBeenCalledWith('recaptcha-1', { sitekey: 'test-key' });

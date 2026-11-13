@@ -10,16 +10,16 @@ String.prototype.copyToClipboard = String.prototype.copyToClipboard || function(
 	}
 	else {
 		try {
-			// On test si la configuration permet l'accès au presse-papier.
+			// Check whether the configuration allows access to the clipboard.
 			netscape.security.PrivilegeManager
 				.enablePrivilege("UniversalXPConnect");
 		}
 		catch (e) {
 			alert("Impossible d'accéder au presse-papier.");
 		}
-		// Initialisation du composant fournit par Mozilla.
+		// Initialize the component provided by Mozilla.
 		let gClipboardHelper = Components.classes["@mozilla.org/widget/clipboardhelper;1"].getService(Components.interfaces.nsIClipboardHelper);
-		// Copie du texte dans le presse papier.
+		// Copy the text to the clipboard.
 		gClipboardHelper.copyString(this);
 	}
 	return false;
@@ -74,7 +74,7 @@ String.prototype.truncateString = String.prototype.truncateString || function(le
 			len2 = Math.floor(length / 2);
 			str1 = split ? this.truncateOnWord(len1, false, '') : this.slice(0, len1);
 			str2 = split ? this.truncateOnWord(len2, true, '') : this.slice(this.length - len2);
-			// Enlever les espaces de fin de str1 et de début de str2 pour éviter les doubles espaces
+			// Remove trailing spaces of str1 and leading spaces of str2 to avoid double spaces
 			return str1.trimEnd() + ' ' + ellipsis + ' ' + str2.trimStart();
 		default:
 			str1 = split ? this.truncateOnWord(length, false, '') : this.slice(0, length);
@@ -103,7 +103,7 @@ String.prototype.escapeHtml = String.prototype.escapeHtml || function() {
 };
 
 String.prototype.normalizeBreaks = String.prototype.normalizeBreaks || function(breaktype) {
-	// 20/01/2022 : modifié car ne fonctionnait pas pour les string en provenance de textarea, enregistrée en bd puis réaffiché depuis bd
+	// 20/01/2022: changed because it did not work for strings coming from a textarea, saved in the DB and then displayed again from the DB
 	//return this.replace(/$/mg, breaktype).replace(new RegExp('/'+breaktype.escapeRegExp()+'$/'), '');
 	return this.replace(/(?:\r\n|\r|\n)/g, breaktype);
 	//return this.replace('/(\r\n|\r|\n)/ms', breaktype);
@@ -148,17 +148,17 @@ String.prototype.isNumeric = String.prototype.isNumeric || function() {
 }
 
 String.prototype.isBase64 = String.prototype.isBase64 || function() {
-	// Vérifie les caractères autorisés par le base64
+	// Check the characters allowed by base64
 	if (!/^[A-Za-z0-9+/=]+$/.test(this)) return false;
 
 	// Longueur multiple de 4
 	if (this.length % 4 !== 0) return false;
 
 	try {
-		atob(this); // Tentative de décodage
-		return true; // OK → c’est du base64
+		atob(this); // Try to decode
+		return true; // OK → this is base64
 	} catch (e) {
-		return false; // Erreur → pas du base64
+		return false; // Error → not base64
 	}
 }
 

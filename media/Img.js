@@ -44,14 +44,14 @@ export class Img {
 	}
 
 	static setBlobToImg(img, blob) {
-		// Validation de l'élément img
+		// Validate the img element
 		img = toEl(img);
 		if (!img) {
 			console.error('Invalid img element provided to setBlobToImg');
 			return;
 		}
 
-		// Validation du blob
+		// Validate the blob
 		if (!blob || !(blob instanceof Blob) || blob.size === 0) {
 			console.error('Invalid blob provided to setBlobToImg', blob);
 			return;

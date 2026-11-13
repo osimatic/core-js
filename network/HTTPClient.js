@@ -7,11 +7,11 @@ export class HTTPClient {
 		HTTPClient.authorizationToken = authorizationToken;
 	}
 
-	// URL appelée pour rafraichir le token. Le token est mis à jour dans JwtSession. En cas de succès, on appelle HTTPClient.onSuccessRefreshTokenCallback et on réexécute toutes les requêtes HTTP en attente de nouveau token. En cas d'échec, on redirige vers HTTPClient.onInvalidRefreshTokenRedirectUrl et/ou on appelle HTTPClient.onInvalidRefreshTokenCallback.
+	// URL called to refresh the token. The token is updated in JwtSession. On success, HTTPClient.onSuccessRefreshTokenCallback is called and all HTTP requests waiting for a new token are re-executed. On failure, we redirect to HTTPClient.onInvalidRefreshTokenRedirectUrl and/or call HTTPClient.onInvalidRefreshTokenCallback.
 	static setRefreshTokenUrl(url) {
 		HTTPClient.refreshTokenUrl = url;
 	}
-	// Callback appelé pour remplacer l'appel à HTTPClient.refreshTokenUrl (et donc pas de gestion de la session avec JwtSession)
+	// Callback called to replace the call to HTTPClient.refreshTokenUrl (and therefore no session management with JwtSession)
 	static setRefreshTokenCallback(callback) {
 		HTTPClient.refreshTokenCallback = callback;
 	}
@@ -30,11 +30,11 @@ export class HTTPClient {
 		HTTPClient.onInvalidRefreshTokenRedirectUrl = url;
 	}
 
-	// URL de la page vers laquelle on redirige si le token est invalide apres destruction de la JwtSession.
+	// URL of the page to redirect to if the token is invalid after the JwtSession is destroyed.
 	static setOnInvalidTokenRedirectUrl(url) {
 		HTTPClient.onInvalidTokenRedirectUrl = url;
 	}
-	// Callback appelé lorsqu'un token est invalide (destruction de la JwtSession dans tous les cas).
+	// Callback called when a token is invalid (the JwtSession is destroyed in all cases).
 	static setOnInvalidTokenCallback(callback) {
 		HTTPClient.onInvalidTokenCallback = callback;
 	}
@@ -92,7 +92,7 @@ export class HTTPClient {
 	}
 
 	static convertObjectToFormData(obj) {
-		// 30/05/2022 : ancienne version, qui ne fonctionne pas avec des tableaux
+		// 30/05/2022 : old version, which does not work with arrays
 		// let formData = new FormData();
 		// Object.entries(data).forEach(([key, value]) => formData.append(key, value));
 		// return formData;
@@ -224,7 +224,7 @@ export class HTTPClient {
 
 		if ('PATCH' === method || 'DELETE' === method) {
 			headers.append('Content-Type', 'application/x-www-form-urlencoded');
-			// 30/01/2023 : ajout encodeURIComponent() sinon les valeurs contenant des "+" pose pb (signe "+" retiré)
+			// 30/01/2023 : added encodeURIComponent(), otherwise values containing "+" cause problems ("+" sign removed)
 			body = encodeURIComponent(new URLSearchParams(HTTPClient.formatFormData(data)).toString());
 		}
 		else if ('POST' === method) {
@@ -252,7 +252,7 @@ export class HTTPClient {
 				cache: 'no-cache'
 			}
 
-			// On met le fetch dans un try catch pour détecter les erreurs de connexion réseau (si pas de connexion, une exception est déclenchée par fetch)
+			// The fetch is wrapped in a try/catch to detect network connection errors (if there is no connection, fetch throws an exception)
 			response = await fetch(url, requestOptions);
 
 			if (response.status !== 204 && response.statusText !== 'No Content') {
@@ -311,7 +311,7 @@ export class HTTPClient {
 		HTTPClient.requestBlob(method, url, data,
 			(blobData, response) => {
 				const contentType = response.headers.get('content-type');
-				// Si la réponse est du JSON, on ne télécharge pas de fichier
+				// If the response is JSON, we do not download a file
 				if (contentType && contentType.includes('application/json')) {
 					return;
 				}
@@ -361,7 +361,7 @@ export class HTTPClient {
 				cache: 'no-cache'
 			}
 
-			// On met le fetch dans un try catch pour détecter les erreurs de connexion réseau (si pas de connexion, une exception est déclenchée par fetch)
+			// The fetch is wrapped in a try/catch to detect network connection errors (if there is no connection, fetch throws an exception)
 			response = await fetch(url, requestOptions);
 
 			let jsonDataBlob = {};
@@ -422,7 +422,7 @@ export class HTTPClient {
 		HTTPClient.listCompleteCallbackAfterRefreshTokenFinished.push(completeCallback);
 		//HTTPClient.addCompleteCallbackAfterRefreshTokenFinished(completeCallback);
 
-		// S'il y a déjà un appel à refresh token effectué, on le refait pas (le completeCallback est dans une liste de callback à exécuter apres la fin du refresh token)
+		// If a refresh token call is already in progress, we do not redo it (the completeCallback is in a list of callbacks to execute after the refresh token ends)
 		if (typeof HTTPClient.refreshTokenStarted != 'undefined' && HTTPClient.refreshTokenStarted) {
 			return;
 		}
@@ -430,7 +430,7 @@ export class HTTPClient {
 		function onRefreshTokenComplete() {
 			HTTPClient.refreshTokenStarted = false;
 
-			// On exécute les completeCallback qui était en attente de la requete refresh token
+			// Execute the completeCallbacks that were waiting for the refresh token request
 			if (typeof HTTPClient.listCompleteCallbackAfterRefreshTokenFinished != 'undefined') {
 				const callbacks = HTTPClient.listCompleteCallbackAfterRefreshTokenFinished;
 				HTTPClient.listCompleteCallbackAfterRefreshTokenFinished = [];
@@ -501,7 +501,7 @@ export class HTTPClient {
 				xhr = new XMLHttpRequest();
 			}
 		} else {
-			// Votre navigateur ne supporte pas l'objet XMLHTTPRequest!
+			// Your browser does not support the XMLHTTPRequest object!
 			return null;
 		}
 

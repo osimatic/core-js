@@ -435,7 +435,7 @@ describe('UrlAndQueryString', () => {
 
 		test('should prevent prototype pollution with __proto__', () => {
 			const result = UrlAndQueryString.parseQueryString('__proto__[polluted]=true');
-			// Vérifie que la propriété polluted n'a pas été ajoutée au prototype
+			// Verifies that the polluted property was not added to the prototype
 			expect(result.polluted).toBeUndefined();
 			expect(Object.keys(result).length).toBe(0);
 		});

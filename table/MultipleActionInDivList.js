@@ -17,7 +17,7 @@ export class MultipleActionInDivList {
 
 		buttonsDiv.classList.add('hide');
 
-		// Si aucune div sélectionnable, on n'applique pas le plugin
+		// If no selectable div, we do not apply the plugin
 		if (!contentDiv.querySelectorAll('.multiple_action').length) {
 			return;
 		}
@@ -28,14 +28,14 @@ export class MultipleActionInDivList {
 			buttonsDiv.dataset.action_multiple_buttons_initialized = '1';
 		}
 
-		// Ajout checkbox pour chaque div sélectionnable
+		// Add a checkbox for each selectable div
 		contentDiv.querySelectorAll('.multiple_action').forEach(div => {
 			if (!div.querySelector('div.multi_select')) {
 				div.insertAdjacentHTML('afterbegin', '<div class="multi_select float-start me-2"><input type="checkbox" class="action_multiple_checkbox" name="'+div.dataset.action_multiple_input_name+'" value="'+div.dataset.action_multiple_item_id+'"></div>');
 			}
 		});
 
-		// Ajout checkbox select all
+		// Add select all checkbox
 		if (!contentDiv.querySelector('input.action_multiple_check_all')) {
 			contentDiv.insertAdjacentHTML('afterbegin', '<p class="mb-2"><input type="checkbox" class="action_multiple_check_all" /> Tout sélectionner</p>');
 		}
@@ -118,12 +118,12 @@ export class MultipleActionInDivList {
 		if (nbItems > 0 && isHidden) {
 			buttonsDiv.classList.remove('hide');
 		}
-		// 13/04/2021 : si le tableau est caché cela veut dire qu'il est en train de s'initialiser (après avoir chargé les données) et donc s'il n'y a pas de ligne sélectionnées, on cache la div buttons
+		// 13/04/2021: if the table is hidden, it means it is being initialized (after loading the data), so if no rows are selected, we hide the buttons div
 		else if ((nbItems === 0 && isVisible) || (nbItems === 0 && contentDiv.classList.contains('hide'))) {
 			buttonsDiv.classList.add('hide');
 		}
 
-		// affichage aucune action possible si aucun bouton n'est visible
+		// display no action possible if no button is visible
 		if (!buttonsDiv.classList.contains('hide')) {
 			buttonsDiv.querySelectorAll('span.no_button').forEach(el => el.remove());
 			if (buttonsDiv.querySelectorAll('button:not(.hide), a:not(.hide)').length === 0) {

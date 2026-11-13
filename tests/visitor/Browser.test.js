@@ -61,7 +61,7 @@ describe('Browser', () => {
 
 	describe('isSafari', () => {
 		test('should return true when HTMLElement toString contains Constructor', () => {
-			// Mock Object.prototype.toString pour simuler Safari
+			// Mock Object.prototype.toString to simulate Safari
 			const originalToString = Object.prototype.toString;
 			Object.prototype.toString = function() {
 				if (this === global.window.HTMLElement) {

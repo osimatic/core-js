@@ -3,7 +3,7 @@
  */
 import { Country } from '../../location/Country.js';
 
-// Valeurs des options hors option vide ajoutée par SelectBox.reset()
+// Option values, excluding the empty option added by SelectBox.reset()
 function getValues(select) {
 	return Array.from(select.options).map(o => o.value).filter(v => v !== '');
 }
@@ -133,7 +133,7 @@ describe('Country', () => {
 	});
 
 	describe('fillSelect', () => {
-		// Vrai <select> : SelectBox.reset() lit les attributs DOM (dataset, multiple)
+		// Real <select>: SelectBox.reset() reads the DOM attributes (dataset, multiple)
 		function makeSelect() {
 			return document.createElement('select');
 		}
@@ -162,7 +162,7 @@ describe('Country', () => {
 
 		test('should add data-content with flag-icons when showFlags is true', () => {
 			const select = makeSelect();
-			// TomSelect (via SelectBox) consomme data-content : on vérifie seulement que l'option est bien créée
+			// TomSelect (via SelectBox) consumes data-content: we only check that the option is created
 			Country.fillSelect(select, null, 'fr-FR', true, ['FR']);
 			expect(select.querySelector('option[value="FR"]').textContent).toBe('France');
 		});
@@ -177,7 +177,7 @@ describe('Country', () => {
 	});
 
 	describe('fillSelectWithFlags', () => {
-		// Vrai <select> : SelectBox.reset() lit les attributs DOM (dataset, multiple)
+		// Real <select>: SelectBox.reset() reads the DOM attributes (dataset, multiple)
 		function makeSelect() {
 			return document.createElement('select');
 		}

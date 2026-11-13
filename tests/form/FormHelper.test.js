@@ -45,7 +45,7 @@ function addSelect(form, name, options = []) {
 	return select;
 }
 
-// Simule un objet jQuery wrappant un élément DOM natif
+// Simulates a jQuery object wrapping a native DOM element
 function mockJQuery(el) {
 	return { jquery: '3.0', 0: el, length: 1 };
 }

@@ -12,7 +12,7 @@ export function createJwtToken(payload) {
 	return `${encodedHeader}.${encodedPayload}.${signature}`;
 }
 
-// Mock localStorage avec des jest.fn() pour pouvoir vérifier les appels
+// Mock localStorage with jest.fn() so that calls can be verified
 export function createLocalStorageMock() {
 	let store = {};
 	return {

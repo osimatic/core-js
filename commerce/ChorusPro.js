@@ -1,5 +1,5 @@
 export class ChorusPro {
-	// La/les référence(s) obligatoire(s) sur les factures déposées pour la structure destinataire (cf. Osimatic\Invoice\ChorusProInvoiceReferenceRequirement côté PHP)
+	// The mandatory reference(s) on invoices submitted for the recipient structure (see Osimatic\Invoice\ChorusProInvoiceReferenceRequirement on the PHP side)
 	static getInvoiceReferenceRequirementList() {
 		return {
 			ENGAGEMENT_REQUIRED: 'Numéro d’engagement obligatoire',
@@ -8,7 +8,7 @@ export class ChorusPro {
 		};
 	}
 
-	// Le statut de dépôt d'une facture (cf. Osimatic\Invoice\ChorusProSubmissionStatus côté PHP) ; mise en forme (HTML/couleur) laissée à l'appelant
+	// The submission status of an invoice (see Osimatic\Invoice\ChorusProSubmissionStatus on the PHP side); formatting (HTML/color) left to the caller
 	static getSubmissionStatusList() {
 		return {
 			DISABLED: 'Désactivé',

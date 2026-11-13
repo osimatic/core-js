@@ -162,35 +162,35 @@ describe('SqlTime', () => {
 		});
 
 		describe('régression DST — doit utiliser le DST du jour, pas celui du 1970-01-01', () => {
-			// Régression : l'ancienne implémentation utilisait '1970-01-01' comme date pivot.
-			// Le 1er janvier 1970, Paris était en CET (UTC+1).
-			// En été, Paris est en CEST (UTC+2) → l'affichage était décalé d'1h.
+			// Regression: the old implementation used '1970-01-01' as the pivot date.
+			// On 1 January 1970, Paris was in CET (UTC+1).
+			// In summer, Paris is in CEST (UTC+2) → the display was off by 1h.
 
 			afterEach(() => {
 				jest.useRealTimers();
 			});
 
 			test("en été (CEST, UTC+2) : '12:00:00' UTC doit s'afficher 14h à Paris", () => {
-				// Simulation : on est le 15 juillet 2024 (heure d'été, CEST = UTC+2)
+				// Simulation: it is 15 July 2024 (summer time, CEST = UTC+2)
 				jest.useFakeTimers();
 				jest.setSystemTime(new Date('2024-07-15T10:00:00Z'));
 
 				const timestamp = SqlTime.getTimestamp('12:00:00');
 				const heureAParis = TimestampUnix.getHour(timestamp, 'Europe/Paris');
 
-				// 12h UTC + 2h (CEST) = 14h — avec l'ancienne implémentation : 13h (CET de 1970)
+				// 12h UTC + 2h (CEST) = 14h — with the old implementation: 13h (CET of 1970)
 				expect(heureAParis).toBe(14);
 			});
 
 			test("en hiver (CET, UTC+1) : '12:00:00' UTC doit s'afficher 13h à Paris", () => {
-				// Simulation : on est le 15 janvier 2024 (heure d'hiver, CET = UTC+1)
+				// Simulation: it is 15 January 2024 (winter time, CET = UTC+1)
 				jest.useFakeTimers();
 				jest.setSystemTime(new Date('2024-01-15T10:00:00Z'));
 
 				const timestamp = SqlTime.getTimestamp('12:00:00');
 				const heureAParis = TimestampUnix.getHour(timestamp, 'Europe/Paris');
 
-				// 12h UTC + 1h (CET) = 13h — les deux implémentations concordaient en hiver
+				// 12h UTC + 1h (CET) = 13h — both implementations agreed in winter
 				expect(heureAParis).toBe(13);
 			});
 

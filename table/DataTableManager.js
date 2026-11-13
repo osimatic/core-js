@@ -18,7 +18,7 @@ export class DataTableManager {
 	}
 
 	// ------------------------------------------------------------
-	// Critères
+	// Criteria
 	// ------------------------------------------------------------
 
 	static populateFormFromFilters(form) {
@@ -42,7 +42,7 @@ export class DataTableManager {
 	}
 
 	// ------------------------------------------------------------
-	// Chargement tableau
+	// Table loading
 	// ------------------------------------------------------------
 
 	static init(options) {
@@ -61,7 +61,7 @@ export class DataTableManager {
 		let queryStringFilters = UrlAndQueryString.parseQuery(window.location.search);
 		defaultFilters = Object.assign(defaultFilters, queryStringFilters);
 
-		// Bouton filtrer
+		// Filter button
 		let filterLink = div.find('a.filter_link');
 		if (filterLink.length) {
 			filterLink.click(function(e) {
@@ -75,10 +75,10 @@ export class DataTableManager {
 
 				DataTableManager.populateFormFromFilters(form);
 
-				// Lien input period
+				// Input period link
 				InputPeriod.addLinks(form);
 
-				// Callback custom
+				// Custom callback
 				if (typeof onShowFilterForm == 'function') {
 					onShowFilterForm(modal, button);
 				}
@@ -91,11 +91,11 @@ export class DataTableManager {
 			});
 		}
 
-		// Bouton exporter
+		// Export button
 		let exportLink = div.find('a.export_link');
 		if (exportLink.length) {
 			if (!exportModalEnabled) {
-				// sans modal
+				// without modal
 				exportLink.click(function(e) {
 					e.preventDefault();
 					var button = $(this).attr('disabled', true).button('loading');
@@ -108,9 +108,9 @@ export class DataTableManager {
 				});
 			}
 			else {
-				// avec modal
+				// with modal
 				exportLink.click(function(e) {
-					// todo : ouvrir modal #modal_export lors du click sur le lien
+					// todo: open modal #modal_export when the link is clicked
 				});
 
 				$('div#modal_export').on('show.bs.modal', function (event) {
@@ -118,12 +118,12 @@ export class DataTableManager {
 					let modal = $(this);
 					let form = modal.find('form');
 
-					// Fonction de callback permettant d'initialiser contenu du modal export, cette fonction doit renvoyer le contenu du modal
+					// Callback function used to initialize the content of the export modal, this function must return the content of the modal
 					if (typeof setExportForm == 'function') {
 						modal.find('.modal-body').html(setExportForm(modal, button));
 					}
 
-					// Fonction de callback permettant d'initialiser le modal export
+					// Callback function used to initialize the export modal
 					if (typeof onShowExportForm == 'function') {
 						onShowExportForm(modal, button);
 					}
@@ -133,7 +133,7 @@ export class DataTableManager {
 						e.preventDefault();
 						$(this).attr('disabled', true).button('loading');
 
-						// Une fois le formulaire d'export validé, si fonction callback spécifié, on l'appelle, cette fonction doit renvoyer true ou false pour savoir si le form contient des erreurs ou non.
+						// Once the export form is validated, if a callback function is specified, we call it; this function must return true or false to indicate whether the form contains errors or not.
 						let hasErrors = false;
 						if (typeof onSubmitExportModal == 'function') {
 							hasErrors = onSubmitExportModal(modal, button);
@@ -144,10 +144,10 @@ export class DataTableManager {
 							return false;
 						}
 
-						// S'il n'y a pas d'erreur on enclenche l'export
+						// If there is no error, we trigger the export
 						if (typeof onExport == 'function') {
 							onExport(button.data('format'), {...DataTableManager.getFilters()}, form, () => {
-								// Retrait du modal
+								// Remove the modal
 								modal.modal('hide');
 							});
 						}
@@ -184,7 +184,7 @@ export class DataTableManager {
 
 	static addBrowserHistory() {
 		//console.log('addBrowserHistory');
-		// on ne garde que les critères contenant des valeurs de type string ou tableau avec max 3 éléments
+		// we only keep the criteria containing string values or arrays with at most 3 elements
 		let savedCriterias = Object.filter(this.criteres, value => (!Array.isArray(value) || (Array.isArray(value) && value.length <= 3)));
 		//console.log('savedCriterias', savedCriterias);
 
@@ -195,7 +195,7 @@ export class DataTableManager {
 		let queryString = UrlAndQueryString.getQueryString(url);
 		//console.log('current QueryString', queryString);
 
-		// Supprimer de l'URL les clés de critères qui ne sont plus dans savedCriterias
+		// Remove from the URL the criteria keys that are no longer in savedCriterias
 		Object.keys(this.criteres).forEach(key => {
 			if (!(key in savedCriterias)) {
 				queryString = UrlAndQueryString.deleteParam(queryString, key);
@@ -211,7 +211,7 @@ export class DataTableManager {
 
 
 	// ------------------------------------------------------------
-	// Affichage tableau
+	// Table display
 	// ------------------------------------------------------------
 
 	static resetContent(div) {
@@ -324,7 +324,7 @@ export class DataTableManager {
 				}
 			}
 			else {
-				// si pas de plugin DataTable sur le tableau, on cache le tableau s'il n'y a pas de résultat
+				// if there is no DataTable plugin on the table, we hide the table if there is no result
 				if (table.is('[data-no_datatables="1"]')) {
 					table.addClass('hide');
 				}
@@ -396,10 +396,10 @@ export class DataTableManager {
 
 		const dt = table.DataTable();
 
-		// Retire le filtre précédent enregistré pour cette table
+		// Remove the previous filter registered for this table
 		DataTable.ext.search = DataTable.ext.search.filter(fn => fn._table !== table[0]);
 
-		// Enregistre un filtre scopé à cette table uniquement
+		// Register a filter scoped to this table only
 		const filterFn = function(settings, searchData, index) {
 			if (settings.table !== table[0]) return true;
 			return callback($(dt.row(index).node()));

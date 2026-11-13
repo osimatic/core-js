@@ -32,7 +32,7 @@ export class CountDown {
 		function refreshData() {
 			currentMillis = 0;
 
-			//Pour ne pas relancer une requête si la précédente n'est pas encore finie
+			// Do not start a new request if the previous one has not finished yet
 			if (true === alreadyMakingRequest) {
 				console.log('Already making request, no new request lauched.');
 				return;

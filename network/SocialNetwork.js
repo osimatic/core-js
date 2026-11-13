@@ -5,7 +5,7 @@ export class SocialNetwork {
 
 	// ---------- Facebook ----------
 
-	// Chargement du SDK Facebook (commun aux boutons share et like)
+	// Loading the Facebook SDK (shared by the share and like buttons)
 	static getFacebookSdkScript(appId, locale) {
 		return ''
 			+'<div id="fb-root"></div>'
@@ -52,7 +52,7 @@ export class SocialNetwork {
 
 	// ---------- Instagram ----------
 
-	// Identifiant Instagram (@…) déduit de l'URL du profil
+	// Instagram handle (@…) derived from the profile URL
 	static getInstagramHandle(url) {
 		var path = new URL(url).pathname.replace(/\/+$/, '');
 		return '@' + path.split('/').pop();

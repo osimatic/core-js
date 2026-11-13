@@ -61,7 +61,7 @@ export class UrlAndQueryString {
 	}
 
 	static setParam(queryString, name, value) {
-		// cette solution ne fonctionne pas avec les tableau
+		// this solution does not work with arrays
 		//let params = new URLSearchParams(queryString);
 		//params.set(name, value);
 		//return params.toString();
@@ -104,7 +104,7 @@ export class UrlAndQueryString {
 		function buildParamFromString(param) {
 			var p = decodeURIComponent(param);
 			var strpos = p.indexOf('=');
-			// Si on trouve pas de signe =, on met la valeur ''
+			// If no = sign is found, we set the value to ''
 			if (strpos === -1) {
 				params[p] = '';
 				//params.length++;
@@ -114,7 +114,7 @@ export class UrlAndQueryString {
 			var value = p.substr(strpos + 1, p.length);
 			var openBracket = name.indexOf('[');
 			var closeBracket = name.indexOf(']');
-			// On traite les paramètre qui ne sont pas sous forme de tableau
+			// Handle the parameters that are not in array form
 			if (openBracket === -1 || closeBracket === -1) {
 				if (!(openBracket === -1 && closeBracket === -1)) {
 					name = name.replace(new RegExp('[\\[\\]]'), '_');
@@ -136,7 +136,7 @@ export class UrlAndQueryString {
 					eval(p + '= new Array();');
 				}
 				key = matches[i].substr(1, matches[i].length - 2);
-				// si la clé est null on met la longueur du tableau
+				// if the key is null we use the length of the array
 				if (key == '') {
 					key = eval(p).length;
 				}
@@ -148,7 +148,7 @@ export class UrlAndQueryString {
 				}
 				if (typeof(matches[i]) != 'function') {
 					key = matches[i].substr(1,matches[i].length-2);
-					// si la clé est null on met la longueur du tableau
+					// if the key is null we use the length of the array
 					if (key == '') {
 						key = eval(p).length;
 					}
@@ -196,19 +196,19 @@ export class UrlAndQueryString {
 			if (typeof (object) == 'object') {
 				for (var name in object) {
 					value = object[name];
-					// 06/06/2022 : ajout de ce if pour éviter bug sur fonction HTTPClient.formatQueryString
+					// 06/06/2022 : added this if to avoid a bug in the HTTPClient.formatQueryString function
 					if (typeof (value) == 'undefined') {
 						continue;
 					}
-					// 14/01/2020 : les tableaux avec param[0], param[1] en query string fonctionne pas, il faut mettre param[]=x&param[]=y
+					// 14/01/2020 : arrays with param[0], param[1] in the query string do not work, you must use param[]=x&param[]=y
 					//name = p == '' ? name : '['+name+']';
 					name = p == '' ? name : '[]';
 					if (typeof (value) == 'object') {
 						buildStringFromParam(value, p + name);
 					}
-					// 06/06/2022 : ajout null !== value pour éviter bug sur fonction HTTPClient.formatQueryString
+					// 06/06/2022 : added null !== value to avoid a bug in the HTTPClient.formatQueryString function
 					else if (null !== value && typeof (value) != 'function' && name != '') {
-						// 27/01/2020 : correction bug boolean affiché en string true/false
+						// 27/01/2020 : fixed a bug where a boolean was displayed as the string true/false
 						if (typeof (value) == 'boolean') {
 							value = (value ? 1 : 0);
 						}
@@ -269,12 +269,12 @@ export class UrlAndQueryString {
 	static getQuery(url) {
 		var str = url;
 		var strpos = str.indexOf('?');
-		// Si on ne trouve pas de queryString on retourne une chaine vide
+		// If no queryString is found we return an empty string
 		if (strpos === -1) {
 			return '';
 		}
 		str = str.substr(strpos + 1, str.length);
-		// Maintenant on verifie si on a une anchor ou pas (#) et si c'est le cas on arrete la querystring avant
+		// Now we check whether there is an anchor (#) or not, and if so we stop the querystring before it
 		strpos = str.indexOf('#');
 		if (strpos === -1) {
 			return str;

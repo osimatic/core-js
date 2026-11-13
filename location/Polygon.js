@@ -79,7 +79,7 @@ export class Polygon {
 				latlngRing.push([lat, long]);
 			}
 			if (latlngRing.length > 0) {
-				// Fermer l'anneau si nécessaire (Leaflet accepte ouvert/fermé, on nettoie par sécurité)
+				// Close the ring if necessary (Leaflet accepts open or closed rings; cleaned up for safety)
 				const first = latlngRing[0];
 				const last = latlngRing[latlngRing.length - 1];
 				if (first[0] !== last[0] || first[1] !== last[1]) {
@@ -92,7 +92,7 @@ export class Polygon {
 	}
 
 
-	// Test "sur le segment" en degrés (plan local) — suffisant pour le bord du polygone
+	// "On segment" test in degrees (local plane) — sufficient for the polygon edge
 	static isPointOnSegmentDeg(lat, long, A, B, EPS = 1e-12) {
 		const [x,  y ] = [long, lat];
 		const [x1, y1] = A;       // A = [long,lat]
@@ -111,14 +111,14 @@ export class Polygon {
 		return dot - len2 <= EPS;
 	}
 
-	// Ray-casting + bords inclus pour un anneau (tableau de [long,lat])
+	// Ray casting + edges included for a ring (array of [long,lat])
 	static isPointInRing(lat, long, ring) {
 		const n0 = ring.length;
 		if (n0 < 3) {
 			return false;
 		}
 
-		// fermer si nécessaire
+		// close if necessary
 		const closed = ring[n0-1][0] === ring[0][0] && ring[n0-1][1] === ring[0][1];
 		const pts = closed ? ring : [...ring, ring[0]];
 		const n = pts.length;
@@ -142,7 +142,7 @@ export class Polygon {
 		return inside;
 	}
 
-	// Polygone avec trous: inside = dans outer ET pas dans un trou
+	// Polygon with holes: inside = in the outer ring AND not in any hole
 	static isPointInPolygon(lat, long, geoJsonPolygon) {
 		const rings = geoJsonPolygon.coordinates;
 		if (!Array.isArray(rings) || rings.length === 0) {
@@ -155,7 +155,7 @@ export class Polygon {
 
 		for (let k = 1; k < rings.length; k++) {
 			if (Polygon.isPointInRing(lat, long, rings[k])) {
-				return false; // dans un trou
+				return false; // in a hole
 			}
 		}
 

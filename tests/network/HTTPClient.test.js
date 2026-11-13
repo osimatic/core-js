@@ -1,5 +1,5 @@
 import { jest } from '@jest/globals';
-// En ESM, les mocks de modules doivent être déclarés avant les import() dynamiques
+// In ESM, module mocks must be declared before dynamic import() calls
 // Mock JwtSession
 jest.unstable_mockModule('../../auth/JwtSession.js', () => ({
 	JwtSession: {

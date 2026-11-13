@@ -132,14 +132,14 @@ export class OpenStreetMap {
 			"ae": [[22.634, 51.570], [26.084, 56.383]], // United Arab Emirates
 			"il": [[29.487, 34.268], [33.277, 35.876]], // Israel
 
-			// Amériques
+			// Americas
 			"us": [[24.396, -124.848], [49.384, -66.885]], // United States (Contiguous)
 			"ca": [[41.675, -141.000], [83.113, -52.648]], // Canada
 			"mx": [[14.538, -118.365], [32.720, -86.711]], // Mexico
 			"br": [[-33.751, -73.987], [5.271, -34.729]], // Brazil
 			"ar": [[-55.051, -73.582], [-21.781, -53.591]], // Argentina
 
-			// Asie / Océanie
+			// Asia / Oceania
 			"cn": [[18.159, 73.499], [53.560, 134.772]], // China (mainland approx)
 			"in": [[6.554, 68.176], [35.674, 97.402]], // India
 			"jp": [[24.249, 122.938], [45.557, 153.987]], // Japan
@@ -173,28 +173,28 @@ export class OpenStreetMap {
 		const maxZoomSmall = Number.isFinite(opts.maxZoomSmall) ? opts.maxZoomSmall : 10;
 		const maxZoomTiny  = Number.isFinite(opts.maxZoomTiny)  ? opts.maxZoomTiny  : 12;
 
-		// Estimation de "taille" en degrés
+		// Estimate the "size" in degrees
 		const [[S, W], [N, E]] = boundingBox;
 		const latSpan = Math.max(0.0001, Math.abs(N - S));
 		const lonSpan = Math.max(0.0001, Math.abs(E - W));
 		const areaDeg = latSpan * lonSpan;
 
-		// Heuristique de zoom maximal selon la taille du pays (en degrés²)
-		// (fitBounds choisira le zoom, plafonné par maxZoom ci-dessous)
+		// Heuristic for the maximum zoom depending on the country size (in square degrees)
+		// (fitBounds chooses the zoom, capped by maxZoom below)
 		let maxZoom;
-		if (areaDeg > 200) {        // très grand (US, CA, AU, BR, CN)
+		if (areaDeg > 200) {        // very large (US, CA, AU, BR, CN)
 			maxZoom = 7;
-		} else if (areaDeg > 50) {  // grand
+		} else if (areaDeg > 50) {  // large
 			maxZoom = 8;
-		} else if (areaDeg > 20) {  // moyen+
+		} else if (areaDeg > 20) {  // medium+
 			maxZoom = 9;
-		} else if (areaDeg > 5) {   // moyen/petit
+		} else if (areaDeg > 5) {   // medium/small
 			maxZoom = maxZoomSmall;   // ~10
-		} else {                    // petit/micro-état
+		} else {                    // small/micro-state
 			maxZoom = maxZoomTiny;    // ~12
 		}
 
-		// fitBounds avec maxZoom pour éviter d'over-zoomer les petits pays
+		// fitBounds with maxZoom to avoid over-zooming small countries
 		const bounds = L.latLngBounds([ [S, W], [N, E] ]);
 		map.fitBounds(bounds, { padding, maxZoom });
 		if (map.getZoom() < minZoom) {
@@ -352,19 +352,19 @@ export class OpenStreetMap {
 	}
 
 	/**
-	 * Affiche un GeoJSON (string) sur une carte Leaflet (OSM).
-	 * Gère: Point, Polygon, et Feature/FeatureCollection contenant ces types.
+	 * Displays a GeoJSON (string) on a Leaflet map (OSM).
+	 * Handles: Point, Polygon, and Feature/FeatureCollection containing these types.
 	 *
-	 * @param {L.Map} map - instance Leaflet déjà créée
+	 * @param {L.Map} map - existing Leaflet map instance
 	 * @param {string} geoJson - GeoJSON en texte
 	 * @param {object} [opts]
-	 *  - layerGroup: L.LayerGroup | L.FeatureGroup (facultatif, cible d'ajout)
-	 *  - pointMarker: options Leaflet pour le marker (ex: { draggable:false })
-	 *  - polygonStyle: options Leaflet pour le polygon (ex: { color:'#007bff' })
-	 *  - fit: boolean (par défaut true) → adapte la vue à la géométrie
-	 *  - pointZoom: number (zoom si Point et fit=true, défaut 16)
-	 *  - popup: string (facultatif) → bindPopup commun pour l'entité
-	 * @returns {L.Layer | null} couche ajoutée (marker ou polygon), sinon null
+	 *  - layerGroup: L.LayerGroup | L.FeatureGroup (optional, target layer to add to)
+	 *  - pointMarker: Leaflet options for the marker (ex: { draggable:false })
+	 *  - polygonStyle: Leaflet options for the polygon (ex: { color:'#007bff' })
+	 *  - fit: boolean (default true) → adjusts the view to the geometry
+	 *  - pointZoom: number (zoom if Point and fit=true, default 16)
+	 *  - popup: string (optional) → common bindPopup for the entity
+	 * @returns {L.Layer | null} added layer (marker or polygon), otherwise null
 	 */
 	static displayGeoJSONOnMap(map, geoJson, opts = {}) {
 		if (!map) {
@@ -436,7 +436,7 @@ export class OpenStreetMap {
 				console.warn('displayGeoJSONOnMap: Polygon invalide');
 				return null;
 			}
-			// Leaflet accepte un tableau d'anneaux pour L.polygon
+			// Leaflet accepts an array of rings for L.polygon
 			const poly = L.polygon(rings, polygonStyle);
 			addLayer(poly);
 

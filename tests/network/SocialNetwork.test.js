@@ -262,7 +262,7 @@ describe('SocialNetwork', () => {
 			});
 
 			test('should throw for an invalid URL', () => {
-				// Pas de toThrow(TypeError) : l'erreur de new URL vient d'un autre realm que celui de Jest
+				// No toThrow(TypeError): the error from new URL comes from a different realm than Jest's
 				expect(() => SocialNetwork.getInstagramHandle('pas une url')).toThrow(/Invalid URL/);
 			});
 		});

@@ -136,7 +136,7 @@ describe('SelectAll', () => {
 		});
 
 		test('should not throw when checkbox has no .form-group ancestor', () => {
-			// Simule une checkbox hors de tout .form-group (le cas du bug en prod)
+			// Simulates a checkbox outside any .form-group (the production bug case)
 			document.body.innerHTML = `
 				<div>
 					<a class="check_all" href="#">Tout sélectionner</a>
@@ -306,7 +306,7 @@ describe('SelectAll', () => {
 		});
 
 		test('should not throw when checkbox has no .checkbox_with_check_all ancestor', () => {
-			// check_all orpheline — closest('div.checkbox_with_check_all') retourne null
+			// orphan check_all — closest('div.checkbox_with_check_all') returns null
 			document.body.innerHTML = `
 				<div id="content">
 					<input type="checkbox" class="check_all">

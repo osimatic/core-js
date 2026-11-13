@@ -234,8 +234,8 @@ describe('MultipleActionInTable', () => {
 			const table = setupTable({ nbRows: 1 });
 			MultipleActionInTable.init(table);
 
-			// Simule une ligne réinsérée dans le DOM par DataTables après un changement de page/longueur de page,
-			// donc absente du DOM au moment de l'appel à init().
+			// Simulates a row re-inserted into the DOM by DataTables after a page/page-length change,
+			// so it is absent from the DOM at the time init() is called.
 			table.querySelector('tbody').insertAdjacentHTML('beforeend', `
 				<tr data-action_multiple_input_name="ids[]" data-action_multiple_item_id="2">
 					<td class="select"><input type="checkbox" class="action_multiple_checkbox" name="ids[]" value="2"></td>

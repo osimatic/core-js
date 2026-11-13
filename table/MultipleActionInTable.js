@@ -2,9 +2,9 @@ import { toEl } from '../utils/util.js';
 
 export class MultipleActionInTable {
 
-	// Ajoute les colonnes select (thead th + tbody td) dans le DOM.
-	// Idempotent : sans effet si les colonnes existent déjà.
-	// Doit être appelé AVANT l'initialisation DataTable.
+	// Adds the select columns (thead th + tbody td) to the DOM.
+	// Idempotent: no effect if the columns already exist.
+	// Must be called BEFORE the DataTable initialization.
 	static initCols(table, cellSelector = 'select') {
 		table = toEl(table);
 		if (!table || !table.classList.contains('table-action_multiple')) {
@@ -25,8 +25,8 @@ export class MultipleActionInTable {
 		});
 	}
 
-	// Initialise les colonnes (via initCols) puis branche les event handlers.
-	// Peut être appelé après l'initialisation DataTable.
+	// Initializes the columns (via initCols) then attaches the event handlers.
+	// Can be called after the DataTable initialization.
 	static init(table, options = {}) {
 		table = toEl(table);
 		if (!table || !table.classList.contains('table-action_multiple')) {
@@ -53,8 +53,8 @@ export class MultipleActionInTable {
 			firstTh.innerHTML = '<input type="checkbox" class="action_multiple_check_all" />';
 		}
 
-		// Délégation sur la table (et non sur chaque checkbox) : avec la pagination DataTables, les lignes hors page courante
-		// sont détachées puis réinsérées dans le DOM, donc une checkbox réapparue n'aurait jamais reçu son écouteur direct.
+		// Delegation on the table (and not on each checkbox): with DataTables pagination, rows outside the current page
+		// are detached then re-inserted into the DOM, so a re-appearing checkbox would never have received its direct listener.
 		if (!table.dataset.action_multiple_bound) {
 			table.addEventListener('change', (e) => {
 				if (e.target.matches('input.action_multiple_checkbox')) {
@@ -142,12 +142,12 @@ export class MultipleActionInTable {
 		if (nbItems > 0 && isHidden) {
 			divBtn.classList.remove('hide');
 		}
-		// 13/04/2021 : si le tableau est caché cela veut dire qu'il est en train de s'initialiser (après avoir chargé les données) et donc s'il n'y a pas de ligne sélectionnées, on cache la div buttons
+		// 13/04/2021: if the table is hidden, it means it is being initialized (after loading the data), so if no rows are selected, we hide the buttons div
 		else if ((nbItems === 0 && isVisible) || (nbItems === 0 && table.classList.contains('hide'))) {
 			divBtn.classList.add('hide');
 		}
 
-		// affichage aucune action possible si aucun bouton n'est visible
+		// display no action possible if no button is visible
 		if (!divBtn.classList.contains('hide')) {
 			divBtn.querySelectorAll('span.no_button').forEach(el => el.remove());
 			if (divBtn.querySelectorAll('button:not(.hide), a:not(.hide)').length === 0) {

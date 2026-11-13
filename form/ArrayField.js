@@ -134,7 +134,7 @@ export class ArrayField {
 		function onUpdateList() {
 			formGroupDiv.querySelectorAll('.list_empty, table').forEach(el => el.classList.add('hide'));
 
-			// Maj tableau
+			// Update array
 			let table = formGroupDiv.querySelector('table');
 			const tableLines = [...table.querySelectorAll('tbody tr:not(.base)')];
 			if ((options['entering_field_in_table'] && tableLines.length ) || (!options['entering_field_in_table'] && itemsList.length)) {

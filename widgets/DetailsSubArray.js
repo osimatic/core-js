@@ -66,7 +66,7 @@ export class DetailsSubArray {
 			tr.insertAdjacentHTML('afterend', '<tr class="waiting_icon"><td colspan="'+getNbColumns(tr)+'" class="center"><i class="fa fa-circle-notch fa-spin"></i></td></tr>');
 		}
 		function hideLoading() {
-			// todo : cacher que le loader du lien au lieu de tous les loaders (cas ou l'user clique sur tous les boutons rapidement)
+			// todo: hide only the link's loader instead of all loaders (case where the user clicks on all buttons quickly)
 			document.querySelectorAll('tr.waiting_icon').forEach(el => el.remove());
 		}
 

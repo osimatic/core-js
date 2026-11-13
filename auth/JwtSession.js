@@ -152,7 +152,7 @@ export class JwtSession {
 	static simulateLogin(loginData, redirectUrl, onComplete) {
 		console.log('JwtSession.simulateLogin');
 
-		// on sauvegarde les tokens de l'utilisateur réellement connecté
+		// save the tokens of the really logged-in user
 		let realUsers = JwtSession.getRealLoggedUsers();
 		realUsers.push({
 			access_token: JwtSession.getToken(),
@@ -160,7 +160,7 @@ export class JwtSession {
 		});
 		JwtSession.setItemInStorage('real_users', JSON.stringify(realUsers));
 
-		// on enregistre la session de l'utilisateur simulé
+		// store the session of the simulated user
 		JwtSession.setToken(loginData['access_token'] || loginData['token']);
 		if (loginData['refresh_token'] != null) {
 			JwtSession.setRefreshToken(loginData['refresh_token']);
@@ -178,7 +178,7 @@ export class JwtSession {
 	static cancelSimulatedLogin(redirectUrl, onComplete) {
 		console.log('JwtSession.cancelSimulatedLogin');
 
-		// on récupère les tokens de l'utilisateur réellement connecté
+		// retrieve the tokens of the really logged-in user
 		let realUsers = JwtSession.getRealLoggedUsers();
 		let loginData = realUsers.pop();
 

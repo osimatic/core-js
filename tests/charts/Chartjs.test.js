@@ -3,8 +3,8 @@
  */
 import { jest } from '@jest/globals';
 
-// En ESM, le mock de module doit être déclaré avant le import() dynamique.
-// Chart est délégué à global.Chart pour que les tests puissent le piloter.
+// In ESM, the module mock must be declared before the dynamic import().
+// Chart is delegated to global.Chart so that the tests can drive it.
 jest.unstable_mockModule('chart.js', () => {
 	const Chart = function (...args) {
 		return new global.Chart(...args);

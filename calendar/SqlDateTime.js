@@ -5,7 +5,7 @@ import { DateTime } from './DateTime.js';
 import { DatePeriod } from './DatePeriod.js';
 
 /**
- * Les dates/heures SQL fournies en paramètre doivent être en UTC.
+ * SQL dates/times provided as parameters must be in UTC.
  */
 export class SqlDateTime {
 	static getCurrentSqlDateTime() {
