@@ -9,6 +9,7 @@ export { JwtSession } from './auth/JwtSession.js';
 export { ApiTokenSession } from './auth/ApiTokenSession.js';
 export { Password } from './auth/Password.js';
 export { GoogleRecaptcha } from './auth/GoogleRecaptcha.js';
+export { WebAuthn } from './auth/WebAuthn.js';
 
 export { IBAN } from './bank/IBAN.js';
 export { BankCard } from './bank/BankCard.js';
