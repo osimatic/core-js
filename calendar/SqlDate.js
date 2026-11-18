@@ -27,6 +27,21 @@ export class SqlDate {
 		return SqlDateTime.getDateTextDisplay(sqlDate+" 00:00:00", locale, timeZone);
 	}
 
+	/**
+	 * Returns the digital display of a SQL date, computed in UTC because a date has no time zone.
+	 * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat
+	 */
+	static getDateDigitalDisplayInUtc(sqlDate, locale=Locale.getDefault()) {
+		return SqlDateTime.getDateDigitalDisplay(sqlDate+" 00:00:00", locale, 'UTC');
+	}
+	/**
+	 * Returns the text display of a SQL date, computed in UTC because a date has no time zone.
+	 * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat
+	 */
+	static getDateTextDisplayInUtc(sqlDate, locale=Locale.getDefault()) {
+		return SqlDateTime.getDateTextDisplay(sqlDate+" 00:00:00", locale, 'UTC');
+	}
+
 	static getDateForInputDate(sqlDate, timeZone=TimeZone.getDefault()) {
 		return SqlDateTime.getDateForInputDate(sqlDate+" 00:00:00", timeZone);
 	}
